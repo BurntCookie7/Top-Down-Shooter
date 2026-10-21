@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://clhgf081eknrw"]
 
+[ext_resource type="Script" uid="uid://dtbtq2iowg33y" path="res://addons/lit/nodes/lit_canvas_modulate.gd" id="1_03604"]
 [ext_resource type="PackedScene" uid="uid://b1dv1tyoo10fc" path="res://Player.tscn" id="1_vw6t8"]
 
 [node name="Node2D" type="Node2D" unique_id=792516362]
 position = Vector2(555, 368)
+
+[node name="LitCanvasModulate" type="Node2D" parent="." unique_id=223644229]
+script = ExtResource("1_03604")
+lit_version = "1.1.7"
+metadata/_custom_type_script = "uid://dtbtq2iowg33y"
 
 [node name="CharacterBody2D" parent="." unique_id=93508001 instance=ExtResource("1_vw6t8")]
