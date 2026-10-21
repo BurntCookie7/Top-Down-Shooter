@@ -1,0 +1,100 @@
+[gd_scene format=4 uid="uid://dgv8o4v2ofgqp"]
+
+[ext_resource type="Script" uid="uid://c1by571qdg2so" path="res://Scripts/light.gd" id="1_avuyf"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="1_bb3v8"]
+[ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="2_avuyf"]
+[ext_resource type="Script" uid="uid://cpa2qb3trjq4k" path="res://addons/lit/nodes/lit_point_light_2d.gd" id="3_cir5v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bb3v8"]
+shader = ExtResource("1_bb3v8")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 2
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="Gradient" id="Gradient_kooqo"]
+offsets = PackedFloat32Array(0, 0.5675676, 0.5868726)
+colors = PackedColorArray(0.098728366, 0.09872835, 0.09872835, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yf5fn"]
+gradient = SubResource("Gradient_kooqo")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9259259, 0.2022792)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_avuyf"]
+diffuse_texture = SubResource("GradientTexture2D_yf5fn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1515"]
+shader = ExtResource("1_bb3v8")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="Gradient" id="Gradient_6rfqi"]
+offsets = PackedFloat32Array(0.52509654, 0.53281856)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+gradient = SubResource("Gradient_6rfqi")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2hbbg"]
+diffuse_texture = SubResource("GradientTexture2D_g4v7s")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 24.186773
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=1523508489]
+script = ExtResource("1_avuyf")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=472111593]
+z_index = 1
+material = SubResource("ShaderMaterial_bb3v8")
+texture = SubResource("CanvasTexture_avuyf")
+script = ExtResource("2_avuyf")
+lit_version = "1.1.7"
+receiver_mask = 2
+
+[node name="LitDirectionalLight2D" type="Node2D" parent="." unique_id=318632393]
+script = ExtResource("3_cir5v")
+lit_version = "1.1.7"
+color = Color(0.9027538, 0.9203001, 0, 1)
+energy = 2.0
+range = 207.3
+falloff = 1.5
+shadow_enabled = true
+metadata/_custom_type_script = "uid://cpa2qb3trjq4k"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2030618787]
+material = SubResource("ShaderMaterial_i1515")
+texture = SubResource("CanvasTexture_2hbbg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=603473170]
+shape = SubResource("CircleShape2D_g4v7s")

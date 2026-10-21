@@ -1,0 +1,5 @@
+Update Project to Lit 1.1.7 - 5 scenes scanned, 1 Lit nodes updated in 1 scenes
+
+--- res://Bench.tscn
+STAMPED 1 Lit nodes at v1.1.7
+SAVED

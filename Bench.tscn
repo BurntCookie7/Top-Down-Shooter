@@ -1,0 +1,60 @@
+[gd_scene format=4 uid="uid://56kr68xk13v7"]
+
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="1_qifmt"]
+[ext_resource type="Script" uid="uid://bepohsp7nj5xp" path="res://Scripts/Bench.gd" id="1_upi1e"]
+[ext_resource type="Texture2D" uid="uid://cyxmmqtihy4a5" path="res://Images/Bench.png" id="2_upi1e"]
+[ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="3_74lck"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u82ir"]
+shader = ExtResource("1_qifmt")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_81ih3"]
+diffuse_texture = ExtResource("2_upi1e")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(126, 39.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(126, 13)
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=2013195154]
+script = ExtResource("1_upi1e")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1430604863]
+material = SubResource("ShaderMaterial_u82ir")
+position = Vector2(0, -2)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CanvasTexture_81ih3")
+script = ExtResource("3_74lck")
+lit_version = "1.1.7"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1451397405]
+position = Vector2(0, -1.75)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=779553053]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1897918093]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="SittingPos" type="Node2D" parent="." unique_id=1484309249]
+position = Vector2(0, -19)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

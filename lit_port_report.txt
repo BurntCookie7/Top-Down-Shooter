@@ -1,0 +1,5 @@
+Port Project to Lit 1.1.7 - 5 scenes scanned, 1 rewritten
+
+--- res://Light.tscn
+CONVERTED ./Sprite2D2: Sprite2D -> LitSprite2D (receiver_mask 1 from light_mask)
+SAVED

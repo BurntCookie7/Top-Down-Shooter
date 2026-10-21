@@ -1,14 +1,31 @@
 [gd_scene format=3 uid="uid://clhgf081eknrw"]
 
 [ext_resource type="Script" uid="uid://dtbtq2iowg33y" path="res://addons/lit/nodes/lit_canvas_modulate.gd" id="1_03604"]
-[ext_resource type="PackedScene" uid="uid://b1dv1tyoo10fc" path="res://Player.tscn" id="1_vw6t8"]
+[ext_resource type="Script" uid="uid://djrtgftop1i8a" path="res://addons/lit/nodes/lit_post_process.gd" id="1_u0r43"]
+[ext_resource type="Script" uid="uid://bbw5g5btekf5t" path="res://addons/lit/nodes/post/lit_post_film_grain.gd" id="2_my0u7"]
+[ext_resource type="PackedScene" uid="uid://cb4h8nesfbgxw" path="res://Map.tscn" id="3_y8vh0"]
+[ext_resource type="PackedScene" uid="uid://b1dv1tyoo10fc" path="res://Player.tscn" id="5_u0r43"]
 
 [node name="Node2D" type="Node2D" unique_id=792516362]
-position = Vector2(555, 368)
+
+[node name="LitPostProcess" type="CanvasLayer" parent="." unique_id=2053184559]
+visible = false
+script = ExtResource("1_u0r43")
+lit_version = "1.1.7"
+metadata/_custom_type_script = "uid://djrtgftop1i8a"
+
+[node name="FilmGrain" type="Node2D" parent="LitPostProcess" unique_id=729497956]
+script = ExtResource("2_my0u7")
+colored = true
+lit_version = "1.1.7"
 
 [node name="LitCanvasModulate" type="Node2D" parent="." unique_id=223644229]
 script = ExtResource("1_03604")
 lit_version = "1.1.7"
+color = Color(0.16685283, 0.16685283, 0.16685283, 1)
 metadata/_custom_type_script = "uid://dtbtq2iowg33y"
 
-[node name="CharacterBody2D" parent="." unique_id=93508001 instance=ExtResource("1_vw6t8")]
+[node name="Node2D" parent="." unique_id=4829420 instance=ExtResource("3_y8vh0")]
+
+[node name="CharacterBody2D" parent="." unique_id=93508001 instance=ExtResource("5_u0r43")]
+position = Vector2(535, 373)

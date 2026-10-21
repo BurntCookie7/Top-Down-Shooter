@@ -1,12 +1,33 @@
-[gd_scene format=3 uid="uid://b1dv1tyoo10fc"]
+[gd_scene format=4 uid="uid://b1dv1tyoo10fc"]
 
 [ext_resource type="Script" uid="uid://botydpkkw1dcn" path="res://Scripts/Player.gd" id="1_xhfnw"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_cxr5p"]
 [ext_resource type="Texture2D" uid="uid://df1vskxn534sa" path="res://Images/Person Top Down Template.png" id="2_kne1u"]
 [ext_resource type="Texture2D" uid="uid://c5atsv86dfp6b" path="res://Images/Person Top Down Template Mirrored.png" id="3_e80uo"]
+[ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="5_tdg3f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6ohk"]
 radius = 16.0
 height = 54.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dtqjt"]
+shader = ExtResource("2_cxr5p")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cxr5p"]
 atlas = ExtResource("2_kne1u")
@@ -85,6 +106,9 @@ animations = [{
 "speed": 3.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yf5fn"]
+polygon = PackedVector2Array(-9, -17, -5, -24, 5, -27, 14, -25, 20, -18, 21, -10, 21, 0, 21, 10, 20, 16, 14, 24, 4, 27, -7, 22, -11, 8, -11, -8)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=93508001]
 motion_mode = 1
 script = ExtResource("1_xhfnw")
@@ -94,8 +118,16 @@ position = Vector2(5, 0)
 shape = SubResource("CapsuleShape2D_l6ohk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=107299947]
+material = SubResource("ShaderMaterial_dtqjt")
 rotation = -1.5707964
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"Running"
-frame_progress = 0.7045818
+frame_progress = 0.6909779
+script = ExtResource("5_tdg3f")
+lit_version = "1.1.7"
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite2D" unique_id=200005782]
+rotation = 1.5707963
+scale = Vector2(1, -1)
+occluder = SubResource("OccluderPolygon2D_yf5fn")
