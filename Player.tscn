@@ -2,13 +2,17 @@
 
 [ext_resource type="Script" uid="uid://botydpkkw1dcn" path="res://Scripts/Player.gd" id="1_xhfnw"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_cxr5p"]
-[ext_resource type="Texture2D" uid="uid://df1vskxn534sa" path="res://Images/Person Top Down Template.png" id="2_kne1u"]
-[ext_resource type="Texture2D" uid="uid://c5atsv86dfp6b" path="res://Images/Person Top Down Template Mirrored.png" id="3_e80uo"]
+[ext_resource type="Texture2D" uid="uid://djygua5qlx347" path="res://Images/spritesheet (1).png" id="3_tdg3f"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="5_tdg3f"]
+[ext_resource type="Texture2D" uid="uid://bxu1h2wkc5bwt" path="res://Images/Person Top Down Template Mirrored Aiming.png" id="6_dtqjt"]
+[ext_resource type="Script" uid="uid://cpa2qb3trjq4k" path="res://addons/lit/nodes/lit_point_light_2d.gd" id="6_tdg3f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6ohk"]
 radius = 16.0
 height = 54.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yf5fn"]
+polygon = PackedVector2Array(-9, -17, -5, -24, 5, -27, 14, -25, 20, -18, 21, -10, 21, 0, 21, 10, 20, 16, 14, 24, 4, 27, -7, 22, -11, 8, -11, -8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtqjt"]
 shader = ExtResource("2_cxr5p")
@@ -29,44 +33,60 @@ shader_parameter/shadow_min_step = 0.2
 shader_parameter/shadow_ramp = 0.0
 shader_parameter/directional_horizontal_scale = 32.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cxr5p"]
-atlas = ExtResource("2_kne1u")
-region = Rect2(64, 0, 64, 79)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tdg3f"]
-atlas = ExtResource("2_kne1u")
-region = Rect2(192, 0, 64, 79)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtqjt"]
-atlas = ExtResource("3_e80uo")
-region = Rect2(128, 0, 64, 79)
+atlas = ExtResource("3_tdg3f")
+region = Rect2(58, 0, 58, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ncpa"]
-atlas = ExtResource("3_e80uo")
-region = Rect2(0, 0, 64, 79)
+atlas = ExtResource("3_tdg3f")
+region = Rect2(58, 96, 58, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wi0c6"]
-atlas = ExtResource("2_kne1u")
-region = Rect2(128, 0, 64, 79)
+atlas = ExtResource("3_tdg3f")
+region = Rect2(0, 0, 58, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hp6x6"]
-atlas = ExtResource("3_e80uo")
-region = Rect2(192, 0, 64, 79)
+atlas = ExtResource("3_tdg3f")
+region = Rect2(116, 0, 58, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv870"]
+atlas = ExtResource("6_dtqjt")
+region = Rect2(195, 0, 63, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efikj"]
+atlas = ExtResource("6_dtqjt")
+region = Rect2(132, 0, 63, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itxgx"]
+atlas = ExtResource("6_dtqjt")
+region = Rect2(6, 0, 63, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tkgg"]
+atlas = ExtResource("3_tdg3f")
+region = Rect2(174, 0, 58, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6ohk"]
+atlas = ExtResource("3_tdg3f")
+region = Rect2(116, 96, 58, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxr5p"]
+atlas = ExtResource("6_dtqjt")
+region = Rect2(195, 22, 63, 88)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cxr5p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tdg3f")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_dtqjt")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5ncpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi0c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp6x6")
 }],
 "loop": 1,
 "name": &"Running",
@@ -74,7 +94,21 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wi0c6")
+"texture": SubResource("AtlasTexture_rv870")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efikj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itxgx")
+}],
+"loop": 1,
+"name": &"RunningAiming",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tkgg")
 }],
 "loop": 1,
 "name": &"Sitting",
@@ -82,7 +116,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hp6x6")
+"texture": SubResource("AtlasTexture_l6ohk")
 }],
 "loop": 1,
 "name": &"Standing",
@@ -91,25 +125,44 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cxr5p")
+}],
+"loop": 1,
+"name": &"StandingAiming",
+"speed": 5.0
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tdg3f")
-}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dtqjt")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5ncpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi0c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp6x6")
 }],
 "loop": 1,
 "name": &"Walking",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rv870")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efikj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itxgx")
+}],
+"loop": 1,
+"name": &"WalkingAiming",
+"speed": 3.0
 }]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yf5fn"]
-polygon = PackedVector2Array(-9, -17, -5, -24, 5, -27, 14, -25, 20, -18, 21, -10, 21, 0, 21, 10, 20, 16, 14, 24, 4, 27, -7, 22, -11, 8, -11, -8)
-
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=93508001]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=93508001 groups=["Player"]]
 motion_mode = 1
 script = ExtResource("1_xhfnw")
 
@@ -117,17 +170,26 @@ script = ExtResource("1_xhfnw")
 position = Vector2(5, 0)
 shape = SubResource("CapsuleShape2D_l6ohk")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=200005782]
+occluder = SubResource("OccluderPolygon2D_yf5fn")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=107299947]
 material = SubResource("ShaderMaterial_dtqjt")
+position = Vector2(22, 0)
 rotation = -1.5707964
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"Running"
-frame_progress = 0.6909779
+animation = &"Walking"
+frame_progress = 0.074058905
 script = ExtResource("5_tdg3f")
 lit_version = "1.1.7"
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite2D" unique_id=200005782]
-rotation = 1.5707963
-scale = Vector2(1, -1)
-occluder = SubResource("OccluderPolygon2D_yf5fn")
+[node name="LitDirectionalLight2D" type="Node2D" parent="AnimatedSprite2D" unique_id=1965863652]
+position = Vector2(-12, 30)
+rotation = 1.5707964
+skew = 0.7941248
+script = ExtResource("6_tdg3f")
+lit_version = "1.1.7"
+color = Color(1, 0.72113544, 0.5519307, 1)
+energy = 0.0
+metadata/_custom_type_script = "uid://cpa2qb3trjq4k"

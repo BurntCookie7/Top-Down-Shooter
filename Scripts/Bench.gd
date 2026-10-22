@@ -13,4 +13,11 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	SignalBus.player_entered_bench.emit(self, sitting_pos.global_position)
+	if body.is_in_group("Player"):
+		Global.can_sit = true
+		SignalBus.player_entered_bench.emit(self, sitting_pos.global_position)
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		Global.can_sit = false
