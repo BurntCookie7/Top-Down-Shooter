@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://botydpkkw1dcn" path="res://Scripts/Player.gd" id="1_xhfnw"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_cxr5p"]
+[ext_resource type="PackedScene" uid="uid://dhg5gt5uqjnt7" path="res://BasicBullet.tscn" id="2_dtqjt"]
 [ext_resource type="Texture2D" uid="uid://djygua5qlx347" path="res://Images/spritesheet (1).png" id="3_tdg3f"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="5_tdg3f"]
 [ext_resource type="Texture2D" uid="uid://bxu1h2wkc5bwt" path="res://Images/Person Top Down Template Mirrored Aiming.png" id="6_dtqjt"]
 [ext_resource type="Script" uid="uid://cpa2qb3trjq4k" path="res://addons/lit/nodes/lit_point_light_2d.gd" id="6_tdg3f"]
+[ext_resource type="AudioStream" uid="uid://bh11w6j8udt6h" path="res://Audio/Gunshot.mp3" id="8_5ncpa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6ohk"]
 radius = 16.0
@@ -165,6 +167,7 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=93508001 groups=["Player"]]
 motion_mode = 1
 script = ExtResource("1_xhfnw")
+bullet_scene = ExtResource("2_dtqjt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=254822238]
 position = Vector2(5, 0)
@@ -179,13 +182,14 @@ position = Vector2(22, 0)
 rotation = -1.5707964
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"Walking"
-frame_progress = 0.074058905
+animation = &"WalkingAiming"
+frame = 2
+frame_progress = 0.6100092
 script = ExtResource("5_tdg3f")
 lit_version = "1.1.7"
 
 [node name="LitDirectionalLight2D" type="Node2D" parent="AnimatedSprite2D" unique_id=1965863652]
-position = Vector2(-12, 30)
+position = Vector2(-16.999998, 32)
 rotation = 1.5707964
 skew = 0.7941248
 script = ExtResource("6_tdg3f")
@@ -193,3 +197,12 @@ lit_version = "1.1.7"
 color = Color(1, 0.72113544, 0.5519307, 1)
 energy = 0.0
 metadata/_custom_type_script = "uid://cpa2qb3trjq4k"
+
+[node name="BulletSpawnPosition" type="Node2D" parent="AnimatedSprite2D" unique_id=93192309]
+position = Vector2(-19.999998, 32)
+
+[node name="GunSounds" type="AudioStreamPlayer" parent="AnimatedSprite2D" unique_id=455229605]
+stream = ExtResource("8_5ncpa")
+max_polyphony = 50
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1456915445]

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://e3g5wyogiycf"]
+
+[ext_resource type="Script" uid="uid://dixnowfv8yu0t" path="res://Scripts/PlayerUI.gd" id="1_qwd5t"]
+
+[node name="Control" type="Control" unique_id=596148611]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qwd5t")
+
+[node name="Label" type="Label" parent="." unique_id=702616153]
+layout_mode = 0
+offset_top = 626.0
+offset_right = 40.0
+offset_bottom = 649.0
+text = "Ammo: 15/15"

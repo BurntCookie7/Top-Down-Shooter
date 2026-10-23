@@ -2,10 +2,17 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var muzzle_flash: LitPointLight2D = $AnimatedSprite2D/LitDirectionalLight2D
+@onready var camera: Camera2D = $Camera2D
+@onready var bullet_spawn_position: Node2D = $AnimatedSprite2D/BulletSpawnPosition
+@onready var gun_sounds: AudioStreamPlayer = $AnimatedSprite2D/GunSounds
 
+@export var bullet_scene: PackedScene = null
+@export var shake_strength = 0.0
 enum Control_Mode{Mouse_Turn, Key_Turn}
-var SPEED = 150.0
-var TURN_SPEED = 0.04
+@export var SPEED = 150.0
+@export var TURN_SPEED = 0.04
+var total_ammunition: int = 15
+var ammunition_remaining: int = 15
 const JUMP_VELOCITY = -400.0
 var turn_amount = 0.0
 var state := Global.State.STANDING
@@ -14,6 +21,9 @@ var sitting: bool = false
 var current_bench: Node2D = null
 var sitting_position = null
 var aiming: bool = false
+var reload_sound = preload("res://Audio/Reload.mp3")
+var shot_sound = preload("res://Audio/Gunshot.mp3")
+
 func _ready() -> void:
 	SignalBus.player_entered_bench.connect(bench_entered)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -35,8 +45,15 @@ func _input(event: InputEvent) -> void:
 		aiming = true
 	if event.is_action_released("RightClick"):
 		aiming = false
-	if event.is_action_pressed("LeftClick") and aiming:
+	if event.is_action_pressed("LeftClick") and aiming and gun_sounds.stream != reload_sound:
 		shoot()
+	if event.is_action_pressed("R") and not (gun_sounds.playing and gun_sounds.stream == reload_sound):
+		gun_sounds.stream = reload_sound
+		gun_sounds.pitch_scale = 1.0
+		gun_sounds.play()
+		await gun_sounds.finished
+		ammunition_remaining = total_ammunition
+		gun_sounds.stream = shot_sound
 
 func bench_entered(bench, sitting_pos):
 	print("entered bench")
@@ -44,6 +61,8 @@ func bench_entered(bench, sitting_pos):
 	sitting_position = sitting_pos
 
 func _physics_process(delta: float) -> void:
+	shake_strength = move_toward(shake_strength, 0.0, 40.0 * delta)
+	camera.offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * shake_strength
 	if Input.is_action_just_pressed("E") and (Global.can_sit or sitting) and is_instance_valid(current_bench):
 		match sitting:
 			true:
@@ -93,16 +112,25 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func wait(frames: int):
-	for i in range(frames):
-		await get_tree().physics_frame
-
 func shoot():
-	sprite.skew = deg_to_rad(10)
-	muzzle_flash.energy = 1.0
-	await wait(5)
-	sprite.skew = deg_to_rad(0)
-	muzzle_flash.energy = 0.0
+	if ammunition_remaining > 0:
+		muzzle_flash.energy = 1.0
+		await Global.wait(5)
+		muzzle_flash.energy = 0.0
+		gun_sounds.pitch_scale = randf_range(0.9, 1.1)
+		gun_sounds.play()
+		camera_shake(2.0)
+		spawn_bullet()
+		ammunition_remaining -= 1
+		
+func camera_shake(amount):
+	shake_strength = max(shake_strength, amount)
+
+func spawn_bullet():
+	var bullet = bullet_scene.instantiate()
+	bullet.rotation_degrees = rotation_degrees
+	get_tree().root.add_child(bullet)
+	bullet.global_position = bullet_spawn_position.global_position
 	
 	
 func state_handler():

@@ -1,0 +1,42 @@
+[gd_scene format=4 uid="uid://bhcrv2ag8nwrp"]
+
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="1_eo5lk"]
+[ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="2_rjuf7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f2r17"]
+shader = ExtResource("1_eo5lk")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="Gradient" id="Gradient_rqf84"]
+offsets = PackedFloat32Array(0.98455596, 1)
+colors = PackedColorArray(0.8641216, 0.6686917, 0.5576652, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yf5fn"]
+gradient = SubResource("Gradient_rqf84")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.7321937, 0.2735043)
+
+[node name="Node2D" type="Node2D" unique_id=806718065]
+
+[node name="LitSprite2D" type="Sprite2D" parent="." unique_id=1529415043]
+material = SubResource("ShaderMaterial_f2r17")
+texture = SubResource("GradientTexture2D_yf5fn")
+script = ExtResource("2_rjuf7")
+lit_version = "1.1.7"
+metadata/_custom_type_script = "uid://drrhypxeb6nsg"

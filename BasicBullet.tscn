@@ -1,0 +1,75 @@
+[gd_scene format=4 uid="uid://dhg5gt5uqjnt7"]
+
+[ext_resource type="Script" uid="uid://cyno0441yc3b" path="res://Scripts/Bullet.gd" id="1_ayd6b"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_7281b"]
+[ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="3_u8st5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7awvy"]
+shader = ExtResource("2_7281b")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="Gradient" id="Gradient_x3e43"]
+offsets = PackedFloat32Array(0.31660232)
+colors = PackedColorArray(0.32915837, 0.3291584, 0.3291584, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+gradient = SubResource("Gradient_x3e43")
+width = 8
+height = 4
+fill = 1
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1rjr3"]
+diffuse_texture = SubResource("GradientTexture2D_g4v7s")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="Curve" id="Curve_g4v7s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.056994796), 0.3415543, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_yf5fn"]
+colors = PackedColorArray(1, 1, 1, 0.05490196, 1, 1, 1, 0)
+
+[node name="StaticBody2D" type="Area2D" unique_id=747237443]
+script = ExtResource("1_ayd6b")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1805081264]
+material = SubResource("ShaderMaterial_7awvy")
+texture = SubResource("CanvasTexture_1rjr3")
+script = ExtResource("3_u8st5")
+lit_version = "1.1.7"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=366740347]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_yf5fn")
+
+[node name="Timer" type="Timer" parent="." unique_id=147887035]
+one_shot = true
+
+[node name="Line2D" type="Line2D" parent="." unique_id=712137718]
+position = Vector2(-4, 0)
+points = PackedVector2Array(0, 0, -35, 0)
+width = 4.015
+width_curve = SubResource("Curve_g4v7s")
+default_color = Color(1, 1, 1, 0)
+gradient = SubResource("Gradient_yf5fn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
