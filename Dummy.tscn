@@ -1,7 +1,13 @@
 [gd_scene format=4 uid="uid://bhcrv2ag8nwrp"]
 
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="1_eo5lk"]
+[ext_resource type="Script" uid="uid://baed2kyujhjxt" path="res://Scripts/Dummy.gd" id="1_rjuf7"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="2_rjuf7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+radius = 20.024984
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f2r17"]
 shader = ExtResource("1_eo5lk")
@@ -32,11 +38,54 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.7321937, 0.2735043)
 
-[node name="Node2D" type="Node2D" unique_id=806718065]
+[sub_resource type="Gradient" id="Gradient_eo5lk"]
+offsets = PackedFloat32Array(0.98455596, 1)
+colors = PackedColorArray(0.2665521, 0.14919153, 0.1021704, 1, 0, 0, 0, 0)
 
-[node name="LitSprite2D" type="Sprite2D" parent="." unique_id=1529415043]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rjuf7"]
+gradient = SubResource("Gradient_eo5lk")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.7321937, 0.2735043)
+
+[node name="Node2D" type="StaticBody2D" unique_id=763927022 groups=["Dummy"]]
+script = ExtResource("1_rjuf7")
+hit_color = Color(0.49939173, 0.41998485, 0.3705187, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=61560400]
+shape = SubResource("CircleShape2D_yf5fn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=902863812]
+position = Vector2(0, 25)
+shape = SubResource("CapsuleShape2D_yf5fn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1885394416]
+position = Vector2(0, -25)
+shape = SubResource("CapsuleShape2D_yf5fn")
+
+[node name="LitSprite2D2" type="Sprite2D" parent="." unique_id=221354048]
 material = SubResource("ShaderMaterial_f2r17")
 texture = SubResource("GradientTexture2D_yf5fn")
+script = ExtResource("2_rjuf7")
+lit_version = "1.1.7"
+metadata/_custom_type_script = "uid://drrhypxeb6nsg"
+
+[node name="LitSprite2D" type="Sprite2D" parent="." unique_id=1529415043]
+z_index = -1
+material = SubResource("ShaderMaterial_f2r17")
+position = Vector2(0, 20)
+scale = Vector2(0.59375, 1)
+texture = SubResource("GradientTexture2D_rjuf7")
+script = ExtResource("2_rjuf7")
+lit_version = "1.1.7"
+metadata/_custom_type_script = "uid://drrhypxeb6nsg"
+
+[node name="LitSprite2D3" type="Sprite2D" parent="." unique_id=293595766]
+z_index = -1
+material = SubResource("ShaderMaterial_f2r17")
+position = Vector2(0, -20)
+scale = Vector2(0.5625, 1)
+texture = SubResource("GradientTexture2D_rjuf7")
 script = ExtResource("2_rjuf7")
 lit_version = "1.1.7"
 metadata/_custom_type_script = "uid://drrhypxeb6nsg"

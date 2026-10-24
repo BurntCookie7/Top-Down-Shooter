@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cyno0441yc3b" path="res://Scripts/Bullet.gd" id="1_ayd6b"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_7281b"]
+[ext_resource type="PackedScene" uid="uid://npfhfas3xcm6" path="res://BulletHitParticle.tscn" id="2_othcl"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="3_u8st5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7awvy"]
@@ -49,6 +50,8 @@ colors = PackedColorArray(1, 1, 1, 0.05490196, 1, 1, 1, 0)
 
 [node name="StaticBody2D" type="Area2D" unique_id=747237443]
 script = ExtResource("1_ayd6b")
+bullet_hit_particles = ExtResource("2_othcl")
+SPEED = 2000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1805081264]
 material = SubResource("ShaderMaterial_7awvy")

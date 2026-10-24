@@ -1,0 +1,46 @@
+[gd_scene format=4 uid="uid://kwfvs0jbovlt"]
+
+[ext_resource type="Script" uid="uid://bwwmhid7w6gig" path="res://Scripts/AmmoBox.gd" id="1_6viba"]
+[ext_resource type="Texture2D" uid="uid://xmk0ltaasp7q" path="res://Images/AmmoBox.png" id="1_afe4d"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_ix5d2"]
+[ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="4_yhmfn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(26, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3ced"]
+shader = ExtResource("2_ix5d2")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_47512"]
+diffuse_texture = ExtResource("1_afe4d")
+
+[node name="Area2D" type="Area2D" unique_id=2074092034]
+script = ExtResource("1_6viba")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=888632169]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1705220902]
+material = SubResource("ShaderMaterial_t3ced")
+position = Vector2(-4.7683716e-07, -2.3841858e-07)
+scale = Vector2(0.18035714, 0.20065787)
+texture = SubResource("CanvasTexture_47512")
+script = ExtResource("4_yhmfn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

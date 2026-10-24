@@ -206,3 +206,4 @@ stream = ExtResource("8_5ncpa")
 max_polyphony = 50
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1456915445]
+zoom = Vector2(1.2, 1.2)

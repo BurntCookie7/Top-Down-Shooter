@@ -10,28 +10,28 @@
 		{
 			"uuid": "26168198-d3d5-4ee2-92e2-6e73bf6fd669",
 			"title": "To Do",
-			"tasks": [
-				"a2b2b373-a797-4320-95fd-30c302a267e3"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "17a38c83-3a72-4dc4-905b-72ee5c1a8da8",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"58c1e3c4-03ba-404c-828a-f7ad74c5eb65"
+			]
 		},
 		{
 			"uuid": "b0b971d2-c33f-4d80-bd7f-e7bca2631a30",
 			"title": "Mostly Working",
-			"tasks": [
-				"8a28e627-52a2-438a-8cf9-ee1934b26e45"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "86996dbf-a132-43df-98a8-a2982790084e",
 			"title": "Done",
 			"tasks": [
 				"e65ee688-d680-46fd-a8de-548975ff6010",
-				"2b78c699-13df-4483-bd17-441f2f2b6ca5"
+				"2b78c699-13df-4483-bd17-441f2f2b6ca5",
+				"8a28e627-52a2-438a-8cf9-ee1934b26e45",
+				"a2b2b373-a797-4320-95fd-30c302a267e3"
 			]
 		}
 	],
@@ -60,6 +60,13 @@
 		{
 			"uuid": "2b78c699-13df-4483-bd17-441f2f2b6ca5",
 			"title": "Player can reload",
+			"description": "",
+			"category": "29d4541a-1b78-4039-9d4f-064e7f430731",
+			"steps": []
+		},
+		{
+			"uuid": "58c1e3c4-03ba-404c-828a-f7ad74c5eb65",
+			"title": "Enemy",
 			"description": "",
 			"category": "29d4541a-1b78-4039-9d4f-064e7f430731",
 			"steps": []

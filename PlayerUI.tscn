@@ -11,9 +11,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qwd5t")
 
-[node name="Label" type="Label" parent="." unique_id=702616153]
+[node name="Ammo" type="Label" parent="." unique_id=702616153]
 layout_mode = 0
-offset_top = 626.0
-offset_right = 40.0
-offset_bottom = 649.0
+offset_left = 1.0
+offset_top = 608.0
+offset_right = 104.0
+offset_bottom = 631.0
 text = "Ammo: 15/15"
+
+[node name="Reserves" type="Label" parent="." unique_id=2042613151]
+layout_mode = 0
+offset_top = 625.0
+offset_right = 103.0
+offset_bottom = 648.0
+text = "Reserves: 0"

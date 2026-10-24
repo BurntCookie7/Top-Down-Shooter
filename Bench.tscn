@@ -35,6 +35,7 @@ size = Vector2(126, 13)
 
 [node name="StaticBody2D" type="StaticBody2D" unique_id=2013195154]
 script = ExtResource("1_upi1e")
+hit_color = Color(0.2774405, 0.21356648, 0.1444242, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1430604863]
 material = SubResource("ShaderMaterial_u82ir")

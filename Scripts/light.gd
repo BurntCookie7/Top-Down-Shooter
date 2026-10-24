@@ -3,6 +3,7 @@ extends StaticBody2D
 @onready var light: LitPointLight2D = $LitDirectionalLight2D
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 
+@export var hit_color: Color
 @export var color: Color
 var light_out: bool = false
 # Called when the node enters the scene tree for the first time.

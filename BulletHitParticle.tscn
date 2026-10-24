@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://npfhfas3xcm6"]
+
+[sub_resource type="Gradient" id="Gradient_hy6nd"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f2r17"]
+gradient = SubResource("Gradient_hy6nd")
+width = 2
+height = 2
+
+[sub_resource type="Curve" id="Curve_6xy32"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.3844223, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hpk72"]
+curve = SubResource("Curve_6xy32")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3v64l"]
+particle_flag_disable_z = true
+initial_velocity_max = 162.62999
+gravity = Vector3(0, 0, 0)
+damping_min = 30.000002
+damping_max = 50.000004
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_hpk72")
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=465734169]
+emitting = false
+amount = 15
+texture = SubResource("GradientTexture2D_f2r17")
+lifetime = 0.4
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3v64l")

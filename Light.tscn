@@ -41,11 +41,12 @@ radius = 24.186773
 
 [node name="StaticBody2D" type="StaticBody2D" unique_id=1523508489 groups=["Light"]]
 script = ExtResource("1_avuyf")
+hit_color = Color(1, 1, 1, 1)
+color = Color(1, 1, 1, 1)
 
 [node name="LitDirectionalLight2D" type="Node2D" parent="." unique_id=318632393]
 script = ExtResource("3_cir5v")
 lit_version = "1.1.7"
-color = Color(0, 0, 0, 1)
 energy = 2.0
 range = 207.3
 falloff = 1.5

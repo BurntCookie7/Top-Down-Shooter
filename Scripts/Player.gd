@@ -11,6 +11,7 @@ extends CharacterBody2D
 enum Control_Mode{Mouse_Turn, Key_Turn}
 @export var SPEED = 150.0
 @export var TURN_SPEED = 0.04
+var reserves: int = 0
 var total_ammunition: int = 15
 var ammunition_remaining: int = 15
 const JUMP_VELOCITY = -400.0
@@ -47,12 +48,15 @@ func _input(event: InputEvent) -> void:
 		aiming = false
 	if event.is_action_pressed("LeftClick") and aiming and gun_sounds.stream != reload_sound:
 		shoot()
-	if event.is_action_pressed("R") and not (gun_sounds.playing and gun_sounds.stream == reload_sound):
+	if event.is_action_pressed("R") and not (gun_sounds.playing and gun_sounds.stream == reload_sound) and reserves > 0:
 		gun_sounds.stream = reload_sound
 		gun_sounds.pitch_scale = 1.0
 		gun_sounds.play()
 		await gun_sounds.finished
-		ammunition_remaining = total_ammunition
+		for i in range(total_ammunition - ammunition_remaining):
+			if ammunition_remaining != total_ammunition and reserves > 0:
+				reserves -= 1
+				ammunition_remaining += 1
 		gun_sounds.stream = shot_sound
 
 func bench_entered(bench, sitting_pos):
@@ -109,7 +113,6 @@ func _physics_process(delta: float) -> void:
 					global_rotation += turn * TURN_SPEED
 
 	state_handler()
-	
 	move_and_slide()
 
 func shoot():

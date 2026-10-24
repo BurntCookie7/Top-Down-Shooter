@@ -5,6 +5,8 @@
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="3_v6avs"]
 [ext_resource type="Texture2D" uid="uid://duwbmts2hdam" path="res://Images/Tiles.png" id="4_8qak7"]
 [ext_resource type="Script" uid="uid://cekuun21ika3v" path="res://addons/lit/nodes/lit_tile_map_layer.gd" id="5_0f2yp"]
+[ext_resource type="PackedScene" uid="uid://bhcrv2ag8nwrp" path="res://Dummy.tscn" id="6_8qak7"]
+[ext_resource type="PackedScene" uid="uid://kwfvs0jbovlt" path="res://AmmoBox.tscn" id="7_0f2yp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vm4q1"]
 shader = ExtResource("3_v6avs")
@@ -34,15 +36,15 @@ texture_region_size = Vector2i(62, 62)
 tile_size = Vector2i(60, 60)
 sources/0 = SubResource("TileSetAtlasSource_ud676")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_g4v7s"]
+vertices = PackedVector2Array(256.5625, 73.88281, 279, 79.89844, 201, 79.5, 240.11719, 57.4375, 201, 0, 234.10156, 35, 240.11719, 12.5625, 480.71875, 139, 1601, -401.96875, 1601, 1059, 475.27344, 159.36719, 475.27344, 118.63281, 323.89844, 35, 317.8828, 12.5625, 470, 164.64063, 470, 171.63281, 466.59375, 184.35156, -340.96094, 1059, 455.35156, 195.59375, 440, 199.71094, 424.64844, 195.59375, 413.40625, 184.35156, 470, 113.359375, 470, 106.36719, 466.59375, 93.64844, 455.35156, 82.40625, 440, 78.28906, 424.64844, 82.40625, 413.40625, 93.64844, 317.8828, 57.4375, 410, 106.36719, 301.4375, 73.88281, 410, 113.359375, 404.72656, 118.63281, 399.28125, 139, 301.4375, -3.8828125, -338.03125, -400.02344, 279, -9.8984375, 256.5625, -3.8828125, 35, 0, 35, 79.5, 410, 171.63281, 410, 164.64063, 404.72656, 159.36719)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2), PackedInt32Array(3, 2, 4), PackedInt32Array(5, 3, 4), PackedInt32Array(6, 5, 4), PackedInt32Array(7, 8, 9), PackedInt32Array(10, 7, 9), PackedInt32Array(8, 7, 11), PackedInt32Array(8, 12, 13), PackedInt32Array(14, 10, 9), PackedInt32Array(15, 14, 9), PackedInt32Array(16, 15, 9), PackedInt32Array(16, 9, 17), PackedInt32Array(18, 16, 17), PackedInt32Array(19, 18, 17), PackedInt32Array(20, 19, 17), PackedInt32Array(21, 20, 17), PackedInt32Array(8, 11, 22), PackedInt32Array(8, 22, 23), PackedInt32Array(8, 23, 24), PackedInt32Array(8, 24, 25), PackedInt32Array(12, 8, 25), PackedInt32Array(12, 25, 26), PackedInt32Array(12, 26, 27), PackedInt32Array(12, 27, 28), PackedInt32Array(29, 12, 28), PackedInt32Array(29, 28, 30), PackedInt32Array(31, 29, 30), PackedInt32Array(31, 30, 32), PackedInt32Array(31, 32, 33), PackedInt32Array(31, 33, 34), PackedInt32Array(8, 13, 35), PackedInt32Array(36, 8, 35), PackedInt32Array(36, 35, 37), PackedInt32Array(36, 37, 38), PackedInt32Array(36, 38, 6), PackedInt32Array(36, 6, 4), PackedInt32Array(36, 4, 39), PackedInt32Array(17, 36, 39), PackedInt32Array(17, 39, 40), PackedInt32Array(21, 17, 40), PackedInt32Array(21, 40, 2), PackedInt32Array(21, 2, 1), PackedInt32Array(41, 21, 1), PackedInt32Array(41, 1, 31), PackedInt32Array(42, 41, 31), PackedInt32Array(43, 42, 31), PackedInt32Array(43, 31, 34)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-358, -420, 1621, -422, 1621, 1079, -361, 1079)])
+sample_partition_type = 1
+parsed_geometry_type = 1
+agent_radius = 20.0
+
 [node name="Node2D" type="Node2D" unique_id=4829420]
-
-[node name="Bench" parent="." unique_id=2013195154 instance=ExtResource("1_gfjgm")]
-position = Vector2(118, 38)
-rotation = 3.1415927
-
-[node name="Light" parent="." unique_id=1523508489 instance=ExtResource("2_3vi7k")]
-position = Vector2(279, 35)
-color = Color(0.55029315, 0.5502932, 0.55029315, 1)
 
 [node name="TileMap" type="TileMapLayer" parent="." unique_id=1698974514]
 z_index = -2
@@ -52,3 +54,19 @@ tile_set = SubResource("TileSet_g4v7s")
 script = ExtResource("5_0f2yp")
 lit_version = "1.1.7"
 metadata/_custom_type_script = "uid://cekuun21ika3v"
+
+[node name="Area2D" parent="." unique_id=2074092034 instance=ExtResource("7_0f2yp")]
+position = Vector2(126, 313)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1221851304]
+navigation_polygon = SubResource("NavigationPolygon_g4v7s")
+
+[node name="Bench" parent="NavigationRegion2D" unique_id=2013195154 instance=ExtResource("1_gfjgm")]
+position = Vector2(118, 38)
+rotation = -3.1415925
+
+[node name="Light" parent="NavigationRegion2D" unique_id=1523508489 instance=ExtResource("2_3vi7k")]
+position = Vector2(279, 35)
+
+[node name="Node2D" parent="NavigationRegion2D" unique_id=763927022 instance=ExtResource("6_8qak7")]
+position = Vector2(440, 139)

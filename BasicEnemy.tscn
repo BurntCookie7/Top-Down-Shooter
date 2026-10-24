@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://tamrqnlbh8x7"]
+
+[ext_resource type="Script" uid="uid://cq22uwmttg6nl" path="res://Scripts/BasicEnemy.gd" id="1_6njx4"]
+[ext_resource type="PackedScene" uid="uid://kwfvs0jbovlt" path="res://AmmoBox.tscn" id="2_3wrki"]
+
+[sub_resource type="Gradient" id="Gradient_1mh3o"]
+offsets = PackedFloat32Array(0.0038610038)
+colors = PackedColorArray(0.38675654, 0.38675663, 0.3867566, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+gradient = SubResource("Gradient_1mh3o")
+width = 32
+height = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(32, 32)
+
+[sub_resource type="Theme" id="Theme_g4v7s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0u6y"]
+bg_color = Color(0, 0, 0, 0.19607843)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(2.6471912e-06, 0.7278638, 0.08175551, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1850996865]
+script = ExtResource("1_6njx4")
+Drops = Array[PackedScene]([ExtResource("2_3wrki")])
+hit_color = Color(1, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2010721503]
+texture = SubResource("GradientTexture2D_g4v7s")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1596461876]
+avoidance_enabled = true
+radius = 20.0
+
+[node name="Timer" type="Timer" parent="." unique_id=710775026]
+wait_time = 0.5
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418133407]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=31531383]
+
+[node name="ProgressBar" type="ProgressBar" parent="Node2D" unique_id=1631956121]
+offset_left = 13.5
+offset_top = -24.0
+offset_right = 17.499996
+offset_bottom = 3.0
+rotation = 1.5707964
+theme = SubResource("Theme_g4v7s")
+theme_override_styles/background = SubResource("StyleBoxFlat_d0u6y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yf5fn")
+value = 100.0
+rounded = true
+fill_mode = 3
+show_percentage = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
