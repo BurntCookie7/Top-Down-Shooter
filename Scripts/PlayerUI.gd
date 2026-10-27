@@ -14,5 +14,5 @@ func _process(delta: float) -> void:
 	pass
 	
 func _physics_process(delta: float) -> void:
-	ammo.text = "Ammo: " + str(player.ammunition_remaining) + "/" + str(player.total_ammunition)
+	ammo.text = "Ammo: " + str(player.ammunition_remaining) + "/" + str(player.max_ammunition)
 	reserves.text = "Reserves: " + str(player.reserves)

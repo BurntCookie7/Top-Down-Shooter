@@ -2,8 +2,12 @@
 
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="1_qifmt"]
 [ext_resource type="Script" uid="uid://bepohsp7nj5xp" path="res://Scripts/Bench.gd" id="1_upi1e"]
+[ext_resource type="PackedScene" uid="uid://d2iwwc5xuen5m" path="res://Upgrades.tscn" id="2_74lck"]
 [ext_resource type="Texture2D" uid="uid://cyxmmqtihy4a5" path="res://Images/Bench.png" id="2_upi1e"]
+[ext_resource type="PackedScene" uid="uid://scykvv4jf3p2" path="res://UpgradeButton.tscn" id="3_25bsb"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="3_74lck"]
+[ext_resource type="Script" uid="uid://c524q2ho8bja3" path="res://Resources/UpgradeData.gd" id="3_81ih3"]
+[ext_resource type="Resource" uid="uid://c240sc735hkgh" path="res://Resources/MaxAmmo.tres" id="4_25bsb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u82ir"]
 shader = ExtResource("1_qifmt")
@@ -35,7 +39,10 @@ size = Vector2(126, 13)
 
 [node name="StaticBody2D" type="StaticBody2D" unique_id=2013195154]
 script = ExtResource("1_upi1e")
+Upgrades_Menu = ExtResource("2_74lck")
+Upgrade_Button = ExtResource("3_25bsb")
 hit_color = Color(0.2774405, 0.21356648, 0.1444242, 1)
+upgrade_options = Array[ExtResource("3_81ih3")]([ExtResource("4_25bsb")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1430604863]
 material = SubResource("ShaderMaterial_u82ir")

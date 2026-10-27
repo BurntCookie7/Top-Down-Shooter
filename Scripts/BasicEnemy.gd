@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var SPEED: float = 100.0
 @export var Drops: Array[PackedScene]
 @export var total_health: int = 100.0
+@onready var sprite: LitAnimatedSprite2D = $Sprite2D
 @export var hit_color: Color = Color()
 @onready var health_bar: ProgressBar = $Node2D/ProgressBar
 var health: int
@@ -14,6 +15,7 @@ func _ready() -> void:
 	update_target()
 	health = total_health
 	health_bar.top_level = true
+	sprite.play()
 
 func _physics_process(delta: float) -> void:
 	manage_health()
@@ -44,7 +46,7 @@ func update_target():
 func manage_health():
 	health_bar.value = health
 	if health <= 0:
-		for i in range(randi_range(0, 3)):
+		for i in range(randi_range(Global.enemy_drop_chance.x, Global.enemy_drop_chance.y)):
 			var item_instance = Drops.pick_random().instantiate()
 			get_tree().root.add_child(item_instance)
 			item_instance.global_position = global_position + Vector2(randi_range(1, 10), randi_range(1, 10))

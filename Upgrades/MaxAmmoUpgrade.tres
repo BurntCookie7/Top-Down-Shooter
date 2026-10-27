@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://ds4714jb7nrfi"]
+
+[ext_resource type="Texture2D" uid="uid://xmk0ltaasp7q" path="res://Images/AmmoBox.png" id="1_ddr6n"]
+[ext_resource type="Script" uid="uid://c524q2ho8bja3" path="res://Resources/UpgradeData.gd" id="2_d5oqq"]
+[ext_resource type="Script" uid="uid://bd2ql44krcm2" path="res://Resources/StatModifier.gd" id="2_ftjl4"]
+
+[sub_resource type="Resource" id="Resource_ddr6n"]
+script = ExtResource("2_ftjl4")
+stat = &"amount"
+amount = 0.05
+metadata/_custom_type_script = "uid://bd2ql44krcm2"
+
+[resource]
+script = ExtResource("2_d5oqq")
+id = &"MaxAmmo"
+title = "Max Ammo"
+description = "+5 Maximum ammo"
+icon = ExtResource("1_ddr6n")
+rarity = 1
+modifiers = [SubResource("Resource_ddr6n")]
+metadata/_custom_type_script = "uid://c524q2ho8bja3"

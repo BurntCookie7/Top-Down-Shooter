@@ -4,10 +4,11 @@
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_7281b"]
 [ext_resource type="PackedScene" uid="uid://npfhfas3xcm6" path="res://BulletHitParticle.tscn" id="2_othcl"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="3_u8st5"]
+[ext_resource type="Texture2D" uid="uid://dwp045sm24sth" path="res://Images/bullet.png" id="4_kok35"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7awvy"]
 shader = ExtResource("2_7281b")
-shader_parameter/emissive_strength = 0.0
+shader_parameter/emissive_strength = 0.37
 shader_parameter/receiver_mask = 1
 shader_parameter/receiver_z = 0
 shader_parameter/receiver_layer = 0
@@ -24,18 +25,8 @@ shader_parameter/shadow_min_step = 0.2
 shader_parameter/shadow_ramp = 0.0
 shader_parameter/directional_horizontal_scale = 32.0
 
-[sub_resource type="Gradient" id="Gradient_x3e43"]
-offsets = PackedFloat32Array(0.31660232)
-colors = PackedColorArray(0.32915837, 0.3291584, 0.3291584, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
-gradient = SubResource("Gradient_x3e43")
-width = 8
-height = 4
-fill = 1
-
 [sub_resource type="CanvasTexture" id="CanvasTexture_1rjr3"]
-diffuse_texture = SubResource("GradientTexture2D_g4v7s")
+diffuse_texture = ExtResource("4_kok35")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
 radius = 2.0
@@ -55,11 +46,15 @@ SPEED = 2000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1805081264]
 material = SubResource("ShaderMaterial_7awvy")
+rotation = 1.5707964
+scale = Vector2(0.021409843, 0.019759601)
 texture = SubResource("CanvasTexture_1rjr3")
 script = ExtResource("3_u8st5")
 lit_version = "1.1.7"
+emissive_strength = 0.37
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=366740347]
+visible = false
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_yf5fn")
 

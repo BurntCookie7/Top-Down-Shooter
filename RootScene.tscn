@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://djrtgftop1i8a" path="res://addons/lit/nodes/lit_post_process.gd" id="1_u0r43"]
 [ext_resource type="Script" uid="uid://3ghrmclc08m8" path="res://addons/lit/nodes/post/lit_post_bloom.gd" id="2_cin2t"]
 [ext_resource type="Script" uid="uid://bbw5g5btekf5t" path="res://addons/lit/nodes/post/lit_post_film_grain.gd" id="2_my0u7"]
-[ext_resource type="Script" uid="uid://c742kw2jy8meu" path="res://addons/lit/nodes/post/lit_post_pixelate.gd" id="3_w6mlc"]
 [ext_resource type="PackedScene" uid="uid://cb4h8nesfbgxw" path="res://Map.tscn" id="3_y8vh0"]
 [ext_resource type="Script" uid="uid://dnwa5edefmb4c" path="res://addons/lit/nodes/post/lit_post_vignette.gd" id="4_cin2t"]
 [ext_resource type="PackedScene" uid="uid://b1dv1tyoo10fc" path="res://Player.tscn" id="5_u0r43"]
@@ -20,11 +19,6 @@ metadata/_custom_type_script = "uid://djrtgftop1i8a"
 
 [node name="Bloom" type="Node2D" parent="LitPostProcess" unique_id=1277699437]
 script = ExtResource("2_cin2t")
-lit_version = "1.1.7"
-
-[node name="Pixelate" type="Node2D" parent="LitPostProcess" unique_id=1855935402]
-script = ExtResource("3_w6mlc")
-pixel_size = 2.0
 lit_version = "1.1.7"
 
 [node name="FilmGrain" type="Node2D" parent="LitPostProcess" unique_id=729497956]

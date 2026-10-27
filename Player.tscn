@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://botydpkkw1dcn" path="res://Scripts/Player.gd" id="1_xhfnw"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_cxr5p"]
 [ext_resource type="PackedScene" uid="uid://dhg5gt5uqjnt7" path="res://BasicBullet.tscn" id="2_dtqjt"]
+[ext_resource type="Resource" uid="uid://ckiql2hrgs8so" path="res://Resources/PlayerStats.tres" id="2_wi0c6"]
 [ext_resource type="Texture2D" uid="uid://djygua5qlx347" path="res://Images/spritesheet (1).png" id="3_tdg3f"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="5_tdg3f"]
 [ext_resource type="Texture2D" uid="uid://bxu1h2wkc5bwt" path="res://Images/Person Top Down Template Mirrored Aiming.png" id="6_dtqjt"]
@@ -167,6 +168,7 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=93508001 groups=["Player"]]
 motion_mode = 1
 script = ExtResource("1_xhfnw")
+Stats = ExtResource("2_wi0c6")
 bullet_scene = ExtResource("2_dtqjt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=254822238]

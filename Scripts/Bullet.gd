@@ -22,6 +22,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	collision.disabled = true
+	disable_mode = CollisionObject2D.DISABLE_MODE_MAKE_STATIC
 	if not body.is_in_group("Player"):
 		if body.is_in_group("Light"):
 			if body.light_out == false:

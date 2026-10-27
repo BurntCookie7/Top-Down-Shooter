@@ -1,19 +1,62 @@
-[gd_scene format=3 uid="uid://tamrqnlbh8x7"]
+[gd_scene format=4 uid="uid://tamrqnlbh8x7"]
 
 [ext_resource type="Script" uid="uid://cq22uwmttg6nl" path="res://Scripts/BasicEnemy.gd" id="1_6njx4"]
 [ext_resource type="PackedScene" uid="uid://kwfvs0jbovlt" path="res://AmmoBox.tscn" id="2_3wrki"]
+[ext_resource type="Texture2D" uid="uid://bshuk7vwqgsv7" path="res://Images/Enemy Aiming Template.png" id="3_1xbk2"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="3_yhmlg"]
+[ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="5_6fv04"]
 
-[sub_resource type="Gradient" id="Gradient_1mh3o"]
-offsets = PackedFloat32Array(0.0038610038)
-colors = PackedColorArray(0.38675654, 0.38675663, 0.3867566, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3sw0"]
+shader = ExtResource("3_yhmlg")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
-gradient = SubResource("Gradient_1mh3o")
-width = 32
-height = 32
+[sub_resource type="AtlasTexture" id="AtlasTexture_t68yt"]
+atlas = ExtResource("3_1xbk2")
+region = Rect2(66, 0, 64, 110)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhmlg"]
+atlas = ExtResource("3_1xbk2")
+region = Rect2(194, 0, 64, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fv04"]
+atlas = ExtResource("3_1xbk2")
+region = Rect2(2, 0, 64, 110)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t68yt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhmlg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fv04")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
+radius = 11.0
+height = 54.0
 
 [sub_resource type="Theme" id="Theme_g4v7s"]
 
@@ -36,19 +79,25 @@ script = ExtResource("1_6njx4")
 Drops = Array[PackedScene]([ExtResource("2_3wrki")])
 hit_color = Color(1, 0, 0, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2010721503]
-texture = SubResource("GradientTexture2D_g4v7s")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
+material = SubResource("ShaderMaterial_s3sw0")
+rotation = -1.5707964
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+frame_progress = 0.5525355
+offset = Vector2(0, 8.495)
+script = ExtResource("5_6fv04")
+lit_version = "1.1.7"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1596461876]
 avoidance_enabled = true
-radius = 20.0
+radius = 30.0
 
 [node name="Timer" type="Timer" parent="." unique_id=710775026]
 wait_time = 0.5
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418133407]
-shape = SubResource("RectangleShape2D_g4v7s")
+shape = SubResource("CapsuleShape2D_yf5fn")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=31531383]
 

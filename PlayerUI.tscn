@@ -2,6 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dixnowfv8yu0t" path="res://Scripts/PlayerUI.gd" id="1_qwd5t"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0, 0.7176471, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="Control" type="Control" unique_id=596148611]
 layout_mode = 3
 anchors_preset = 15
@@ -13,15 +20,24 @@ script = ExtResource("1_qwd5t")
 
 [node name="Ammo" type="Label" parent="." unique_id=702616153]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 608.0
-offset_right = 104.0
-offset_bottom = 631.0
+offset_left = 7.0
+offset_top = 573.0
+offset_right = 110.0
+offset_bottom = 596.0
 text = "Ammo: 15/15"
 
 [node name="Reserves" type="Label" parent="." unique_id=2042613151]
 layout_mode = 0
-offset_top = 625.0
-offset_right = 103.0
-offset_bottom = 648.0
+offset_left = 6.0
+offset_top = 590.0
+offset_right = 109.0
+offset_bottom = 613.0
 text = "Reserves: 0"
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1688570116]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 615.0
+offset_right = 300.0
+offset_bottom = 642.0
+theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")

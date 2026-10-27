@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://scykvv4jf3p2"]
+
+[ext_resource type="Script" uid="uid://cnt7xvu51h0e1" path="res://Scripts/UpgradeButton.gd" id="1_6vefb"]
+[ext_resource type="Texture2D" uid="uid://xmk0ltaasp7q" path="res://Images/AmmoBox.png" id="2_r8hhc"]
+
+[node name="Upgrade" type="Control" unique_id=1674467657]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_6vefb")
+
+[node name="Button" type="Button" parent="." unique_id=297707364]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 166.0
+offset_bottom = 55.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Placeholder"
+icon = ExtResource("2_r8hhc")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true

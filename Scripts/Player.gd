@@ -6,13 +6,14 @@ extends CharacterBody2D
 @onready var bullet_spawn_position: Node2D = $AnimatedSprite2D/BulletSpawnPosition
 @onready var gun_sounds: AudioStreamPlayer = $AnimatedSprite2D/GunSounds
 
+@export var Stats: PlayerStats
 @export var bullet_scene: PackedScene = null
 @export var shake_strength = 0.0
 enum Control_Mode{Mouse_Turn, Key_Turn}
 @export var SPEED = 150.0
 @export var TURN_SPEED = 0.04
 var reserves: int = 0
-var total_ammunition: int = 15
+var max_ammunition: int = 15
 var ammunition_remaining: int = 15
 const JUMP_VELOCITY = -400.0
 var turn_amount = 0.0
@@ -42,7 +43,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
-	if event.is_action_pressed("RightClick"):
+	if event.is_action_pressed("RightClick") and sitting != true:
 		aiming = true
 	if event.is_action_released("RightClick"):
 		aiming = false
@@ -53,8 +54,8 @@ func _input(event: InputEvent) -> void:
 		gun_sounds.pitch_scale = 1.0
 		gun_sounds.play()
 		await gun_sounds.finished
-		for i in range(total_ammunition - ammunition_remaining):
-			if ammunition_remaining != total_ammunition and reserves > 0:
+		for i in range(max_ammunition - ammunition_remaining):
+			if ammunition_remaining != max_ammunition and reserves > 0:
 				reserves -= 1
 				ammunition_remaining += 1
 		gun_sounds.stream = shot_sound
@@ -70,15 +71,20 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("E") and (Global.can_sit or sitting) and is_instance_valid(current_bench):
 		match sitting:
 			true:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 				state = Global.State.STANDING
 				sitting = false
 				collision.disabled = false
+				current_bench.unload_upgrades()
 			false:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				state = Global.State.SITTING
 				sitting = true
 				collision.disabled = true
 				rotation = current_bench.rotation - deg_to_rad(90)
 				global_position = sitting_position
+				current_bench.load_upgrades(current_bench.upgrade_options)
+				
 		
 		
 	if not sitting:
@@ -123,7 +129,9 @@ func shoot():
 		gun_sounds.pitch_scale = randf_range(0.9, 1.1)
 		gun_sounds.play()
 		camera_shake(2.0)
-		spawn_bullet()
+		for i in range(Stats.bullets):
+			await Global.wait(1)
+			spawn_bullet()
 		ammunition_remaining -= 1
 		
 func camera_shake(amount):
@@ -134,7 +142,7 @@ func spawn_bullet():
 	bullet.rotation_degrees = rotation_degrees
 	get_tree().root.add_child(bullet)
 	bullet.global_position = bullet_spawn_position.global_position
-	
+		
 	
 func state_handler():
 	match state:
@@ -158,7 +166,15 @@ func state_handler():
 			SPEED = 250
 			TURN_SPEED = 0.07
 		Global.State.SITTING:
+			aiming = false
 			sprite.play("Sitting")
 			SPEED = 0
 			TURN_SPEED = 0
-			velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+			velocity = Vector2.ZERO
+
+
+func apply_upgrade(upgrade:UpgradeData):
+	match upgrade.title:
+		"Max Ammo":
+			for i in range(len(upgrade.modifiers)):
+				set(upgrade.modifiers[i].stat, get(upgrade.modifiers[i].stat) + upgrade.modifiers[i].amount)

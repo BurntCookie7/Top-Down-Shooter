@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://ckiql2hrgs8so"]
+
+[ext_resource type="Script" uid="uid://b5nrksnxgvjyq" path="res://Resources/Stats.gd" id="1_c26vb"]
+
+[resource]
+script = ExtResource("1_c26vb")
+name = "Player"
+ammo_pickup_amount = 5
+metadata/_custom_type_script = "uid://b5nrksnxgvjyq"
