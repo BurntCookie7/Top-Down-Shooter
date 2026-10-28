@@ -8,7 +8,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7awvy"]
 shader = ExtResource("2_7281b")
-shader_parameter/emissive_strength = 0.37
+shader_parameter/emissive_strength = 0.1
 shader_parameter/receiver_mask = 1
 shader_parameter/receiver_z = 0
 shader_parameter/receiver_layer = 0
@@ -43,6 +43,7 @@ colors = PackedColorArray(1, 1, 1, 0.05490196, 1, 1, 1, 0)
 script = ExtResource("1_ayd6b")
 bullet_hit_particles = ExtResource("2_othcl")
 SPEED = 2000.0
+damage = 34
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1805081264]
 material = SubResource("ShaderMaterial_7awvy")
@@ -51,7 +52,7 @@ scale = Vector2(0.021409843, 0.019759601)
 texture = SubResource("CanvasTexture_1rjr3")
 script = ExtResource("3_u8st5")
 lit_version = "1.1.7"
-emissive_strength = 0.37
+emissive_strength = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=366740347]
 visible = false

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://jvua65ywc5i5"]
+
+[ext_resource type="Script" uid="uid://dnkcv5mpco2ki" path="res://Scripts/TitleScreenHandler.gd" id="1_pkhjh"]
+[ext_resource type="Texture2D" uid="uid://l14vlsycn7mn" path="res://Images/Title Screen Background.png" id="2_1xr1c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Node2D" type="Node2D" unique_id=1114385867]
+script = ExtResource("1_pkhjh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2146996075]
+position = Vector2(576.5, 323.50003)
+scale = Vector2(0.91331756, 0.9747023)
+texture = ExtResource("2_1xr1c")
+
+[node name="Control" type="Control" parent="." unique_id=1297951828]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1155.0
+offset_bottom = 649.0
+
+[node name="Button" type="Button" parent="Control" unique_id=722676818]
+layout_mode = 0
+offset_left = 932.0
+offset_top = 249.0
+offset_right = 1113.0
+offset_bottom = 309.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
+text = "Play"
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

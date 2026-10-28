@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://m02fg1ysdkjs"]
+
+[ext_resource type="Script" uid="uid://notq651ybrjy" path="res://Scripts/LevelSelectManager.gd" id="1_sf6f5"]
+[ext_resource type="PackedScene" uid="uid://b8583r46p5ar" path="res://LevelButton.tscn" id="2_q3t17"]
+[ext_resource type="Texture2D" uid="uid://bkmlkqnfyv8a4" path="res://Images/TestLevelIcon.png" id="3_0bmyu"]
+[ext_resource type="PackedScene" uid="uid://cb4h8nesfbgxw" path="res://Map.tscn" id="4_0bmyu"]
+
+[sub_resource type="Gradient" id="Gradient_0bmyu"]
+colors = PackedColorArray(0, 0, 0, 1, 0.30692267, 0.3069227, 0.3069227, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+gradient = SubResource("Gradient_0bmyu")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[node name="Node2D" type="Node2D" unique_id=925437669]
+script = ExtResource("1_sf6f5")
+
+[node name="Control" type="Control" parent="." unique_id=1699823635]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TestLevel" parent="Control" unique_id=1701931160 instance=ExtResource("2_q3t17")]
+z_index = 1
+layout_mode = 1
+offset_left = 31.0
+offset_top = 32.0
+offset_right = 31.0
+offset_bottom = 32.0
+Icon = ExtResource("3_0bmyu")
+Text = "Test"
+Map = ExtResource("4_0bmyu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=458536211]
+position = Vector2(572, 315)
+scale = Vector2(18.875, 10.84375)
+texture = SubResource("GradientTexture2D_g4v7s")

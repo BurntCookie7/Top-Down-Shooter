@@ -3,6 +3,6 @@
 [node name="Node2D" type="Node2D" unique_id=49926377]
 
 [node name="Control" type="VBoxContainer" parent="." unique_id=138246478]
-offset_right = 513.0
+offset_right = 224.0
 offset_bottom = 287.0
-theme_override_constants/separation = 66
+theme_override_constants/separation = 70

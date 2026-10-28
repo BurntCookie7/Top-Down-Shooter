@@ -25,6 +25,7 @@ var sitting_position = null
 var aiming: bool = false
 var reload_sound = preload("res://Audio/Reload.mp3")
 var shot_sound = preload("res://Audio/Gunshot.mp3")
+var bullets_shot: int = 1
 
 func _ready() -> void:
 	SignalBus.player_entered_bench.connect(bench_entered)
@@ -61,14 +62,17 @@ func _input(event: InputEvent) -> void:
 		gun_sounds.stream = shot_sound
 
 func bench_entered(bench, sitting_pos):
-	print("entered bench")
+	#print("entered bench")
 	current_bench = bench
 	sitting_position = sitting_pos
+	
+func bench_left():
+	pass
 
 func _physics_process(delta: float) -> void:
 	shake_strength = move_toward(shake_strength, 0.0, 40.0 * delta)
 	camera.offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * shake_strength
-	if Input.is_action_just_pressed("E") and (Global.can_sit or sitting) and is_instance_valid(current_bench):
+	if Input.is_action_just_pressed("E") and is_instance_valid(current_bench):
 		match sitting:
 			true:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -80,11 +84,11 @@ func _physics_process(delta: float) -> void:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 				state = Global.State.SITTING
 				sitting = true
-				collision.disabled = true
 				rotation = current_bench.rotation - deg_to_rad(90)
 				global_position = sitting_position
 				current_bench.load_upgrades(current_bench.upgrade_options)
-				
+				collision.disabled = true
+
 		
 		
 	if not sitting:
@@ -129,7 +133,7 @@ func shoot():
 		gun_sounds.pitch_scale = randf_range(0.9, 1.1)
 		gun_sounds.play()
 		camera_shake(2.0)
-		for i in range(Stats.bullets):
+		for i in range(bullets_shot):
 			await Global.wait(1)
 			spawn_bullet()
 		ammunition_remaining -= 1
@@ -174,7 +178,16 @@ func state_handler():
 
 
 func apply_upgrade(upgrade:UpgradeData):
-	match upgrade.title:
-		"Max Ammo":
-			for i in range(len(upgrade.modifiers)):
+	for i in range(len(upgrade.modifiers)):
 				set(upgrade.modifiers[i].stat, get(upgrade.modifiers[i].stat) + upgrade.modifiers[i].amount)
+	current_bench.remove_upgrades()
+	state = Global.State.STANDING
+	sitting = false
+	Global.can_sit = false
+	current_bench.queue_free()
+	Global.enemies_killed = 0
+	#match upgrade.title:
+		#"Max Ammo":
+			#
+		#"Bullets Shot":
+			#for i in range(len)

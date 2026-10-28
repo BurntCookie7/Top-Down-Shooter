@@ -1,5 +1,6 @@
 extends Node
 signal player_entered_bench
+signal player_left_bench
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

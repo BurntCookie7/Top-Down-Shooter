@@ -50,4 +50,5 @@ func manage_health():
 			var item_instance = Drops.pick_random().instantiate()
 			get_tree().root.add_child(item_instance)
 			item_instance.global_position = global_position + Vector2(randi_range(1, 10), randi_range(1, 10))
+		Global.enemies_killed += 1
 		queue_free()

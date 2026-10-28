@@ -201,7 +201,7 @@ energy = 0.0
 metadata/_custom_type_script = "uid://cpa2qb3trjq4k"
 
 [node name="BulletSpawnPosition" type="Node2D" parent="AnimatedSprite2D" unique_id=93192309]
-position = Vector2(-19.999998, 32)
+position = Vector2(-20, -18)
 
 [node name="GunSounds" type="AudioStreamPlayer" parent="AnimatedSprite2D" unique_id=455229605]
 stream = ExtResource("8_5ncpa")

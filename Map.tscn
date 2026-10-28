@@ -1,12 +1,14 @@
 [gd_scene format=4 uid="uid://cb4h8nesfbgxw"]
 
 [ext_resource type="PackedScene" uid="uid://56kr68xk13v7" path="res://Bench.tscn" id="1_gfjgm"]
-[ext_resource type="PackedScene" uid="uid://dgv8o4v2ofgqp" path="res://Light.tscn" id="2_3vi7k"]
+[ext_resource type="Script" uid="uid://4wswqsxmfyow" path="res://Scripts/DefaultMap.gd" id="1_vm4q1"]
+[ext_resource type="PackedScene" uid="uid://tamrqnlbh8x7" path="res://BasicEnemy.tscn" id="2_ud676"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="3_v6avs"]
 [ext_resource type="Texture2D" uid="uid://duwbmts2hdam" path="res://Images/Tiles.png" id="4_8qak7"]
 [ext_resource type="Script" uid="uid://cekuun21ika3v" path="res://addons/lit/nodes/lit_tile_map_layer.gd" id="5_0f2yp"]
 [ext_resource type="PackedScene" uid="uid://bhcrv2ag8nwrp" path="res://Dummy.tscn" id="6_8qak7"]
 [ext_resource type="PackedScene" uid="uid://kwfvs0jbovlt" path="res://AmmoBox.tscn" id="7_0f2yp"]
+[ext_resource type="Texture2D" uid="uid://cyxmmqtihy4a5" path="res://Images/Bench.png" id="9_ud676"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vm4q1"]
 shader = ExtResource("3_v6avs")
@@ -37,14 +39,22 @@ tile_size = Vector2i(60, 60)
 sources/0 = SubResource("TileSetAtlasSource_ud676")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_g4v7s"]
-vertices = PackedVector2Array(256.5625, 73.88281, 279, 79.89844, 201, 79.5, 240.11719, 57.4375, 201, 0, 234.10156, 35, 240.11719, 12.5625, 480.71875, 139, 1601, -401.96875, 1601, 1059, 475.27344, 159.36719, 475.27344, 118.63281, 323.89844, 35, 317.8828, 12.5625, 470, 164.64063, 470, 171.63281, 466.59375, 184.35156, -340.96094, 1059, 455.35156, 195.59375, 440, 199.71094, 424.64844, 195.59375, 413.40625, 184.35156, 470, 113.359375, 470, 106.36719, 466.59375, 93.64844, 455.35156, 82.40625, 440, 78.28906, 424.64844, 82.40625, 413.40625, 93.64844, 317.8828, 57.4375, 410, 106.36719, 301.4375, 73.88281, 410, 113.359375, 404.72656, 118.63281, 399.28125, 139, 301.4375, -3.8828125, -338.03125, -400.02344, 279, -9.8984375, 256.5625, -3.8828125, 35, 0, 35, 79.5, 410, 171.63281, 410, 164.64063, 404.72656, 159.36719)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2), PackedInt32Array(3, 2, 4), PackedInt32Array(5, 3, 4), PackedInt32Array(6, 5, 4), PackedInt32Array(7, 8, 9), PackedInt32Array(10, 7, 9), PackedInt32Array(8, 7, 11), PackedInt32Array(8, 12, 13), PackedInt32Array(14, 10, 9), PackedInt32Array(15, 14, 9), PackedInt32Array(16, 15, 9), PackedInt32Array(16, 9, 17), PackedInt32Array(18, 16, 17), PackedInt32Array(19, 18, 17), PackedInt32Array(20, 19, 17), PackedInt32Array(21, 20, 17), PackedInt32Array(8, 11, 22), PackedInt32Array(8, 22, 23), PackedInt32Array(8, 23, 24), PackedInt32Array(8, 24, 25), PackedInt32Array(12, 8, 25), PackedInt32Array(12, 25, 26), PackedInt32Array(12, 26, 27), PackedInt32Array(12, 27, 28), PackedInt32Array(29, 12, 28), PackedInt32Array(29, 28, 30), PackedInt32Array(31, 29, 30), PackedInt32Array(31, 30, 32), PackedInt32Array(31, 32, 33), PackedInt32Array(31, 33, 34), PackedInt32Array(8, 13, 35), PackedInt32Array(36, 8, 35), PackedInt32Array(36, 35, 37), PackedInt32Array(36, 37, 38), PackedInt32Array(36, 38, 6), PackedInt32Array(36, 6, 4), PackedInt32Array(36, 4, 39), PackedInt32Array(17, 36, 39), PackedInt32Array(17, 39, 40), PackedInt32Array(21, 17, 40), PackedInt32Array(21, 40, 2), PackedInt32Array(21, 2, 1), PackedInt32Array(41, 21, 1), PackedInt32Array(41, 1, 31), PackedInt32Array(42, 41, 31), PackedInt32Array(43, 42, 31), PackedInt32Array(43, 31, 34)])
+vertices = PackedVector2Array(491.0703, 139, 1591, -391.96094, 1591, 1049, 484.2422, 164.53906, 484.2422, 113.46094, 480, 168.78125, 480, 172.95313, 475.5625, 189.53125, -330.9375, 1049, 460.53125, 204.5625, 440, 210.0625, 419.46875, 204.5625, -328.04688, -390.03125, 404.4375, 189.53125, 400, 172.95313, 400, 168.78125, 395.7578, 164.53906, 388.9297, 139, 395.7578, 113.46094, 400, 109.21094, 400, 105.046875, 404.4375, 88.46875, 419.46875, 73.4375, 440, 67.9375, 460.53125, 73.4375, 475.5625, 88.46875, 480, 105.046875, 480, 109.21094)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2), PackedInt32Array(1, 0, 4), PackedInt32Array(5, 3, 2), PackedInt32Array(6, 5, 2), PackedInt32Array(7, 6, 2), PackedInt32Array(7, 2, 8), PackedInt32Array(9, 7, 8), PackedInt32Array(10, 9, 8), PackedInt32Array(11, 10, 8), PackedInt32Array(11, 8, 12), PackedInt32Array(13, 11, 12), PackedInt32Array(14, 13, 12), PackedInt32Array(15, 14, 12), PackedInt32Array(16, 15, 12), PackedInt32Array(17, 16, 12), PackedInt32Array(18, 17, 12), PackedInt32Array(19, 18, 12), PackedInt32Array(20, 19, 12), PackedInt32Array(21, 20, 12), PackedInt32Array(22, 21, 12), PackedInt32Array(22, 12, 1), PackedInt32Array(23, 22, 1), PackedInt32Array(24, 23, 1), PackedInt32Array(25, 24, 1), PackedInt32Array(25, 1, 4), PackedInt32Array(26, 25, 4), PackedInt32Array(26, 4, 27)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-358, -420, 1621, -422, 1621, 1079, -361, 1079)])
 sample_partition_type = 1
 parsed_geometry_type = 1
-agent_radius = 20.0
+agent_radius = 30.0
 
-[node name="Node2D" type="Node2D" unique_id=4829420]
+[node name="Node2D" type="Node2D" unique_id=4829420 node_paths=PackedStringArray("spawn_points_node", "bench_location")]
+z_index = -2
+script = ExtResource("1_vm4q1")
+enemy_amount = 10
+enemy_spawn_interval = 1.0
+enemies = Array[PackedScene]([ExtResource("2_ud676")])
+spawn_points_node = NodePath("Spawn Points")
+bench = ExtResource("1_gfjgm")
+bench_location = NodePath("BenchLocation")
 
 [node name="TileMap" type="TileMapLayer" parent="." unique_id=1698974514]
 z_index = -2
@@ -61,12 +71,29 @@ position = Vector2(126, 313)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1221851304]
 navigation_polygon = SubResource("NavigationPolygon_g4v7s")
 
-[node name="Bench" parent="NavigationRegion2D" unique_id=2013195154 instance=ExtResource("1_gfjgm")]
-position = Vector2(118, 38)
-rotation = -3.1415925
-
-[node name="Light" parent="NavigationRegion2D" unique_id=1523508489 instance=ExtResource("2_3vi7k")]
-position = Vector2(279, 35)
-
-[node name="Node2D" parent="NavigationRegion2D" unique_id=763927022 instance=ExtResource("6_8qak7")]
+[node name="Dummy" parent="NavigationRegion2D" unique_id=763927022 instance=ExtResource("6_8qak7")]
+z_index = -2
 position = Vector2(440, 139)
+
+[node name="Spawn Points" type="Node" parent="." unique_id=1281334337]
+
+[node name="Node2D" type="Node2D" parent="Spawn Points" unique_id=112744421]
+position = Vector2(68, 531)
+
+[node name="Node2D2" type="Node2D" parent="Spawn Points" unique_id=1318226630]
+position = Vector2(1274, 568)
+
+[node name="Node2D3" type="Node2D" parent="Spawn Points" unique_id=1613024791]
+position = Vector2(1290, -206)
+
+[node name="Node2D4" type="Node2D" parent="Spawn Points" unique_id=665900915]
+position = Vector2(-56, -220)
+
+[node name="BenchLocation" type="Node2D" parent="." unique_id=1755185976]
+position = Vector2(118, 38)
+rotation = 3.1415927
+
+[node name="Sprite2D" type="Sprite2D" parent="BenchLocation" unique_id=1959200160]
+position = Vector2(-2.2888184e-05, 0)
+scale = Vector2(0.5079365, 0.5189873)
+texture = ExtResource("9_ud676")

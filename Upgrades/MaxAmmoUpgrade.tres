@@ -17,5 +17,5 @@ title = "Max Ammo"
 description = "+5 Maximum ammo"
 icon = ExtResource("1_ddr6n")
 rarity = 1
-modifiers = [SubResource("Resource_ddr6n")]
+modifiers = Array[ExtResource("2_ftjl4")]([SubResource("Resource_ddr6n")])
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

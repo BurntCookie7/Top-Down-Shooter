@@ -4,11 +4,10 @@
 [ext_resource type="Script" uid="uid://djrtgftop1i8a" path="res://addons/lit/nodes/lit_post_process.gd" id="1_u0r43"]
 [ext_resource type="Script" uid="uid://3ghrmclc08m8" path="res://addons/lit/nodes/post/lit_post_bloom.gd" id="2_cin2t"]
 [ext_resource type="Script" uid="uid://bbw5g5btekf5t" path="res://addons/lit/nodes/post/lit_post_film_grain.gd" id="2_my0u7"]
-[ext_resource type="PackedScene" uid="uid://cb4h8nesfbgxw" path="res://Map.tscn" id="3_y8vh0"]
 [ext_resource type="Script" uid="uid://dnwa5edefmb4c" path="res://addons/lit/nodes/post/lit_post_vignette.gd" id="4_cin2t"]
 [ext_resource type="PackedScene" uid="uid://b1dv1tyoo10fc" path="res://Player.tscn" id="5_u0r43"]
 [ext_resource type="PackedScene" uid="uid://e3g5wyogiycf" path="res://PlayerUI.tscn" id="8_8b3ly"]
-[ext_resource type="PackedScene" uid="uid://tamrqnlbh8x7" path="res://BasicEnemy.tscn" id="9_644yn"]
+[ext_resource type="Script" uid="uid://cn7y8200jbqns" path="res://Scripts/map.gd" id="9_w6mlc"]
 
 [node name="Node2D" type="Node2D" unique_id=792516362]
 
@@ -37,9 +36,8 @@ lit_version = "1.1.7"
 script = ExtResource("1_03604")
 lit_version = "1.1.7"
 color = Color(0.16685283, 0.16685283, 0.16685283, 1)
+ambient_energy = 2.0
 metadata/_custom_type_script = "uid://dtbtq2iowg33y"
-
-[node name="Node2D" parent="." unique_id=4829420 instance=ExtResource("3_y8vh0")]
 
 [node name="Player" parent="." unique_id=93508001 instance=ExtResource("5_u0r43")]
 position = Vector2(535, 373)
@@ -56,5 +54,6 @@ player = NodePath("../../Player")
 
 [node name="Enemies" type="Node" parent="." unique_id=1745186024]
 
-[node name="CharacterBody2D" parent="." unique_id=1850996865 instance=ExtResource("9_644yn")]
-position = Vector2(777, 456)
+[node name="Map" type="Node" parent="." unique_id=1846273350 node_paths=PackedStringArray("enemies_container")]
+script = ExtResource("9_w6mlc")
+enemies_container = NodePath("../Enemies")

@@ -53,6 +53,7 @@ script = ExtResource("1_rjuf7")
 hit_color = Color(0.49939173, 0.41998485, 0.3705187, 1)
 
 [node name="LitSprite2D2" type="Sprite2D" parent="." unique_id=221354048]
+z_index = 2
 material = SubResource("ShaderMaterial_f2r17")
 texture = SubResource("GradientTexture2D_yf5fn")
 script = ExtResource("2_rjuf7")
@@ -60,7 +61,7 @@ lit_version = "1.1.7"
 metadata/_custom_type_script = "uid://drrhypxeb6nsg"
 
 [node name="LitSprite2D" type="Sprite2D" parent="." unique_id=1529415043]
-z_index = -1
+z_index = 1
 material = SubResource("ShaderMaterial_f2r17")
 position = Vector2(0, 20)
 scale = Vector2(0.59375, 1)
@@ -70,7 +71,7 @@ lit_version = "1.1.7"
 metadata/_custom_type_script = "uid://drrhypxeb6nsg"
 
 [node name="LitSprite2D3" type="Sprite2D" parent="." unique_id=293595766]
-z_index = -1
+z_index = 1
 material = SubResource("ShaderMaterial_f2r17")
 position = Vector2(0, -20)
 scale = Vector2(0.5625, 1)
