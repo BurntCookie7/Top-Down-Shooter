@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c524q2ho8bja3" path="res://Resources/UpgradeData.gd" id="3_81ih3"]
 [ext_resource type="Resource" uid="uid://c240sc735hkgh" path="res://Resources/MaxAmmo.tres" id="4_25bsb"]
 [ext_resource type="Resource" uid="uid://bgba0kafutrcq" path="res://Upgrades/BulletsShotUpgrade.tres" id="6_ex44m"]
+[ext_resource type="Resource" uid="uid://cn625uh8jjmyh" path="res://Upgrades/MaxHealthUpgrade.tres" id="7_l1fbu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u82ir"]
 shader = ExtResource("1_qifmt")
@@ -43,7 +44,7 @@ script = ExtResource("1_upi1e")
 Upgrades_Menu = ExtResource("2_74lck")
 Upgrade_Button = ExtResource("3_25bsb")
 hit_color = Color(0.2774405, 0.21356648, 0.1444242, 1)
-upgrade_options = Array[ExtResource("3_81ih3")]([ExtResource("4_25bsb"), ExtResource("6_ex44m")])
+upgrade_options = Array[ExtResource("3_81ih3")]([ExtResource("4_25bsb"), ExtResource("6_ex44m"), ExtResource("7_l1fbu")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1430604863]
 material = SubResource("ShaderMaterial_u82ir")

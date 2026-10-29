@@ -1,0 +1,46 @@
+[gd_scene format=4 uid="uid://byyh0odadrqiy"]
+
+[ext_resource type="Script" uid="uid://dsur4j1vtd7nn" path="res://health_pickup.gd" id="1_krg1p"]
+[ext_resource type="Texture2D" uid="uid://cl81l76q2tmv2" path="res://Images/HealthPickup.png" id="2_lj2ej"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_o0grg"]
+[ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="4_il1r5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 9.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iyj80"]
+shader = ExtResource("2_o0grg")
+shader_parameter/emissive_strength = 0.1
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_o0grg"]
+diffuse_texture = ExtResource("2_lj2ej")
+
+[node name="Area2D" type="Area2D" unique_id=1756809262]
+script = ExtResource("1_krg1p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=47326914]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1902830863]
+material = SubResource("ShaderMaterial_iyj80")
+scale = Vector2(0.02481885, 0.02481885)
+texture = SubResource("CanvasTexture_o0grg")
+script = ExtResource("4_il1r5")
+emissive_strength = 0.1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

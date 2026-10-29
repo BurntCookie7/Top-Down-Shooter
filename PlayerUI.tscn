@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dixnowfv8yu0t" path="res://Scripts/PlayerUI.gd" id="1_qwd5t"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwd5t"]
+bg_color = Color(0, 0, 0, 0.49803922)
+skew = Vector2(0.5, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pf331"]
 bg_color = Color(0, 0.7176471, 0, 1)
+skew = Vector2(0.5, 0)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -40,4 +49,23 @@ offset_left = 6.0
 offset_top = 615.0
 offset_right = 300.0
 offset_bottom = 642.0
-theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")
+theme_override_styles/background = SubResource("StyleBoxFlat_qwd5t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pf331")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="ProgressBar" unique_id=328191580]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -13.5
+offset_right = 147.0
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "100"
+horizontal_alignment = 1

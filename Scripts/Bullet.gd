@@ -6,6 +6,7 @@ extends Area2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @export var damage: int = 10
 
+var shot_by_enemy: bool = false
 var hit_done: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,7 +23,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if hit_done or body.is_in_group("Player"):
+	if hit_done:
+		return
+	if shot_by_enemy and body.is_in_group("Enemy"):
+		return
+	if not shot_by_enemy and body.is_in_group("Player"):
 		return
 	hit_done = true
 

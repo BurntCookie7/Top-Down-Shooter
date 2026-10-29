@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cq22uwmttg6nl" path="res://Scripts/BasicEnemy.gd" id="1_6njx4"]
 [ext_resource type="PackedScene" uid="uid://kwfvs0jbovlt" path="res://AmmoBox.tscn" id="2_3wrki"]
 [ext_resource type="Texture2D" uid="uid://bshuk7vwqgsv7" path="res://Images/Enemy Aiming Template.png" id="3_1xbk2"]
+[ext_resource type="PackedScene" uid="uid://dhg5gt5uqjnt7" path="res://BasicBullet.tscn" id="3_6fv04"]
+[ext_resource type="PackedScene" uid="uid://byyh0odadrqiy" path="res://HealthPickup.tscn" id="3_s3sw0"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="3_yhmlg"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="5_6fv04"]
 
@@ -76,8 +78,9 @@ corner_radius_bottom_left = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1850996865]
 script = ExtResource("1_6njx4")
-Drops = Array[PackedScene]([ExtResource("2_3wrki")])
+Drops = Array[PackedScene]([ExtResource("2_3wrki"), ExtResource("3_s3sw0")])
 hit_color = Color(1, 0, 0, 1)
+bullet_scene = ExtResource("3_6fv04")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
 material = SubResource("ShaderMaterial_s3sw0")
@@ -87,6 +90,14 @@ frame_progress = 0.5525355
 offset = Vector2(0, 8.495)
 script = ExtResource("5_6fv04")
 lit_version = "1.1.7"
+
+[node name="BulletSpawnPosition" type="Node2D" parent="Sprite2D" unique_id=1444088525]
+position = Vector2(20, 8.940697e-07)
+
+[node name="RayCast2D" type="RayCast2D" parent="Sprite2D" unique_id=2002126239]
+position = Vector2(20, 8.742278e-07)
+scale = Vector2(3.85, 1)
+target_position = Vector2(0, 200)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1596461876]
 avoidance_enabled = true
@@ -115,4 +126,8 @@ rounded = true
 fill_mode = 3
 show_percentage = false
 
+[node name="ShootTimer" type="Timer" parent="." unique_id=266761494]
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

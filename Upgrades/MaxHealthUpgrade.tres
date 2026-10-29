@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://cn625uh8jjmyh"]
+
+[ext_resource type="Script" uid="uid://bd2ql44krcm2" path="res://Resources/StatModifier.gd" id="1_2bwfe"]
+[ext_resource type="Texture2D" uid="uid://cl81l76q2tmv2" path="res://Images/HealthPickup.png" id="1_b23ms"]
+[ext_resource type="Script" uid="uid://c524q2ho8bja3" path="res://Resources/UpgradeData.gd" id="2_b23ms"]
+
+[sub_resource type="Resource" id="Resource_wi0c6"]
+script = ExtResource("1_2bwfe")
+stat = &"Global.player_max_health"
+amount = 10.0
+metadata/_custom_type_script = "uid://bd2ql44krcm2"
+
+[resource]
+script = ExtResource("2_b23ms")
+id = &"Max Health"
+title = "Max Health"
+description = "+10 max health"
+icon = ExtResource("1_b23ms")
+rarity = 1
+modifiers = Array[ExtResource("1_2bwfe")]([SubResource("Resource_wi0c6")])
+metadata/_custom_type_script = "uid://c524q2ho8bja3"

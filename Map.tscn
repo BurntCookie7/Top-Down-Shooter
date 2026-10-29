@@ -49,7 +49,7 @@ agent_radius = 30.0
 [node name="Node2D" type="Node2D" unique_id=4829420 node_paths=PackedStringArray("spawn_points_node", "bench_location")]
 z_index = -2
 script = ExtResource("1_vm4q1")
-enemy_amount = 10
+enemy_amount = 1
 enemy_spawn_interval = 1.0
 enemies = Array[PackedScene]([ExtResource("2_ud676")])
 spawn_points_node = NodePath("Spawn Points")
@@ -97,3 +97,6 @@ rotation = 3.1415927
 position = Vector2(-2.2888184e-05, 0)
 scale = Vector2(0.5079365, 0.5189873)
 texture = ExtResource("9_ud676")
+
+[node name="PlayerSpawn" type="Node2D" parent="." unique_id=1535475765]
+position = Vector2(206, 202)

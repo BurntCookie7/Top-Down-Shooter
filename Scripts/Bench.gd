@@ -47,8 +47,7 @@ func load_upgrades(upgrades: Array[UpgradeData]):
 			option.setup(upgrade)
 			option.pressed.connect(func():
 				upgrade_chosen.emit(upgrade, player)
-				player.apply_upgrade(upgrade)
-				unload_upgrades())
+				player.apply_upgrade(upgrade))
 			Hbox.add_child(option)
 		menu_made = true
 		#print("menu shown")

@@ -26,8 +26,10 @@ var aiming: bool = false
 var reload_sound = preload("res://Audio/Reload.mp3")
 var shot_sound = preload("res://Audio/Gunshot.mp3")
 var bullets_shot: int = 1
-
+var health: int = 100
+var max_health: int = 100
 func _ready() -> void:
+	Global.player = self
 	SignalBus.player_entered_bench.connect(bench_entered)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	await get_tree().physics_frame
@@ -68,6 +70,9 @@ func bench_entered(bench, sitting_pos):
 	
 func bench_left():
 	pass
+
+func _process(delta: float) -> void:
+	Global.player_health = health
 
 func _physics_process(delta: float) -> void:
 	shake_strength = move_toward(shake_strength, 0.0, 40.0 * delta)
@@ -155,6 +160,8 @@ func state_handler():
 				sprite.play("StandingAiming")
 			else:
 				sprite.play("Standing")
+			SPEED = 150
+			TURN_SPEED = 0.04
 		Global.State.WALKING:
 			if aiming:
 				sprite.play("WalkingAiming")
@@ -178,16 +185,22 @@ func state_handler():
 
 
 func apply_upgrade(upgrade:UpgradeData):
-	for i in range(len(upgrade.modifiers)):
-				set(upgrade.modifiers[i].stat, get(upgrade.modifiers[i].stat) + upgrade.modifiers[i].amount)
+	for mod in upgrade.modifiers:
+		var target: Object = null
+		if mod.stat in self:
+			target = self
+		elif mod.stat in Global:
+			target = Global
+		else:
+			push_warning("Upgrade stat not found: " + str(mod.stat))
+			continue
+		target.set(mod.stat, target.get(mod.stat) + mod.amount)
 	current_bench.remove_upgrades()
 	state = Global.State.STANDING
 	sitting = false
+	collision.set_deferred("disabled", false)
 	Global.can_sit = false
 	current_bench.queue_free()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Global.enemies_killed = 0
-	#match upgrade.title:
-		#"Max Ammo":
-			#
-		#"Bullets Shot":
-			#for i in range(len)
+	Global.map_container.load_new_map(Global.map_scene)

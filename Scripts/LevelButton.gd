@@ -18,5 +18,5 @@ func _process(delta: float) -> void:
 
 func _on_button_pressed() -> void:
 	if not Engine.is_editor_hint():
-		Global.map = Map
+		Global.map_scene = Map
 		get_tree().change_scene_to_file("res://RootScene.tscn")

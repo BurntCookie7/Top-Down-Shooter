@@ -11,6 +11,7 @@ var enemies_spawned: int = 0
 @onready var enemies_container = get_parent().enemies_container
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	enemies_spawned = 0
 	bench_location.hide()
 	for child in spawn_points_node.get_children():
 		spawn_points.append(child)
@@ -18,9 +19,14 @@ func _ready() -> void:
 	print(spawn_points)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Global.enemies_killed >= enemy_amount:
-		spawn_bench()
+		if Global.won_round:
+			pass
+		else:
+			spawn_bench()
+			Global.wins += 1
+			Global.won_round = true
 
 
 func setup_timer():
