@@ -2,7 +2,16 @@
 
 [node name="Node2D" type="Node2D" unique_id=49926377]
 
-[node name="Control" type="VBoxContainer" parent="." unique_id=138246478]
-offset_right = 224.0
-offset_bottom = 287.0
-theme_override_constants/separation = 85
+[node name="Control" type="HBoxContainer" parent="." unique_id=533195982]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -332.5
+offset_top = -17.0
+offset_right = 332.5
+offset_bottom = 117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 249

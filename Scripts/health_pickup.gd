@@ -13,10 +13,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		if "health" in body:
-			if body.health + Global.player_health < Global.player_max_health:
-				body.health += Health_Amount
-				queue_free()
-			else:
-				if Global.player_health + Health_Amount > Global.player_max_health:
-					body.health += Global.player_max_health - Global.player_health
+		if Global.player_health >= Global.player_max_health:
+			return
+		Global.player_health = min(Global.player_health + Health_Amount, Global.player_max_health)
+		queue_free()

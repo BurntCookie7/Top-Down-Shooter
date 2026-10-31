@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://dnwa5edefmb4c" path="res://addons/lit/nodes/post/lit_post_vignette.gd" id="4_cin2t"]
 [ext_resource type="PackedScene" uid="uid://b1dv1tyoo10fc" path="res://Player.tscn" id="5_u0r43"]
 [ext_resource type="PackedScene" uid="uid://e3g5wyogiycf" path="res://PlayerUI.tscn" id="8_8b3ly"]
+[ext_resource type="PackedScene" uid="uid://bh17jrcqf5cpy" path="res://Four Corners.tscn" id="9_644yn"]
 [ext_resource type="Script" uid="uid://cn7y8200jbqns" path="res://Scripts/map.gd" id="9_w6mlc"]
+[ext_resource type="PackedScene" uid="uid://157tr5a4d3ir" path="res://Images/Maze.tscn" id="10_w6mlc"]
 
 [node name="Node2D" type="Node2D" unique_id=792516362]
 
@@ -44,16 +46,12 @@ position = Vector2(535, 373)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1518127662]
 
-[node name="Control" parent="CanvasLayer" unique_id=596148611 node_paths=PackedStringArray("player") instance=ExtResource("8_8b3ly")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-player = NodePath("../../Player")
+[node name="Control" parent="CanvasLayer" unique_id=596148611 instance=ExtResource("8_8b3ly")]
 
 [node name="Enemies" type="Node" parent="." unique_id=1745186024]
 
 [node name="Map" type="Node" parent="." unique_id=1846273350 node_paths=PackedStringArray("enemies_container")]
 script = ExtResource("9_w6mlc")
+initial_map = ExtResource("9_644yn")
 enemies_container = NodePath("../Enemies")
+map_cycle = Array[PackedScene]([ExtResource("9_644yn"), ExtResource("10_w6mlc")])

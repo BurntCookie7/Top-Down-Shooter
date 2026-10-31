@@ -34,13 +34,17 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func load_upgrades(upgrades: Array[UpgradeData]):
 	if menu_made:
 		menu.show()
-		menu.global_rotation = player.camera.global_rotation - deg_to_rad(90) 
+		menu.global_rotation = player.camera.global_rotation - deg_to_rad(90)
+		menu.global_position = player.global_position
+		menu.global_position.y -= 200
 		#print("menu shown")
 	else:
 		menu = Upgrades_Menu.instantiate()
 		menu.name = "UpgradeMenu"
 		add_child(menu)
 		menu.global_rotation = player.camera.global_rotation - deg_to_rad(90)
+		menu.global_position = player.global_position
+		menu.global_position.y -= 200
 		var Hbox = menu.get_child(0)
 		for upgrade in upgrades:
 			var option = Upgrade_Button.instantiate()
@@ -49,6 +53,8 @@ func load_upgrades(upgrades: Array[UpgradeData]):
 				upgrade_chosen.emit(upgrade, player)
 				player.apply_upgrade(upgrade))
 			Hbox.add_child(option)
+		for child in menu.get_children():
+			child.z_index = 500
 		menu_made = true
 		#print("menu shown")
 		

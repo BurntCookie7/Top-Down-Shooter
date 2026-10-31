@@ -1,10 +1,12 @@
 extends Node
 
+@export var initial_map: PackedScene
 @export var enemies_container: Node
+@export var map_cycle: Array[PackedScene]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.map_container = self
-	load_new_map.call_deferred(Global.map_scene)
+	load_new_map.call_deferred(initial_map)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -15,14 +17,18 @@ func _process(delta: float) -> void:
 func load_new_map(map: PackedScene) -> void:
 	Global.enemies_killed = 0
 	Global.won_round = false
-
-	for child in get_children():
-		remove_child(child)  # leaves the tree immediately, so no overlap
-		child.queue_free()
+	var prev_map = get_child(0)
+	print(prev_map)
+	if is_instance_valid(prev_map):
+		for child in prev_map.get_children():
+			remove_child(child)
+			child.queue_free()
+		remove_child(prev_map)
 
 	if enemies_container:
 		for enemy in enemies_container.get_children():
 			enemy.queue_free()
+
 	Global.map_scene = map
 	var map_instance := map.instantiate()
 	map_instance.z_index = -10

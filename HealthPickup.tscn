@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://byyh0odadrqiy"]
 
-[ext_resource type="Script" uid="uid://dsur4j1vtd7nn" path="res://health_pickup.gd" id="1_krg1p"]
+[ext_resource type="Script" uid="uid://dsur4j1vtd7nn" path="res://Scripts/health_pickup.gd" id="1_krg1p"]
 [ext_resource type="Texture2D" uid="uid://cl81l76q2tmv2" path="res://Images/HealthPickup.png" id="2_lj2ej"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_o0grg"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="4_il1r5"]

@@ -3,8 +3,9 @@ extends Control
 @onready var reserves: Label = $Reserves 
 @onready var health_bar: ProgressBar = $ProgressBar
 @onready var label: Label = $ProgressBar/Label
+@onready var round_counter: Label = $RoundCounter
 
-@export var player: Node2D = null
+@onready var player = Global.player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,8 +17,10 @@ func _process(delta: float) -> void:
 	pass
 	
 func _physics_process(delta: float) -> void:
+	var hp: int = clampi(Global.player_health, 0, Global.player_max_health)
 	ammo.text = "Ammo: " + str(player.ammunition_remaining) + "/" + str(player.max_ammunition)
 	reserves.text = "Reserves: " + str(player.reserves)
 	health_bar.max_value = Global.player_max_health
-	health_bar.value = Global.player_health
-	label.text = str(Global.player_health)
+	health_bar.value = hp
+	label.text = str(hp)
+	round_counter.text = "Round: " + str(Global.wins) + "/5"

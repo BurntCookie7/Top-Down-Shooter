@@ -12,6 +12,7 @@ extends CharacterBody2D
 enum Control_Mode{Mouse_Turn, Key_Turn}
 @export var SPEED = 150.0
 @export var TURN_SPEED = 0.04
+var hit_color: Color = Color(1.0, 0.0, 0.0, 1.0)
 var reserves: int = 0
 var max_ammunition: int = 15
 var ammunition_remaining: int = 15
@@ -26,8 +27,7 @@ var aiming: bool = false
 var reload_sound = preload("res://Audio/Reload.mp3")
 var shot_sound = preload("res://Audio/Gunshot.mp3")
 var bullets_shot: int = 1
-var health: int = 100
-var max_health: int = 100
+
 func _ready() -> void:
 	Global.player = self
 	SignalBus.player_entered_bench.connect(bench_entered)
@@ -72,7 +72,7 @@ func bench_left():
 	pass
 
 func _process(delta: float) -> void:
-	Global.player_health = health
+	pass
 
 func _physics_process(delta: float) -> void:
 	shake_strength = move_toward(shake_strength, 0.0, 40.0 * delta)
@@ -203,4 +203,12 @@ func apply_upgrade(upgrade:UpgradeData):
 	current_bench.queue_free()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Global.enemies_killed = 0
-	Global.map_container.load_new_map(Global.map_scene)
+	if Global.wins > Global.rounds:
+		if Global.cycle >= len(Global.map_container.map_cycle)-1:
+			Global.cycle = 0
+		else:
+			Global.cycle += 1
+		Global.wins = 0
+		Global.map_container.load_new_map(Global.map_container.map_cycle[Global.cycle])
+	else:
+		Global.map_container.load_new_map(Global.map_container.map_cycle[Global.cycle])

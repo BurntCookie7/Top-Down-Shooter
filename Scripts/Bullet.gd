@@ -5,6 +5,7 @@ extends Area2D
 @export var lifetime: float = 1.0
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @export var damage: int = 10
+@onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 
 var shot_by_enemy: bool = false
 var hit_done: bool = false
@@ -51,7 +52,10 @@ func _on_body_entered(body: Node2D) -> void:
 		particle_instance.global_position = global_position
 		particle_instance.emitting = true
 		particle_instance.finished.connect(particle_instance.queue_free)
-
+	set_physics_process(false)
+	hide()
+	audio.play()
+	await audio.finished
 	queue_free()
 
 

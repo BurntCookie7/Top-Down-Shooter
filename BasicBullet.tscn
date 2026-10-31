@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://npfhfas3xcm6" path="res://BulletHitParticle.tscn" id="2_othcl"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="3_u8st5"]
 [ext_resource type="Texture2D" uid="uid://dwp045sm24sth" path="res://Images/bullet.png" id="4_kok35"]
+[ext_resource type="AudioStream" uid="uid://dhrk7codvek7t" path="res://Audio/freesound-community-080998-bullet-hit-39870_ZfXCgtPJ.mp3" id="6_e8cpy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7awvy"]
 shader = ExtResource("2_7281b")
@@ -30,7 +31,7 @@ diffuse_texture = ExtResource("4_kok35")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
 radius = 2.0
-height = 8.0
+height = 10.0
 
 [sub_resource type="Curve" id="Curve_g4v7s"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.056994796), 0.3415543, 0.0, 0, 0]
@@ -55,7 +56,6 @@ lit_version = "1.1.7"
 emissive_strength = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=366740347]
-visible = false
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_yf5fn")
 
@@ -69,6 +69,10 @@ width = 4.015
 width_curve = SubResource("Curve_g4v7s")
 default_color = Color(1, 1, 1, 0)
 gradient = SubResource("Gradient_yf5fn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1586016238]
+stream = ExtResource("6_e8cpy")
+max_polyphony = 80
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
