@@ -5,7 +5,7 @@ Expect the game to be kind of boring with little to no real content or replay va
 ## Latest ##
 Currently there are 2 different maps. "Maze" and "four corners" (when you press the play button it will
 take you to a level select screen, just select the only available level named "test")
-## END ##
+
 
 # How To Play
 1. Download the file in Releases titled Build2.zip
