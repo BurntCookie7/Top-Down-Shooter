@@ -1,0 +1,128 @@
+[gd_scene format=4 uid="uid://0ta2j3xvwvga"]
+
+[ext_resource type="Script" uid="uid://u6hs5ohx6voh" path="res://Scripts/Grenade.gd" id="1_xmro0"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_87bes"]
+[ext_resource type="Texture2D" uid="uid://buqv4gfdts28r" path="res://Images/pixelated-image.png" id="2_824rw"]
+[ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="4_68v2o"]
+[ext_resource type="AudioStream" uid="uid://cuctwm0gvob35" path="res://Audio/Explosion.mp3" id="5_68v2o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yfln0"]
+shader = ExtResource("2_87bes")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gt30u"]
+diffuse_texture = ExtResource("2_824rw")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+
+[sub_resource type="Gradient" id="Gradient_87bes"]
+offsets = PackedFloat32Array(0.969112, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+gradient = SubResource("Gradient_87bes")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.6210826, 0.4074074)
+
+[sub_resource type="Curve" id="Curve_3gngh"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50649345, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.9496403), -4.056919, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d0u6y"]
+curve = SubResource("Curve_3gngh")
+
+[sub_resource type="Curve" id="Curve_68v2o"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.52380955, 1), -2.7780519, -2.7780519, 0, 0, Vector2(1, 0.33093524), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_57qmd"]
+curve = SubResource("Curve_68v2o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yf5fn"]
+particle_flag_disable_z = true
+angular_velocity_min = 323.87997
+angular_velocity_max = 343.80997
+radial_velocity_min = 48.439976
+radial_velocity_max = 152.24997
+radial_velocity_curve = SubResource("CurveTexture_d0u6y")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_57qmd")
+hue_variation_min = -0.010000022
+hue_variation_max = -0.010000022
+turbulence_noise_strength = 0.57
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+radius = 67.02985
+
+[sub_resource type="Gradient" id="Gradient_68v2o"]
+offsets = PackedFloat32Array(0.8648649, 0.87644786, 0.9459459)
+colors = PackedColorArray(0.5372549, 0.5372549, 0.5372549, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yf5fn"]
+gradient = SubResource("Gradient_68v2o")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8974359, 0.12535612)
+
+[node name="StaticBody2D" type="RigidBody2D" unique_id=672757634 groups=["Grenade"]]
+gravity_scale = 0.0
+script = ExtResource("1_xmro0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1708255932]
+material = SubResource("ShaderMaterial_yfln0")
+position = Vector2(1.0000002, -4.999999)
+scale = Vector2(0.11282051, 0.11583012)
+texture = SubResource("CanvasTexture_gt30u")
+script = ExtResource("4_68v2o")
+lit_version = "1.1.7"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=488376044]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Timer" type="Timer" parent="." unique_id=1026536146]
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1924244926]
+emitting = false
+amount = 30
+texture = SubResource("GradientTexture2D_g4v7s")
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yf5fn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1078630228]
+stream = ExtResource("5_68v2o")
+max_polyphony = 80
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1986948785]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1481968095]
+shape = SubResource("CircleShape2D_yf5fn")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Area2D" unique_id=1498485066]
+position = Vector2(-1.1920929e-06, 3.8146973e-06)
+scale = Vector2(2.09375, 2.09375)
+texture = SubResource("GradientTexture2D_yf5fn")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

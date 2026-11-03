@@ -5,15 +5,19 @@ extends CharacterBody2D
 @onready var camera: Camera2D = $Camera2D
 @onready var bullet_spawn_position: Node2D = $AnimatedSprite2D/BulletSpawnPosition
 @onready var gun_sounds: AudioStreamPlayer = $AnimatedSprite2D/GunSounds
+@onready var grenade_spawn_position: Node2D = $AnimatedSprite2D/GrenadeSpawnPosition
 
 @export var Stats: PlayerStats
 @export var bullet_scene: PackedScene = null
+@export var grenade_scene: PackedScene = null
 @export var shake_strength = 0.0
 enum Control_Mode{Mouse_Turn, Key_Turn}
 @export var SPEED = 150.0
 @export var TURN_SPEED = 0.04
+@export var grenade_throw_strength: float = 1000
 var hit_color: Color = Color(1.0, 0.0, 0.0, 1.0)
 var reserves: int = 0
+var grenades: int = 5
 var max_ammunition: int = 15
 var ammunition_remaining: int = 15
 const JUMP_VELOCITY = -400.0
@@ -27,6 +31,7 @@ var aiming: bool = false
 var reload_sound = preload("res://Audio/Reload.mp3")
 var shot_sound = preload("res://Audio/Gunshot.mp3")
 var bullets_shot: int = 1
+var health = null
 
 func _ready() -> void:
 	Global.player = self
@@ -62,12 +67,15 @@ func _input(event: InputEvent) -> void:
 				reserves -= 1
 				ammunition_remaining += 1
 		gun_sounds.stream = shot_sound
-
+	if event.is_action_pressed("Q") and not event.is_echo():
+		if grenades > 0:
+			spawn_grenade()
+			grenades -= 1
 func bench_entered(bench, sitting_pos):
 	#print("entered bench")
 	current_bench = bench
 	sitting_position = sitting_pos
-	
+
 func bench_left():
 	pass
 
@@ -151,8 +159,14 @@ func spawn_bullet():
 	bullet.rotation_degrees = rotation_degrees
 	get_tree().root.add_child(bullet)
 	bullet.global_position = bullet_spawn_position.global_position
-		
-	
+
+func spawn_grenade() -> void:
+	var grenade = grenade_scene.instantiate()
+	grenade.global_position = grenade_spawn_position.global_position
+	get_tree().root.add_child(grenade)
+	grenade.throw(global_transform.x, grenade_throw_strength)
+	grenade.linear_velocity += velocity * 0.5
+
 func state_handler():
 	match state:
 		Global.State.STANDING:
@@ -183,6 +197,7 @@ func state_handler():
 			TURN_SPEED = 0
 			velocity = Vector2.ZERO
 
+ 
 
 func apply_upgrade(upgrade:UpgradeData):
 	for mod in upgrade.modifiers:

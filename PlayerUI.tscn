@@ -81,3 +81,11 @@ offset_right = 40.0
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "Round 0/5"
+
+[node name="Label" type="Label" parent="." unique_id=2084165725]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 555.0
+offset_right = 114.0
+offset_bottom = 578.0
+text = "Granades: 5/5"

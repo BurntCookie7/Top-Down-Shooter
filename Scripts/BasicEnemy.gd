@@ -74,7 +74,6 @@ func manage_shooting():
 			var target = raycast.get_collider()
 			if is_instance_valid(target):
 				if target.is_in_group("Player"):
-					print(target)
 					shoot()
 
 

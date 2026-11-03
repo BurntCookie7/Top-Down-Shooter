@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://4wswqsxmfyow" path="res://Scripts/DefaultMap.gd" id="1_ixai5"]
 [ext_resource type="PackedScene" uid="uid://tamrqnlbh8x7" path="res://BasicEnemy.tscn" id="2_o62de"]
 [ext_resource type="PackedScene" uid="uid://56kr68xk13v7" path="res://Bench.tscn" id="3_mnku0"]
+[ext_resource type="PackedScene" uid="uid://byyh0odadrqiy" path="res://HealthPickup.tscn" id="4_mnku0"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="4_paaqd"]
 [ext_resource type="Texture2D" uid="uid://duwbmts2hdam" path="res://Images/Tiles.png" id="5_3ojgd"]
+[ext_resource type="PackedScene" uid="uid://kwfvs0jbovlt" path="res://AmmoBox.tscn" id="5_paaqd"]
 [ext_resource type="Script" uid="uid://cekuun21ika3v" path="res://addons/lit/nodes/lit_tile_map_layer.gd" id="6_lcqfy"]
 [ext_resource type="Texture2D" uid="uid://ckhwqle4a8ipw" path="res://Images/new_gradient_texture_2d.tres" id="7_vro1g"]
 [ext_resource type="Texture2D" uid="uid://cyxmmqtihy4a5" path="res://Images/Bench.png" id="8_6ldan"]
@@ -80,6 +82,7 @@ enemies = Array[PackedScene]([ExtResource("2_o62de")])
 spawn_points_node = NodePath("Spawn Points")
 bench = ExtResource("3_mnku0")
 bench_location = NodePath("BenchLocation")
+resources = Array[PackedScene]([ExtResource("4_mnku0"), ExtResource("5_paaqd")])
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=1698974514]
 z_index = -2

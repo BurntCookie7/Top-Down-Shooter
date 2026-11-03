@@ -6,6 +6,7 @@ extends Node2D
 @export var spawn_points_node: Node
 @export var bench: PackedScene
 @export var bench_location: Node2D
+@export var resources: Array[PackedScene]
 var spawn_points: Array[Node2D]
 var enemies_spawned: int = 0
 @onready var enemies_container = get_parent().enemies_container
@@ -16,7 +17,6 @@ func _ready() -> void:
 	for child in spawn_points_node.get_children():
 		spawn_points.append(child)
 	setup_timer()
-	print(spawn_points)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -42,13 +42,19 @@ func timer_out():
 		if is_instance_valid(enemies_container):
 			var spawn_point = spawn_points.pick_random()
 			spawn_enemy(spawn_point)
+			spawn_resources()
 		
 func spawn_enemy(point):
 	var enemy: CharacterBody2D = enemies.pick_random().instantiate()
 	enemies_container.add_child(enemy)
 	enemy.global_position = point.global_position
 	enemies_spawned += 1
-	
+
+func spawn_resources():
+	for location in spawn_points:
+		var resource = resources.pick_random().instantiate()
+		location.add_child(resource)
+
 func spawn_bench():
 	var bench_instance: StaticBody2D = bench.instantiate()
 	add_child(bench_instance)

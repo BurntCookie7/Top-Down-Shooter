@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dhg5gt5uqjnt7" path="res://BasicBullet.tscn" id="2_dtqjt"]
 [ext_resource type="Resource" uid="uid://ckiql2hrgs8so" path="res://Resources/PlayerStats.tres" id="2_wi0c6"]
 [ext_resource type="Texture2D" uid="uid://djygua5qlx347" path="res://Images/spritesheet (1).png" id="3_tdg3f"]
+[ext_resource type="PackedScene" uid="uid://0ta2j3xvwvga" path="res://Grenade.tscn" id="4_hp6x6"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="5_tdg3f"]
 [ext_resource type="Texture2D" uid="uid://bxu1h2wkc5bwt" path="res://Images/Person Top Down Template Mirrored Aiming.png" id="6_dtqjt"]
 [ext_resource type="Script" uid="uid://cpa2qb3trjq4k" path="res://addons/lit/nodes/lit_point_light_2d.gd" id="6_tdg3f"]
@@ -172,6 +173,7 @@ motion_mode = 1
 script = ExtResource("1_xhfnw")
 Stats = ExtResource("2_wi0c6")
 bullet_scene = ExtResource("2_dtqjt")
+grenade_scene = ExtResource("4_hp6x6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=254822238]
 position = Vector2(5, 0)
@@ -208,6 +210,11 @@ position = Vector2(-20, -18)
 [node name="GunSounds" type="AudioStreamPlayer" parent="AnimatedSprite2D" unique_id=455229605]
 stream = ExtResource("8_5ncpa")
 max_polyphony = 50
+
+[node name="GrenadeSpawnPosition" type="Node2D" parent="AnimatedSprite2D" unique_id=719112210]
+position = Vector2(5.6824786e-07, 13)
+rotation = 1.5707963
+scale = Vector2(1, -1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1456915445]
 zoom = Vector2(1.2, 1.2)
