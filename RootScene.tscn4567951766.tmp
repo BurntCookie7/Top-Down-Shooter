@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://clhgf081eknrw"]
+
+[ext_resource type="Script" uid="uid://dtbtq2iowg33y" path="res://addons/lit/nodes/lit_canvas_modulate.gd" id="1_03604"]
+[ext_resource type="Script" uid="uid://djrtgftop1i8a" path="res://addons/lit/nodes/lit_post_process.gd" id="1_u0r43"]
+[ext_resource type="Script" uid="uid://3ghrmclc08m8" path="res://addons/lit/nodes/post/lit_post_bloom.gd" id="2_cin2t"]
+[ext_resource type="Script" uid="uid://bbw5g5btekf5t" path="res://addons/lit/nodes/post/lit_post_film_grain.gd" id="2_my0u7"]
+[ext_resource type="Script" uid="uid://dnwa5edefmb4c" path="res://addons/lit/nodes/post/lit_post_vignette.gd" id="4_cin2t"]
+[ext_resource type="PackedScene" uid="uid://b1dv1tyoo10fc" path="res://Player.tscn" id="5_u0r43"]
+[ext_resource type="PackedScene" uid="uid://e3g5wyogiycf" path="res://PlayerUI.tscn" id="8_8b3ly"]
+[ext_resource type="PackedScene" uid="uid://bh47sm7jr4rhb" path="res://DeathScreen.tscn" id="8_buaba"]
+[ext_resource type="PackedScene" uid="uid://bh17jrcqf5cpy" path="res://Four Corners.tscn" id="9_644yn"]
+[ext_resource type="Script" uid="uid://cn7y8200jbqns" path="res://Scripts/map.gd" id="9_w6mlc"]
+[ext_resource type="PackedScene" uid="uid://157tr5a4d3ir" path="res://Images/Maze.tscn" id="10_w6mlc"]
+
+[node name="Node2D" type="Node2D" unique_id=792516362]
+
+[node name="LitPostProcess" type="CanvasLayer" parent="." unique_id=2053184559]
+visible = false
+script = ExtResource("1_u0r43")
+lit_version = "1.1.7"
+metadata/_custom_type_script = "uid://djrtgftop1i8a"
+
+[node name="Bloom" type="Node2D" parent="LitPostProcess" unique_id=1277699437]
+script = ExtResource("2_cin2t")
+lit_version = "1.1.7"
+
+[node name="FilmGrain" type="Node2D" parent="LitPostProcess" unique_id=729497956]
+script = ExtResource("2_my0u7")
+colored = true
+lit_version = "1.1.7"
+
+[node name="Vignette" type="Node2D" parent="LitPostProcess" unique_id=518563242]
+position = Vector2(119, 44)
+script = ExtResource("4_cin2t")
+strength = 0.5
+softness = 1.0
+lit_version = "1.1.7"
+
+[node name="LitCanvasModulate" type="Node2D" parent="." unique_id=223644229]
+script = ExtResource("1_03604")
+lit_version = "1.1.7"
+color = Color(0.16685283, 0.16685283, 0.16685283, 1)
+ambient_energy = 2.0
+metadata/_custom_type_script = "uid://dtbtq2iowg33y"
+
+[node name="Player" parent="." unique_id=93508001 instance=ExtResource("5_u0r43")]
+position = Vector2(535, 373)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1518127662]
+
+[node name="PlayerUI" parent="CanvasLayer" unique_id=596148611 instance=ExtResource("8_8b3ly")]
+
+[node name="DeathScreen" parent="CanvasLayer" unique_id=1074426196 instance=ExtResource("8_buaba")]
+visible = false
+z_index = 1000
+
+[node name="Enemies" type="Node" parent="." unique_id=1745186024]
+
+[node name="Map" type="Node" parent="." unique_id=1846273350 node_paths=PackedStringArray("enemies_container")]
+script = ExtResource("9_w6mlc")
+initial_map = ExtResource("9_644yn")
+enemies_container = NodePath("../Enemies")
+map_cycle = Array[PackedScene]([ExtResource("9_644yn"), ExtResource("10_w6mlc")])

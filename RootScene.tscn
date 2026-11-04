@@ -7,8 +7,9 @@
 [ext_resource type="Script" uid="uid://dnwa5edefmb4c" path="res://addons/lit/nodes/post/lit_post_vignette.gd" id="4_cin2t"]
 [ext_resource type="PackedScene" uid="uid://b1dv1tyoo10fc" path="res://Player.tscn" id="5_u0r43"]
 [ext_resource type="PackedScene" uid="uid://e3g5wyogiycf" path="res://PlayerUI.tscn" id="8_8b3ly"]
+[ext_resource type="PackedScene" uid="uid://bh47sm7jr4rhb" path="res://DeathScreen.tscn" id="8_buaba"]
 [ext_resource type="PackedScene" uid="uid://bh17jrcqf5cpy" path="res://Four Corners.tscn" id="9_644yn"]
-[ext_resource type="Script" uid="uid://cn7y8200jbqns" path="res://Scripts/map.gd" id="9_w6mlc"]
+[ext_resource type="Script" uid="uid://cn7y8200jbqns" path="res://Scripts/MapContainerHandler.gd" id="9_w6mlc"]
 [ext_resource type="PackedScene" uid="uid://157tr5a4d3ir" path="res://Images/Maze.tscn" id="10_w6mlc"]
 
 [node name="Node2D" type="Node2D" unique_id=792516362]
@@ -46,7 +47,12 @@ position = Vector2(535, 373)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1518127662]
 
-[node name="Control" parent="CanvasLayer" unique_id=596148611 instance=ExtResource("8_8b3ly")]
+[node name="PlayerUI" parent="CanvasLayer" unique_id=596148611 instance=ExtResource("8_8b3ly")]
+
+[node name="DeathScreen" parent="CanvasLayer" unique_id=1074426196 instance=ExtResource("8_buaba")]
+process_mode = 2
+visible = false
+z_index = 1000
 
 [node name="Enemies" type="Node" parent="." unique_id=1745186024]
 

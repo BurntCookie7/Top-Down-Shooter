@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DropTable" format=3 uid="uid://chpybbgau80h0"]
+
+[ext_resource type="Script" uid="uid://i4o22xyau85o" path="res://Resources/DropTable.gd" id="1_24pf0"]
+[ext_resource type="PackedScene" uid="uid://bosrxl8sqwbpn" path="res://GrenadeBox.tscn" id="2_r58if"]
+[ext_resource type="PackedScene" uid="uid://byyh0odadrqiy" path="res://HealthPickup.tscn" id="3_7c7f2"]
+
+[resource]
+script = ExtResource("1_24pf0")
+table = Dictionary[PackedScene, float]({
+ExtResource("2_r58if"): 9.0,
+ExtResource("3_7c7f2"): 2.0
+})
+metadata/_custom_type_script = "uid://i4o22xyau85o"

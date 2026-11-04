@@ -15,7 +15,7 @@ var map: Node2D
 var wins: int = 0
 var cycle: int = 0
 var rounds: int = 5
-var player_max_grenades = 5
+var player_max_grenades = 3
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -31,3 +31,20 @@ func wait(frames: int):
 
 func _physics_process(delta: float) -> void:
 	pass
+
+func restart():
+	can_sit = false
+	upgrade_menu
+	enemies_killed = 0
+	won_round = false
+	player_health = 100
+	player_max_health = 100
+	wins = 0
+	cycle = 0
+	rounds = 5
+	player_max_grenades = 5
+	map_container.load_new_map(map_container.initial_map)
+	get_tree().paused = false
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	get_tree().reload_current_scene()
+	

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bh47sm7jr4rhb"]
+
+[ext_resource type="FontFile" uid="uid://ye48oxluhm2o" path="res://Fonts/Vipnagorgialla Rg It.otf" id="1_58ct5"]
+[ext_resource type="Script" uid="uid://ckkijfx6ecqxf" path="res://Scripts/DeathScreenHandler.gd" id="1_80igo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0, 0, 0, 0.33333334)
+
+[node name="Control" type="Control" unique_id=1074426196]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_80igo")
+
+[node name="Panel" type="Panel" parent="." unique_id=617559641]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="YouDied" type="Label" parent="." unique_id=1123044877]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_top = 202.0
+offset_right = 161.0
+offset_bottom = 284.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.5647059, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_58ct5")
+theme_override_font_sizes/font_size = 59
+text = "You Died"
+
+[node name="Retry" type="Button" parent="YouDied" unique_id=1477848598]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = 42.0
+offset_right = 22.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Retry"
+
+[node name="Quit" type="Button" parent="YouDied" unique_id=1741285857]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = 96.0
+offset_right = 39.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+
+[connection signal="pressed" from="YouDied/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="YouDied/Quit" to="." method="_on_quit_pressed"]

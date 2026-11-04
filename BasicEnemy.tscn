@@ -1,10 +1,9 @@
 [gd_scene format=4 uid="uid://tamrqnlbh8x7"]
 
 [ext_resource type="Script" uid="uid://cq22uwmttg6nl" path="res://Scripts/BasicEnemy.gd" id="1_6njx4"]
-[ext_resource type="PackedScene" uid="uid://kwfvs0jbovlt" path="res://AmmoBox.tscn" id="2_3wrki"]
+[ext_resource type="Resource" uid="uid://bkcki03e6v0vb" path="res://Drop Tables/BasicEnemyDrops.tres" id="2_6fv04"]
 [ext_resource type="Texture2D" uid="uid://bshuk7vwqgsv7" path="res://Images/Enemy Aiming Template.png" id="3_1xbk2"]
 [ext_resource type="PackedScene" uid="uid://dhg5gt5uqjnt7" path="res://BasicBullet.tscn" id="3_6fv04"]
-[ext_resource type="PackedScene" uid="uid://byyh0odadrqiy" path="res://HealthPickup.tscn" id="3_s3sw0"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="3_yhmlg"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="5_6fv04"]
 
@@ -78,7 +77,7 @@ corner_radius_bottom_left = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1850996865]
 script = ExtResource("1_6njx4")
-Drops = Array[PackedScene]([ExtResource("2_3wrki"), ExtResource("3_s3sw0")])
+drops = ExtResource("2_6fv04")
 hit_color = Color(1, 0, 0, 1)
 bullet_scene = ExtResource("3_6fv04")
 

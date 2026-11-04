@@ -17,13 +17,14 @@ func _process(delta: float) -> void:
 func load_new_map(map: PackedScene) -> void:
 	Global.enemies_killed = 0
 	Global.won_round = false
-	var prev_map = get_child(0)
-	print(prev_map)
-	if is_instance_valid(prev_map):
-		for child in prev_map.get_children():
-			remove_child(child)
-			child.queue_free()
-		remove_child(prev_map)
+	if is_instance_valid(Global.map):
+		var prev_map = Global.map
+		print(prev_map)
+		if is_instance_valid(prev_map):
+			for child in prev_map.get_children():
+				remove_child(child)
+				child.queue_free()
+			remove_child(prev_map)
 
 	if enemies_container:
 		for enemy in enemies_container.get_children():
