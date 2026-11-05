@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://xmk0ltaasp7q" path="res://Images/AmmoBox.png" id="1_afe4d"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_ix5d2"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="4_yhmfn"]
+[ext_resource type="Script" uid="uid://cpa2qb3trjq4k" path="res://addons/lit/nodes/lit_point_light_2d.gd" id="5_yhmfn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(26, 16)
@@ -11,7 +12,7 @@ size = Vector2(26, 16)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t3ced"]
 shader = ExtResource("2_ix5d2")
 shader_parameter/emissive_strength = 0.0
-shader_parameter/receiver_mask = 1
+shader_parameter/receiver_mask = 2
 shader_parameter/receiver_z = 0
 shader_parameter/receiver_layer = 0
 shader_parameter/self_shadow = false
@@ -42,5 +43,14 @@ position = Vector2(-4.7683716e-07, -2.3841858e-07)
 scale = Vector2(0.18035714, 0.20065787)
 texture = SubResource("CanvasTexture_47512")
 script = ExtResource("4_yhmfn")
+lit_version = "1.1.7"
+receiver_mask = 2
+
+[node name="LitPointLight2D" type="Node2D" parent="." unique_id=1158748242]
+script = ExtResource("5_yhmfn")
+lit_version = "1.1.7"
+color = Color(9.62615e-08, 0.43908986, 0.46541464, 1)
+falloff = 4.0
+metadata/_custom_type_script = "uid://cpa2qb3trjq4k"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

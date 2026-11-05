@@ -96,7 +96,7 @@ position = Vector2(20, 8.940697e-07)
 [node name="RayCast2D" type="RayCast2D" parent="Sprite2D" unique_id=2002126239]
 position = Vector2(20, 8.742278e-07)
 scale = Vector2(3.85, 1)
-target_position = Vector2(0, 200)
+target_position = Vector2(0, 400)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1596461876]
 avoidance_enabled = true

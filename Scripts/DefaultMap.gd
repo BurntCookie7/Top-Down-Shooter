@@ -26,7 +26,6 @@ func _physics_process(delta: float) -> void:
 			pass
 		else:
 			spawn_bench()
-			Global.wins += 1
 			Global.won_round = true
 
 

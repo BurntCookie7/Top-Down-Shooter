@@ -52,6 +52,8 @@ func explode():
 			for target in targets:
 				if is_instance_valid(target):
 					if "health" in target and not target.is_in_group("Player"):
+						if target.has_method("hit"):
+							target.hit()
 						target.health -= damage_to_enemy
 		"Enemy":
 			for target in targets:

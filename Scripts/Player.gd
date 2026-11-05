@@ -36,6 +36,7 @@ var health = null
 
 func _ready() -> void:
 	Global.player = self
+	control_mode = Control_Mode.get(Global.player_control_mode)
 	SignalBus.player_entered_bench.connect(bench_entered)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	await get_tree().physics_frame
@@ -58,7 +59,7 @@ func _input(event: InputEvent) -> void:
 		aiming = false
 	if event.is_action_pressed("LeftClick") and aiming and gun_sounds.stream != reload_sound:
 		shoot()
-	if event.is_action_pressed("R") and not (gun_sounds.playing and gun_sounds.stream == reload_sound) and reserves > 0:
+	if event.is_action_pressed("R") and not (gun_sounds.playing and gun_sounds.stream == reload_sound) and reserves > 0 and ammunition_remaining < max_ammunition:
 		gun_sounds.stream = reload_sound
 		gun_sounds.pitch_scale = 1.0
 		gun_sounds.play()
@@ -84,6 +85,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if control_mode != Control_Mode.get(Global.player_control_mode):
+		control_mode = Control_Mode.get(Global.player_control_mode)
 	if Global.player_health <= 0:
 		death_screen.show()
 		get_tree().paused = true
@@ -223,12 +226,13 @@ func apply_upgrade(upgrade:UpgradeData):
 	current_bench.queue_free()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Global.enemies_killed = 0
-	if Global.wins > Global.rounds:
-		if Global.cycle >= len(Global.map_container.map_cycle)-1:
+	if Global.wins >= Global.rounds:
+		if Global.cycle >= len(Global.map_container.map_cycle) - 1:
 			Global.cycle = 0
 		else:
 			Global.cycle += 1
-		Global.wins = 0
+		Global.wins = 1
 		Global.map_container.load_new_map(Global.map_container.map_cycle[Global.cycle])
 	else:
 		Global.map_container.load_new_map(Global.map_container.map_cycle[Global.cycle])
+		Global.wins += 1

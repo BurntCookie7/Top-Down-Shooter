@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cl81l76q2tmv2" path="res://Images/HealthPickup.png" id="2_lj2ej"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_o0grg"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="4_il1r5"]
+[ext_resource type="Script" uid="uid://cpa2qb3trjq4k" path="res://addons/lit/nodes/lit_point_light_2d.gd" id="5_o0grg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 9.0
@@ -11,7 +12,7 @@ radius = 9.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iyj80"]
 shader = ExtResource("2_o0grg")
 shader_parameter/emissive_strength = 0.1
-shader_parameter/receiver_mask = 1
+shader_parameter/receiver_mask = 2
 shader_parameter/receiver_z = 0
 shader_parameter/receiver_layer = 0
 shader_parameter/self_shadow = false
@@ -41,6 +42,15 @@ material = SubResource("ShaderMaterial_iyj80")
 scale = Vector2(0.02481885, 0.02481885)
 texture = SubResource("CanvasTexture_o0grg")
 script = ExtResource("4_il1r5")
+lit_version = "1.1.7"
 emissive_strength = 0.1
+receiver_mask = 2
+
+[node name="LitPointLight2D" type="Node2D" parent="." unique_id=1599105609]
+script = ExtResource("5_o0grg")
+lit_version = "1.1.7"
+color = Color(0, 0.470434, 0, 1)
+falloff = 4.0
+metadata/_custom_type_script = "uid://cpa2qb3trjq4k"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

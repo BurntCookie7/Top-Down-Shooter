@@ -189,12 +189,13 @@ rotation = -1.5707964
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"WalkingAiming"
-frame = 2
-frame_progress = 0.6100092
+frame = 1
+frame_progress = 0.28922188
 script = ExtResource("5_tdg3f")
 lit_version = "1.1.7"
 
 [node name="LitDirectionalLight2D" type="Node2D" parent="AnimatedSprite2D" unique_id=1965863652]
+light_mask = 3
 position = Vector2(-16.999998, 32)
 rotation = 1.5707964
 skew = 0.7941248

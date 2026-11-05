@@ -12,10 +12,11 @@ var player_max_health: int = 100
 var player: Node2D
 var map_container: Node
 var map: Node2D
-var wins: int = 0
+var wins: int = 1
 var cycle: int = 0
 var rounds: int = 5
 var player_max_grenades = 3
+var player_control_mode: String = "Mouse_Turn"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -39,7 +40,7 @@ func restart():
 	won_round = false
 	player_health = 100
 	player_max_health = 100
-	wins = 0
+	wins = 1
 	cycle = 0
 	rounds = 5
 	player_max_grenades = 5

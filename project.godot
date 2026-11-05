@@ -13,7 +13,7 @@ config_version=5
 config/name="Top Down Shooter"
 run/main_scene="uid://jvua65ywc5i5"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://cl81l76q2tmv2"
 
 [audio]
 

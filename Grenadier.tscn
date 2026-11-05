@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://46chadwwxnhg" path="res://Scripts/GrenadierEnemy.gd" id="1_yssgn"]
 [ext_resource type="Resource" uid="uid://chpybbgau80h0" path="res://Drop Tables/GrenadierDrops.tres" id="2_yssgn"]
 [ext_resource type="PackedScene" uid="uid://0ta2j3xvwvga" path="res://Grenade.tscn" id="4_tcew6"]
+[ext_resource type="Texture2D" uid="uid://dgm1c4xv7aip7" path="res://Images/GrenadierSprites.png" id="5_yssgn"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="6_ybxan"]
-[ext_resource type="Texture2D" uid="uid://bshuk7vwqgsv7" path="res://Images/Enemy Aiming Template.png" id="7_yega4"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="8_eyhfq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s3sw0"]
@@ -26,29 +26,29 @@ shader_parameter/shadow_min_step = 0.2
 shader_parameter/shadow_ramp = 0.0
 shader_parameter/directional_horizontal_scale = 32.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t68yt"]
-atlas = ExtResource("7_yega4")
-region = Rect2(66, 0, 64, 110)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcew6"]
+atlas = ExtResource("5_yssgn")
+region = Rect2(64, 0, 64, 110)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yhmlg"]
-atlas = ExtResource("7_yega4")
-region = Rect2(194, 0, 64, 110)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fkyj"]
+atlas = ExtResource("5_yssgn")
+region = Rect2(0, 0, 64, 110)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6fv04"]
-atlas = ExtResource("7_yega4")
-region = Rect2(2, 0, 64, 110)
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1uv4"]
+atlas = ExtResource("5_yssgn")
+region = Rect2(192, 0, 64, 110)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_paaqd"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t68yt")
+"texture": SubResource("AtlasTexture_tcew6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yhmlg")
+"texture": SubResource("AtlasTexture_7fkyj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6fv04")
+"texture": SubResource("AtlasTexture_e1uv4")
 }],
 "loop": 1,
 "name": &"default",
@@ -83,11 +83,10 @@ total_health = 200
 grenade_scene = ExtResource("4_tcew6")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
-self_modulate = Color(0, 1, 0, 1)
 material = SubResource("ShaderMaterial_s3sw0")
 rotation = -1.5707964
-sprite_frames = SubResource("SpriteFrames_g4v7s")
-frame_progress = 0.5525355
+sprite_frames = SubResource("SpriteFrames_paaqd")
+frame_progress = 0.3787723
 offset = Vector2(0, 8.495)
 script = ExtResource("8_eyhfq")
 lit_version = "1.1.7"
