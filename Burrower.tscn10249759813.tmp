@@ -1,0 +1,182 @@
+[gd_scene format=4 uid="uid://ba4dhkx8s4a5v"]
+
+[ext_resource type="Script" uid="uid://clcp5mx0c5t72" path="res://Scripts/BurrowerEnemy.gd" id="1_82a60"]
+[ext_resource type="Resource" uid="uid://djf2whtuldb5v" path="res://Drop Tables/BurrowerDrops.tres" id="2_pp8hh"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="4_dkils"]
+[ext_resource type="Texture2D" uid="uid://gdec1n8385f8" path="res://Images/SpiderSpriteSheet.png" id="5_ls3pj"]
+[ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="6_0ve6i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3sw0"]
+shader = ExtResource("4_dkils")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1tjd"]
+atlas = ExtResource("5_ls3pj")
+region = Rect2(548, 0, 548, 615)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkils"]
+atlas = ExtResource("5_ls3pj")
+region = Rect2(1096, 0, 548, 615)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uj6bi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1tjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkils")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.5
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
+radius = 15.0
+height = 36.0
+
+[sub_resource type="Theme" id="Theme_g4v7s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0u6y"]
+bg_color = Color(0, 0, 0, 0.19607843)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(2.6471912e-06, 0.7278638, 0.08175551, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="Gradient" id="Gradient_ls3pj"]
+offsets = PackedFloat32Array(0.95752895, 1)
+colors = PackedColorArray(0.333239, 0.30571586, 0.2286515, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yf5fn"]
+gradient = SubResource("Gradient_ls3pj")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.4871795, 0.54415953)
+
+[sub_resource type="Curve" id="Curve_d0u6y"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -9.140285, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_57qmd"]
+curve = SubResource("Curve_d0u6y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g4v7s"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 3.0
+emission_ring_inner_radius = 8.0
+emission_ring_cone_angle = 90.0
+angle_min = 1.0728835e-05
+angle_max = 104.60001
+direction = Vector3(0, 0, 0)
+angular_velocity_min = 2.4999838
+angular_velocity_max = 29.899982
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 20.759977
+radial_velocity_curve = SubResource("CurveTexture_57qmd")
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 8.299997
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(15, 25)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1850996865]
+script = ExtResource("1_82a60")
+drops = ExtResource("2_pp8hh")
+hit_color = Color(0, 1, 0, 1)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
+material = SubResource("ShaderMaterial_s3sw0")
+position = Vector2(-1.4424323e-05, 0)
+rotation = -1.5707964
+scale = Vector2(0.15505424, 0.15505423)
+sprite_frames = SubResource("SpriteFrames_uj6bi")
+frame = 1
+frame_progress = 0.5093522
+offset = Vector2(15.995, 0)
+flip_v = true
+script = ExtResource("6_0ve6i")
+lit_version = "1.1.7"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1596461876]
+avoidance_enabled = true
+radius = 30.0
+
+[node name="Timer" type="Timer" parent="." unique_id=710775026]
+wait_time = 0.5
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418133407]
+position = Vector2(0, 2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_yf5fn")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=31531383]
+
+[node name="ProgressBar" type="ProgressBar" parent="Node2D" unique_id=1631956121]
+offset_left = 13.5
+offset_top = -24.0
+offset_right = 17.499996
+offset_bottom = 3.0
+rotation = 1.5707964
+theme = SubResource("Theme_g4v7s")
+theme_override_styles/background = SubResource("StyleBoxFlat_d0u6y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yf5fn")
+value = 100.0
+rounded = true
+fill_mode = 3
+show_percentage = false
+
+[node name="HitTimer" type="Timer" parent="." unique_id=266761494]
+autostart = true
+
+[node name="BurrowParticles" type="GPUParticles2D" parent="." unique_id=149537907]
+emitting = false
+texture = SubResource("GradientTexture2D_yf5fn")
+lifetime = 0.8
+explosiveness = 0.25
+process_material = SubResource("ParticleProcessMaterial_g4v7s")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=220924222]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=267405042]
+position = Vector2(21.5, 2.5)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1081175100]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=2066334900]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(-35, 2, -21, -26, 8, -40, 37, -24, 37, 2, 37, 24, 8, 40, -21, 26)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_shoot_timer_timeout"]

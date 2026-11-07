@@ -80,6 +80,7 @@ script = ExtResource("1_yssgn")
 SPEED = 80.0
 drops = ExtResource("2_yssgn")
 total_health = 200
+hit_color = Color(1, 0, 0, 1)
 grenade_scene = ExtResource("4_tcew6")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]

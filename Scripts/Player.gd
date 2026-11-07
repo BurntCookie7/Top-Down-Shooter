@@ -16,6 +16,7 @@ enum Control_Mode{Mouse_Turn, Key_Turn}
 @export var SPEED = 150.0
 @export var TURN_SPEED = 0.04
 @export var grenade_throw_strength: float = 1000
+var turn_speed_mult: float = 1.0
 var hit_color: Color = Color(1.0, 0.0, 0.0, 1.0)
 var reserves: int = 0
 var grenades: int = 3
@@ -113,7 +114,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 	if not sitting:
-		rotation += turn_amount * TURN_SPEED
+		rotation += turn_amount * TURN_SPEED * turn_speed_mult
 		turn_amount = 0.0
 		match control_mode:
 			Control_Mode.Mouse_Turn:
@@ -183,26 +184,26 @@ func state_handler():
 			else:
 				sprite.play("Standing")
 			SPEED = 150
-			TURN_SPEED = 0.04
+			turn_speed_mult = 1.0
 		Global.State.WALKING:
 			if aiming:
 				sprite.play("WalkingAiming")
 			else:
 				sprite.play("Walking")
 			SPEED = 150
-			TURN_SPEED = 0.04
+			turn_speed_mult = 1.0
 		Global.State.RUNNING:
 			if aiming:
 				sprite.play("RunningAiming")
 			else:
 				sprite.play("Running")
 			SPEED = 250
-			TURN_SPEED = 0.07
+			turn_speed_mult *= 1.001
 		Global.State.SITTING:
 			aiming = false
 			sprite.play("Sitting")
 			SPEED = 0
-			TURN_SPEED = 0
+			turn_speed_mult = 0.0
 			velocity = Vector2.ZERO
 
  
@@ -229,6 +230,7 @@ func apply_upgrade(upgrade:UpgradeData):
 	if Global.wins >= Global.rounds:
 		if Global.cycle >= len(Global.map_container.map_cycle) - 1:
 			Global.cycle = 0
+			Global.loops += 1
 		else:
 			Global.cycle += 1
 		Global.wins = 1

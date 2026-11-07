@@ -36,7 +36,7 @@ func load_new_map(map: PackedScene) -> void:
 	add_child(map_instance)
 	Global.map = map_instance
 	if "enemy_amount" in map_instance:
-		map_instance.enemy_amount += 2*Global.wins
+		map_instance.enemy_amount += (2*Global.wins)*Global.loops
 	var spawn_point := map_instance.get_node_or_null("PlayerSpawn") as Node2D
 	if spawn_point and is_instance_valid(Global.player):
 		Global.player.global_position = spawn_point.global_position

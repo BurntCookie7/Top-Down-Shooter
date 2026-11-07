@@ -15,6 +15,7 @@ var map: Node2D
 var wins: int = 1
 var cycle: int = 0
 var rounds: int = 5
+var loops: int = 1
 var player_max_grenades = 3
 var player_control_mode: String = "Mouse_Turn"
 # Called when the node enters the scene tree for the first time.
@@ -43,6 +44,7 @@ func restart():
 	wins = 1
 	cycle = 0
 	rounds = 5
+	loops = 1
 	player_max_grenades = 5
 	map_container.load_new_map(map_container.initial_map)
 	get_tree().paused = false

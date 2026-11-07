@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://ba4dhkx8s4a5v"]
 
 [ext_resource type="Script" uid="uid://clcp5mx0c5t72" path="res://Scripts/BurrowerEnemy.gd" id="1_82a60"]
+[ext_resource type="Resource" uid="uid://djf2whtuldb5v" path="res://Drop Tables/BurrowerDrops.tres" id="2_pp8hh"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="4_dkils"]
 [ext_resource type="Texture2D" uid="uid://gdec1n8385f8" path="res://Images/SpiderSpriteSheet.png" id="5_ls3pj"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="6_0ve6i"]
@@ -47,7 +48,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
-radius = 6.0
+radius = 15.0
 height = 36.0
 
 [sub_resource type="Theme" id="Theme_g4v7s"]
@@ -66,9 +67,15 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_e8cpy"]
+radius = 101.788994
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_snsop"]
+radius = 45.01111
+
 [sub_resource type="Gradient" id="Gradient_ls3pj"]
 offsets = PackedFloat32Array(0.95752895, 1)
-colors = PackedColorArray(0.333239, 0.30571586, 0.2286515, 1, 0, 0, 0, 0)
+colors = PackedColorArray(0.64705884, 0.5764706, 0.49411765, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yf5fn"]
 gradient = SubResource("Gradient_ls3pj")
@@ -105,6 +112,9 @@ linear_accel_max = 8.299997
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1850996865]
 script = ExtResource("1_82a60")
+drops = ExtResource("2_pp8hh")
+total_health = 250
+hit_color = Color(0, 1, 0, 1)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
 material = SubResource("ShaderMaterial_s3sw0")
@@ -112,7 +122,8 @@ position = Vector2(-1.4424323e-05, 0)
 rotation = -1.5707964
 scale = Vector2(0.15505424, 0.15505423)
 sprite_frames = SubResource("SpriteFrames_uj6bi")
-frame_progress = 0.23171665
+frame = 1
+frame_progress = 0.5093522
 offset = Vector2(15.995, 0)
 flip_v = true
 script = ExtResource("6_0ve6i")
@@ -127,6 +138,7 @@ wait_time = 0.5
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418133407]
+visible = false
 position = Vector2(0, 2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_yf5fn")
@@ -142,6 +154,7 @@ rotation = 1.5707964
 theme = SubResource("Theme_g4v7s")
 theme_override_styles/background = SubResource("StyleBoxFlat_d0u6y")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yf5fn")
+max_value = 250.0
 value = 100.0
 rounded = true
 fill_mode = 3
@@ -150,12 +163,36 @@ show_percentage = false
 [node name="HitTimer" type="Timer" parent="." unique_id=266761494]
 autostart = true
 
+[node name="PlayerDetecion" type="Area2D" parent="." unique_id=1922164771]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetecion" unique_id=1162228223]
+shape = SubResource("CircleShape2D_e8cpy")
+
+[node name="AttackRange" type="Area2D" parent="." unique_id=220924222]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=267405042]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_snsop")
+debug_color = Color(0.8357183, 3.2247603e-06, 7.70092e-07, 0.41960785)
+
+[node name="BurrowTimer" type="Timer" parent="." unique_id=1960910411]
+wait_time = 5.0
+one_shot = true
+
 [node name="BurrowParticles" type="GPUParticles2D" parent="." unique_id=149537907]
-emitting = false
+z_index = 1
+amount = 20
 texture = SubResource("GradientTexture2D_yf5fn")
 lifetime = 0.8
 explosiveness = 0.25
 process_material = SubResource("ParticleProcessMaterial_g4v7s")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="HitTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]
+[connection signal="body_entered" from="PlayerDetecion" to="." method="_on_player_detecion_body_entered"]
+[connection signal="body_exited" from="PlayerDetecion" to="." method="_on_player_detecion_body_exited"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
+[connection signal="timeout" from="BurrowTimer" to="." method="_on_burrow_timer_timeout"]

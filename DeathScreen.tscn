@@ -55,6 +55,22 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "Retry"
 
+[node name="Main Menu" type="Button" parent="YouDied" unique_id=760351932]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.5
+offset_top = 94.0
+offset_right = 40.5
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
 [node name="Quit" type="Button" parent="YouDied" unique_id=1741285857]
 layout_mode = 1
 anchors_preset = 7
@@ -62,14 +78,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -46.0
-offset_top = 96.0
-offset_right = 39.0
-offset_bottom = 146.0
+offset_left = -45.5
+offset_top = 163.0
+offset_right = 39.5
+offset_bottom = 213.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 
 [connection signal="pressed" from="YouDied/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="YouDied/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="YouDied/Quit" to="." method="_on_quit_pressed"]
