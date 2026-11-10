@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://clcp5mx0c5t72" path="res://Scripts/BurrowerEnemy.gd" id="1_82a60"]
 [ext_resource type="Resource" uid="uid://djf2whtuldb5v" path="res://Drop Tables/BurrowerDrops.tres" id="2_pp8hh"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="4_dkils"]
+[ext_resource type="Texture2D" uid="uid://dsaskgxq1jxxx" path="res://Images/Grub.png" id="4_ls3pj"]
 [ext_resource type="Texture2D" uid="uid://gdec1n8385f8" path="res://Images/SpiderSpriteSheet.png" id="5_ls3pj"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="6_0ve6i"]
 
@@ -25,6 +26,14 @@ shader_parameter/shadow_min_step = 0.2
 shader_parameter/shadow_ramp = 0.0
 shader_parameter/directional_horizontal_scale = 32.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4oa4"]
+atlas = ExtResource("4_ls3pj")
+region = Rect2(374, 0, 187, 346)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drduj"]
+atlas = ExtResource("4_ls3pj")
+region = Rect2(187, 0, 187, 346)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1tjd"]
 atlas = ExtResource("5_ls3pj")
 region = Rect2(548, 0, 548, 615)
@@ -35,6 +44,17 @@ region = Rect2(1096, 0, 548, 615)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uj6bi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4oa4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drduj")
+}],
+"loop": 1,
+"name": &"arachnophobia",
+"speed": 2.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w1tjd")
@@ -118,12 +138,12 @@ hit_color = Color(0, 1, 0, 1)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
 material = SubResource("ShaderMaterial_s3sw0")
-position = Vector2(-1.4424323e-05, 0)
+position = Vector2(9.094947e-13, -5.421011e-20)
 rotation = -1.5707964
 scale = Vector2(0.15505424, 0.15505423)
 sprite_frames = SubResource("SpriteFrames_uj6bi")
-frame = 1
-frame_progress = 0.5093522
+animation = &"arachnophobia"
+frame_progress = 0.6203103
 offset = Vector2(15.995, 0)
 flip_v = true
 script = ExtResource("6_0ve6i")
@@ -138,7 +158,6 @@ wait_time = 0.5
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418133407]
-visible = false
 position = Vector2(0, 2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_yf5fn")
@@ -164,13 +183,11 @@ show_percentage = false
 autostart = true
 
 [node name="PlayerDetecion" type="Area2D" parent="." unique_id=1922164771]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetecion" unique_id=1162228223]
 shape = SubResource("CircleShape2D_e8cpy")
 
 [node name="AttackRange" type="Area2D" parent="." unique_id=220924222]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=267405042]
 position = Vector2(0, 3)
@@ -183,6 +200,7 @@ one_shot = true
 
 [node name="BurrowParticles" type="GPUParticles2D" parent="." unique_id=149537907]
 z_index = 1
+emitting = false
 amount = 20
 texture = SubResource("GradientTexture2D_yf5fn")
 lifetime = 0.8

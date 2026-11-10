@@ -16,6 +16,7 @@ enum Control_Mode{Mouse_Turn, Key_Turn}
 @export var SPEED = 150.0
 @export var TURN_SPEED = 0.04
 @export var grenade_throw_strength: float = 1000
+@export var pause_menu: Control
 var turn_speed_mult: float = 1.0
 var hit_color: Color = Color(1.0, 0.0, 0.0, 1.0)
 var reserves: int = 0
@@ -47,13 +48,12 @@ func _input(event: InputEvent) -> void:
 	if control_mode == Control_Mode.Mouse_Turn:
 			if event is InputEventMouseMotion:
 				turn_amount += event.relative.x
-				
-	if event.is_action_pressed("ui_cancel"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			
+	
+	if event.is_action_pressed("ESC") and not death_screen.visible:
+		pause_menu.show()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().paused = not get_tree().paused
+	
 	if event.is_action_pressed("RightClick") and sitting != true:
 		aiming = true
 	if event.is_action_released("RightClick"):
@@ -108,7 +108,7 @@ func _physics_process(delta: float) -> void:
 				sitting = true
 				rotation = current_bench.rotation - deg_to_rad(90)
 				global_position = sitting_position
-				current_bench.load_upgrades(current_bench.upgrade_options)
+				current_bench.load_upgrades()
 				collision.disabled = true
 
 		

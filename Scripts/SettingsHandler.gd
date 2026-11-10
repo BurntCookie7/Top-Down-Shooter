@@ -4,12 +4,15 @@ extends Control
 @onready var control_mode_selection: OptionButton = $Panel/VBoxContainer/ControlSettings/ControlMode/OptionButton
 @onready var mouse_turn_controls: Control = $Panel/VBoxContainer/ControlSettings/MouseTurn
 @onready var key_turn_controls: Control = $Panel/VBoxContainer/ControlSettings/KeyTurn
+@onready var general_settings: Control = $Panel/VBoxContainer/GeneralSettings
+@onready var check_box: CheckBox = $Panel/VBoxContainer/GeneralSettings/Arachnophobia/CheckBox
 
 var controls_to_show = 0
 var current_tab
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	check_box.set_pressed_no_signal(Global.arachnophobia)
 	manage_tabs(0)
 
 
@@ -25,6 +28,7 @@ func hide_all():
 	control_settings.hide()
 	mouse_turn_controls.hide()
 	key_turn_controls.hide()
+	general_settings.hide()
 
 
 func manage_tabs(tab):
@@ -32,6 +36,7 @@ func manage_tabs(tab):
 	match tab:
 		0:
 			hide_all()
+			general_settings.show()
 		1:
 			hide_all()
 		2:
@@ -57,3 +62,11 @@ func _on_option_button_item_selected(index: int) -> void:
 
 func _on_exit_pressed() -> void:
 	queue_free()
+
+
+func _on_check_box_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		Global.arachnophobia = true
+	else:
+		Global.arachnophobia = false
+	print(Global.arachnophobia)

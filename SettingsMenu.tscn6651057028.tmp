@@ -1,0 +1,437 @@
+[gd_scene format=3 uid="uid://buc0lhu2mrhpy"]
+
+[ext_resource type="Script" uid="uid://ejpsg73jfy5v" path="res://Scripts/SettingsHandler.gd" id="1_svoao"]
+[ext_resource type="Texture2D" uid="uid://casmdw1resubx" path="res://addons/controller_icons/assets/key/w.png" id="2_qx6hv"]
+[ext_resource type="Texture2D" uid="uid://db6nbed6w2fis" path="res://addons/controller_icons/assets/key/s.png" id="3_252gt"]
+[ext_resource type="Texture2D" uid="uid://bptg6u6b4y5no" path="res://addons/controller_icons/assets/key/a.png" id="4_kqhgn"]
+[ext_resource type="Texture2D" uid="uid://dlwamiuq1f5t6" path="res://addons/controller_icons/assets/key/d.png" id="5_tfpf4"]
+[ext_resource type="Texture2D" uid="uid://xe4n818le3p8" path="res://addons/controller_icons/assets/key/e.png" id="6_lu4a6"]
+[ext_resource type="Texture2D" uid="uid://dim5mk7g4q043" path="res://addons/controller_icons/assets/key/q.png" id="7_lnr38"]
+[ext_resource type="Texture2D" uid="uid://b8vuy7l8npt6w" path="res://addons/controller_icons/assets/mouse/left.png" id="8_di4v8"]
+[ext_resource type="Texture2D" uid="uid://cy7e67qj2flir" path="res://addons/controller_icons/assets/mouse/right.png" id="9_3o7xj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+border_width_left = 8
+border_width_top = 4
+border_width_right = 8
+border_width_bottom = 4
+border_color = Color(0.32172796, 0.321728, 0.32172775, 1)
+border_blend = true
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0, 0, 0, 0.33333334)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.70519364, 0.70519364, 0.7051935, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tb4hl"]
+bg_color = Color(0, 0, 0, 0.33333334)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.70519364, 0.70519364, 0.7051935, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svoao"]
+bg_color = Color(0.28974146, 0.28974146, 0.28974146, 0.33333334)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.70519364, 0.70519364, 0.7051935, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5s0fj"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.42731854, 0.70609844, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7numd"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1639154, 0.61683947, 0.9999998, 1)
+border_width_top = 2
+border_color = Color(0.12856287, 0.2733235, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+expand_margin_top = 7.0
+shadow_offset = Vector2(-1, -1)
+
+[node name="Control" type="Control" unique_id=1472007492]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_svoao")
+
+[node name="Panel" type="Panel" parent="." unique_id=1896948414]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.0
+offset_top = -216.0
+offset_right = 320.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=907630902]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 73.0
+offset_right = -18.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GeneralSettings" type="Control" parent="Panel/VBoxContainer" unique_id=287171245]
+layout_mode = 2
+
+[node name="Arachnophobia" type="Label" parent="Panel/VBoxContainer/GeneralSettings" unique_id=114640642]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Arachnophobia mode"
+
+[node name="CheckBox" type="CheckBox" parent="Panel/VBoxContainer/GeneralSettings/Arachnophobia" unique_id=29245035]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -11.5
+offset_right = 29.0
+offset_bottom = 12.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ControlSettings" type="Control" parent="Panel/VBoxContainer" unique_id=2082964895]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ControlMode" type="Label" parent="Panel/VBoxContainer/ControlSettings" unique_id=1700317291]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 106.0
+offset_bottom = 21.0
+size_flags_horizontal = 0
+text = "Control Mode"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/VBoxContainer/ControlSettings/ControlMode" unique_id=212529235]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -14.5
+offset_right = 139.0
+offset_bottom = 16.5
+grow_horizontal = 0
+grow_vertical = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Mouse Turn"
+popup/item_0/id = 0
+popup/item_1/text = "Key Turn"
+popup/item_1/id = 1
+
+[node name="MouseTurn" type="Control" parent="Panel/VBoxContainer/ControlSettings" unique_id=828696529]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ControlSettings/MouseTurn" unique_id=2057777044]
+layout_mode = 0
+offset_left = 308.0
+offset_right = 373.0
+offset_bottom = 23.0
+text = "Forward"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/MouseTurn/Label" unique_id=498348489]
+position = Vector2(84, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("2_qx6hv")
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/ControlSettings/MouseTurn" unique_id=1578052375]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 35.0
+offset_right = 385.0
+offset_bottom = 58.0
+text = "Backward"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/MouseTurn/Label2" unique_id=668198882]
+position = Vector2(94, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("3_252gt")
+
+[node name="Label3" type="Label" parent="Panel/VBoxContainer/ControlSettings/MouseTurn" unique_id=1184682525]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 68.0
+offset_right = 385.0
+offset_bottom = 91.0
+text = "Left"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/MouseTurn/Label3" unique_id=1746994328]
+position = Vector2(53, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("4_kqhgn")
+
+[node name="Label4" type="Label" parent="Panel/VBoxContainer/ControlSettings/MouseTurn" unique_id=1391210229]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 103.0
+offset_right = 385.0
+offset_bottom = 126.0
+text = "Right"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/MouseTurn/Label4" unique_id=1135797828]
+position = Vector2(58, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("5_tfpf4")
+
+[node name="Label5" type="Label" parent="Panel/VBoxContainer/ControlSettings/MouseTurn" unique_id=1023123440]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 137.0
+offset_right = 385.0
+offset_bottom = 160.0
+text = "Interact"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/MouseTurn/Label5" unique_id=740020817]
+position = Vector2(82, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("6_lu4a6")
+
+[node name="Label6" type="Label" parent="Panel/VBoxContainer/ControlSettings/MouseTurn" unique_id=870121829]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 173.0
+offset_right = 385.0
+offset_bottom = 196.0
+text = "Grenade"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/MouseTurn/Label6" unique_id=343311225]
+position = Vector2(86, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("7_lnr38")
+
+[node name="Label7" type="Label" parent="Panel/VBoxContainer/ControlSettings/MouseTurn" unique_id=845381039]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 207.0
+offset_right = 385.0
+offset_bottom = 230.0
+text = "Shoot"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/MouseTurn/Label7" unique_id=2094658923]
+position = Vector2(66, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("8_di4v8")
+
+[node name="Label8" type="Label" parent="Panel/VBoxContainer/ControlSettings/MouseTurn" unique_id=53295754]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 245.0
+offset_right = 385.0
+offset_bottom = 268.0
+text = "Aim"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/MouseTurn/Label8" unique_id=1436112078]
+position = Vector2(47, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("9_3o7xj")
+
+[node name="KeyTurn" type="Control" parent="Panel/VBoxContainer/ControlSettings" unique_id=1149906172]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ControlSettings/KeyTurn" unique_id=289528174]
+layout_mode = 0
+offset_left = 308.0
+offset_right = 373.0
+offset_bottom = 23.0
+text = "Forward"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/KeyTurn/Label" unique_id=2021741954]
+position = Vector2(84, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("2_qx6hv")
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/ControlSettings/KeyTurn" unique_id=1544248254]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 35.0
+offset_right = 385.0
+offset_bottom = 58.0
+text = "Backward"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/KeyTurn/Label2" unique_id=644690098]
+position = Vector2(94, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("3_252gt")
+
+[node name="Label3" type="Label" parent="Panel/VBoxContainer/ControlSettings/KeyTurn" unique_id=276053658]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 68.0
+offset_right = 385.0
+offset_bottom = 91.0
+text = "Turn Left"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/KeyTurn/Label3" unique_id=207862111]
+position = Vector2(92, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("4_kqhgn")
+
+[node name="Label4" type="Label" parent="Panel/VBoxContainer/ControlSettings/KeyTurn" unique_id=641616387]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 103.0
+offset_right = 385.0
+offset_bottom = 126.0
+text = "Turn Right"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/KeyTurn/Label4" unique_id=358373525]
+position = Vector2(99, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("5_tfpf4")
+
+[node name="Label5" type="Label" parent="Panel/VBoxContainer/ControlSettings/KeyTurn" unique_id=2069186637]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 137.0
+offset_right = 385.0
+offset_bottom = 160.0
+text = "Interact"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/KeyTurn/Label5" unique_id=440431026]
+position = Vector2(82, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("6_lu4a6")
+
+[node name="Label6" type="Label" parent="Panel/VBoxContainer/ControlSettings/KeyTurn" unique_id=450638477]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 173.0
+offset_right = 385.0
+offset_bottom = 196.0
+text = "Grenade"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/KeyTurn/Label6" unique_id=634482723]
+position = Vector2(86, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("7_lnr38")
+
+[node name="Label7" type="Label" parent="Panel/VBoxContainer/ControlSettings/KeyTurn" unique_id=132491264]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 207.0
+offset_right = 385.0
+offset_bottom = 230.0
+text = "Shoot"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/KeyTurn/Label7" unique_id=1544567220]
+position = Vector2(66, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("8_di4v8")
+
+[node name="Label8" type="Label" parent="Panel/VBoxContainer/ControlSettings/KeyTurn" unique_id=1623860868]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 245.0
+offset_right = 385.0
+offset_bottom = 268.0
+text = "Aim"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/KeyTurn/Label8" unique_id=231953425]
+position = Vector2(47, 14.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("9_3o7xj")
+
+[node name="Exit" type="Button" parent="Panel" unique_id=181506210]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -67.0
+offset_top = 25.0
+offset_right = -32.0
+offset_bottom = 61.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_yf5fn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tb4hl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_svoao")
+text = "X"
+
+[node name="TabBar" type="TabBar" parent="Panel" unique_id=1642331607]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = 11.0
+offset_right = 123.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 6
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_5s0fj")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_7numd")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_7numd")
+current_tab = 0
+tab_count = 3
+tab_0/title = "General"
+tab_0/tooltip = "Where all the general settings are kept"
+tab_1/title = "Display"
+tab_1/tooltip = "Where all the display settings are"
+tab_2/title = "Controls"
+tab_2/tooltip = "Where all the control settings are"
+
+[connection signal="toggled" from="Panel/VBoxContainer/GeneralSettings/Arachnophobia/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="item_selected" from="Panel/VBoxContainer/ControlSettings/ControlMode/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="Panel/Exit" to="." method="_on_exit_pressed"]
+[connection signal="tab_changed" from="Panel/TabBar" to="." method="_on_tab_bar_tab_changed"]

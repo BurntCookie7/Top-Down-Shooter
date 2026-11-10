@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dnkcv5mpco2ki" path="res://Scripts/TitleScreenHandler.gd" id="1_pkhjh"]
 [ext_resource type="Texture2D" uid="uid://l14vlsycn7mn" path="res://Images/Title Screen Background.png" id="2_1xr1c"]
 [ext_resource type="PackedScene" uid="uid://buc0lhu2mrhpy" path="res://SettingsMenu.tscn" id="2_tu0on"]
+[ext_resource type="FontFile" uid="uid://dq3hwlqrhhpdd" path="res://Fonts/Vipnagorgialla Bd It.otf" id="4_tu0on"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 bg_color = Color(1, 1, 1, 1)
@@ -60,6 +61,16 @@ theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
 text = "Settings"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=179748321]
+layout_mode = 1
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 556.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("4_tu0on")
+theme_override_font_sizes/font_size = 77
+text = "Slow Burn"
 
 [connection signal="pressed" from="CanvasLayer/Control/Play" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Settings" to="." method="_on_settings_pressed"]

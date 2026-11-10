@@ -27,11 +27,14 @@ func _ready() -> void:
 	update_target()
 	health = total_health
 	health_bar.top_level = true
-	sprite.play()
 	burrow()
 
 func _physics_process(delta: float) -> void:
 	manage_health()
+	if Global.arachnophobia:
+		sprite.play("arachnophobia")
+	else:
+		sprite.play("default")
 	match state:
 		State.UNBURROWED:
 			if navigation.is_navigation_finished():

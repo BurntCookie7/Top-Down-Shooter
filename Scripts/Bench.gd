@@ -5,7 +5,7 @@ extends StaticBody2D
 @export var Upgrades_Menu: PackedScene
 @export var Upgrade_Button: PackedScene
 @export var hit_color: Color
-@export var upgrade_options: Array[UpgradeData]
+@export var upgrade_table: BenchTable
 
 var menu_made: bool
 var menu = null
@@ -31,7 +31,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		Global.can_sit = false
 
-func load_upgrades(upgrades: Array[UpgradeData]):
+func load_upgrades():
 	if menu_made:
 		menu.show()
 		menu.global_rotation = player.camera.global_rotation - deg_to_rad(90)
@@ -46,15 +46,16 @@ func load_upgrades(upgrades: Array[UpgradeData]):
 		menu.global_position = player.global_position
 		menu.global_position.y -= 200
 		var Hbox = menu.get_child(0)
-		for upgrade in upgrades:
+		for upgrade in Global.upgrades:
 			var option = Upgrade_Button.instantiate()
-			option.setup(upgrade)
+			var upgrade_choice = upgrade_table.pick_random()
+			option.setup(upgrade_choice)
 			option.pressed.connect(func():
-				upgrade_chosen.emit(upgrade, player)
-				player.apply_upgrade(upgrade))
+				upgrade_chosen.emit()
+				player.apply_upgrade(upgrade_choice))
 			Hbox.add_child(option)
-		for child in menu.get_children():
-			child.z_index = 500
+			for child in menu.get_children():
+				child.z_index = 500
 		menu_made = true
 		#print("menu shown")
 		
