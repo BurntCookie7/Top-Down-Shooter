@@ -34,7 +34,6 @@ var aiming: bool = false
 var reload_sound = preload("res://Audio/Reload.mp3")
 var shot_sound = preload("res://Audio/Gunshot.mp3")
 var bullets_shot: int = 1
-var health = null
 
 func _ready() -> void:
 	Global.player = self
@@ -172,6 +171,7 @@ func spawn_bullet():
 func spawn_grenade() -> void:
 	var grenade = grenade_scene.instantiate()
 	grenade.global_position = grenade_spawn_position.global_position
+	grenade.rotation = rotation
 	get_tree().root.add_child(grenade)
 	grenade.throw(global_transform.x, grenade_throw_strength, "Player")
 	grenade.linear_velocity += velocity * 0.5

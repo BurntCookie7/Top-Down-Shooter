@@ -22,7 +22,7 @@ var enemy_damage_mult = 1.0
 var enemy_health_mult = 2.0
 var arachnophobia: bool = false
 var benches: int = 1
-var upgrades: int = 3
+var upgrades: int = 6
 var ammo_per_pickup: int = 5
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

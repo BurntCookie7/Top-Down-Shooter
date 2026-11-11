@@ -1,0 +1,179 @@
+[gd_scene format=4 uid="uid://bmivrm7wiw7ab"]
+
+[ext_resource type="Script" uid="uid://cpkn4e7ql15tp" path="res://Scripts/EggBomber.gd" id="1_1i1kt"]
+[ext_resource type="Resource" uid="uid://djf2whtuldb5v" path="res://Drop Tables/BurrowerDrops.tres" id="2_1i1kt"]
+[ext_resource type="PackedScene" uid="uid://bxhel732gm3fl" path="res://BabySpider.tscn" id="3_0nwfv"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="3_ml7gf"]
+[ext_resource type="Texture2D" uid="uid://dsaskgxq1jxxx" path="res://Images/Grub.png" id="4_0nwfv"]
+[ext_resource type="Texture2D" uid="uid://qiiuhoph5fqu" path="res://Images/SpiderSpriteSheetEggs.png" id="4_ml7gf"]
+[ext_resource type="Texture2D" uid="uid://gdec1n8385f8" path="res://Images/SpiderSpriteSheet.png" id="5_u2qli"]
+[ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="6_yy0xh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3sw0"]
+shader = ExtResource("3_ml7gf")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nwfv"]
+atlas = ExtResource("4_ml7gf")
+region = Rect2(561, 0, 561, 615)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2qli"]
+atlas = ExtResource("4_ml7gf")
+region = Rect2(1122, 0, 561, 615)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4oa4"]
+atlas = ExtResource("4_0nwfv")
+region = Rect2(374, 0, 187, 346)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drduj"]
+atlas = ExtResource("4_0nwfv")
+region = Rect2(187, 0, 187, 346)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1tjd"]
+atlas = ExtResource("5_u2qli")
+region = Rect2(548, 0, 548, 615)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkils"]
+atlas = ExtResource("5_u2qli")
+region = Rect2(1096, 0, 548, 615)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uj6bi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nwfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2qli")
+}],
+"loop": 1,
+"name": &"Eggs",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4oa4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drduj")
+}],
+"loop": 1,
+"name": &"arachnophobia",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1tjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkils")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.5
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
+radius = 15.0
+height = 36.0
+
+[sub_resource type="Theme" id="Theme_g4v7s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0u6y"]
+bg_color = Color(0, 0, 0, 0.19607843)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(2.6471912e-06, 0.7278638, 0.08175551, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_snsop"]
+radius = 45.01111
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1850996865 groups=["Enemy"]]
+script = ExtResource("1_1i1kt")
+drops = ExtResource("2_1i1kt")
+total_health = 150
+hit_color = Color(0, 1, 0, 1)
+baby = ExtResource("3_0nwfv")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
+material = SubResource("ShaderMaterial_s3sw0")
+position = Vector2(9.094947e-13, -5.421011e-20)
+rotation = -1.5707964
+scale = Vector2(0.15505424, 0.15505423)
+sprite_frames = SubResource("SpriteFrames_uj6bi")
+animation = &"Eggs"
+frame = 1
+frame_progress = 0.7899313
+offset = Vector2(15.995, 0)
+flip_v = true
+script = ExtResource("6_yy0xh")
+lit_version = "1.1.7"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1596461876]
+avoidance_enabled = true
+radius = 30.0
+
+[node name="Timer" type="Timer" parent="." unique_id=710775026]
+wait_time = 0.5
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418133407]
+position = Vector2(0, 2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_yf5fn")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=31531383]
+
+[node name="ProgressBar" type="ProgressBar" parent="Node2D" unique_id=1631956121]
+offset_left = 13.5
+offset_top = -24.0
+offset_right = 17.499996
+offset_bottom = 3.0
+rotation = 1.5707964
+theme = SubResource("Theme_g4v7s")
+theme_override_styles/background = SubResource("StyleBoxFlat_d0u6y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yf5fn")
+max_value = 250.0
+value = 100.0
+rounded = true
+fill_mode = 3
+show_percentage = false
+
+[node name="HitTimer" type="Timer" parent="." unique_id=266761494]
+wait_time = 4.0
+autostart = true
+
+[node name="AttackRange" type="Area2D" parent="." unique_id=220924222]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=267405042]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_snsop")
+debug_color = Color(0.8357183, 3.2247603e-06, 7.70092e-07, 0.41960785)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]

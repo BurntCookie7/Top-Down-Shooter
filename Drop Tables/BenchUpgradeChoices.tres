@@ -6,6 +6,8 @@
 [ext_resource type="Resource" uid="uid://cn625uh8jjmyh" path="res://Upgrades/MaxHealthUpgrade.tres" id="4_cp6el"]
 [ext_resource type="Resource" uid="uid://bgba0kafutrcq" path="res://Upgrades/BulletsShotUpgrade.tres" id="5_2s6l3"]
 [ext_resource type="Resource" uid="uid://dc8e3op16hnga" path="res://Upgrades/BulletsPerBox.tres" id="6_cp6el"]
+[ext_resource type="Resource" uid="uid://d0qdjysribhdt" path="res://Upgrades/PlayerSpeedUpgrade.tres" id="7_2s6l3"]
+[ext_resource type="Resource" uid="uid://d1glnbl88ajcy" path="res://Upgrades/GrenadeCapacityUpgrade.tres" id="8_3oc2u"]
 
 [resource]
 script = ExtResource("1_am5jm")
@@ -13,6 +15,8 @@ table = Dictionary[ExtResource("2_vsu6e"), float]({
 ExtResource("3_j2slk"): 2.0,
 ExtResource("4_cp6el"): 2.0,
 ExtResource("5_2s6l3"): 0.5,
-ExtResource("6_cp6el"): 1.0
+ExtResource("6_cp6el"): 1.0,
+ExtResource("7_2s6l3"): 0.5,
+ExtResource("8_3oc2u"): 0.5
 })
 metadata/_custom_type_script = "uid://ycumbst7jav1"

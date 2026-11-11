@@ -9,12 +9,22 @@ extends StaticBody2D
 
 var menu_made: bool
 var menu = null
-var player: Node2D = null
+var player: Node2D = Global.player
 signal upgrade_chosen(upgrade:UpgradeData, player_node:Node2D)
+var upgrade_options: Array[UpgradeData]
+var buffer_node: Control
+var Hbox: Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ESC") and player.sitting:
+		menu_made = false
+		unload_upgrades()
+		upgrade_options.clear()
+		remove_upgrades()
+		load_upgrades()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -36,29 +46,47 @@ func load_upgrades():
 		menu.show()
 		menu.global_rotation = player.camera.global_rotation - deg_to_rad(90)
 		menu.global_position = player.global_position
-		menu.global_position.y -= 200
+		menu.global_position.y -= 100
 		#print("menu shown")
 	else:
 		menu = Upgrades_Menu.instantiate()
+		Hbox = menu.get_child(0).get_child(0)
 		menu.name = "UpgradeMenu"
 		add_child(menu)
 		menu.global_rotation = player.camera.global_rotation - deg_to_rad(90)
 		menu.global_position = player.global_position
-		menu.global_position.y -= 200
-		var Hbox = menu.get_child(0)
+		menu.global_position.y -= 100
 		for upgrade in Global.upgrades:
-			var option = Upgrade_Button.instantiate()
-			var upgrade_choice = upgrade_table.pick_random()
-			option.setup(upgrade_choice)
-			option.pressed.connect(func():
-				upgrade_chosen.emit()
-				player.apply_upgrade(upgrade_choice))
-			Hbox.add_child(option)
-			for child in menu.get_children():
-				child.z_index = 500
+			create_button()
+		for child in menu.get_children():
+			child.z_index = 500
+		buffer_node = Control.new()
+		Hbox.add_child(buffer_node)
+		Hbox.move_child(buffer_node, -1)
 		menu_made = true
-		#print("menu shown")
 		
+		#print("menu shown")
+
+func create_button():
+	var option = Upgrade_Button.instantiate()
+	var upgrade_choice = upgrade_table.pick_random()
+	option.setup(upgrade_choice)
+	var tries = 0
+	while option.data in upgrade_options and tries <= 10:
+		option.setup(upgrade_table.pick_random())
+		tries += 1
+		continue
+	if tries > 10:
+		upgrade_choice = upgrade_table.pick_random()
+	else:
+		upgrade_choice = option.data
+	option.pressed.connect(func():
+		upgrade_chosen.emit()
+		player.apply_upgrade(upgrade_choice))
+	Hbox.add_child(option)
+	upgrade_options.append(option.data)
+	return
+
 func unload_upgrades():
 	menu.hide()
 	

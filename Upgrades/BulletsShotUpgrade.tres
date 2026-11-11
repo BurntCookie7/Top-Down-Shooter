@@ -16,6 +16,5 @@ id = &"Bullets Shot"
 title = "Bullets Shot"
 description = "+1 bullets per shot"
 icon = ExtResource("1_j51ka")
-rarity = 1
 modifiers = Array[ExtResource("1_q1iy5")]([SubResource("Resource_c7v7g")])
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

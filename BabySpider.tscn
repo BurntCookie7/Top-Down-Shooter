@@ -1,0 +1,103 @@
+[gd_scene format=4 uid="uid://bxhel732gm3fl"]
+
+[ext_resource type="Script" uid="uid://ctkxen862pnwf" path="res://Scripts/BabySpider.gd" id="1_4lhe6"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_03bou"]
+[ext_resource type="Texture2D" uid="uid://doc15yrfubols" path="res://Images/BabySpider.png" id="3_82htw"]
+[ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="4_t5j5n"]
+[ext_resource type="AudioStream" uid="uid://cuctwm0gvob35" path="res://Audio/Explosion.mp3" id="5_6v2lw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yfln0"]
+shader = ExtResource("2_03bou")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 16.0
+
+[sub_resource type="Gradient" id="Gradient_4lhe6"]
+offsets = PackedFloat32Array(0.972973, 0.996139)
+colors = PackedColorArray(0, 1, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ml7gf"]
+gradient = SubResource("Gradient_4lhe6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.6096866, 0.41880342)
+
+[sub_resource type="Curve" id="Curve_3gngh"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50649345, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.9496403), -4.056919, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d0u6y"]
+curve = SubResource("Curve_3gngh")
+
+[sub_resource type="Curve" id="Curve_68v2o"]
+_data = [Vector2(0, 0.4244604), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_57qmd"]
+curve = SubResource("Curve_68v2o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yf5fn"]
+particle_flag_disable_z = true
+angular_velocity_min = 323.87997
+angular_velocity_max = 343.80997
+radial_velocity_min = 48.439976
+radial_velocity_max = 152.24997
+radial_velocity_curve = SubResource("CurveTexture_d0u6y")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_57qmd")
+hue_variation_min = -0.010000022
+hue_variation_max = -0.010000022
+turbulence_noise_strength = 0.57
+
+[node name="StaticBody2D" type="RigidBody2D" unique_id=672757634 groups=["Enemy"]]
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_4lhe6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1708255932]
+material = SubResource("ShaderMaterial_yfln0")
+position = Vector2(2.6673079e-06, 0.1467183)
+rotation = 1.5707964
+scale = Vector2(0.539999, 0.5570646)
+texture = ExtResource("3_82htw")
+script = ExtResource("4_t5j5n")
+lit_version = "1.1.7"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=488376044]
+scale = Vector2(0.6399988, 0.6399988)
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1924244926]
+emitting = false
+amount = 30
+texture = SubResource("GradientTexture2D_ml7gf")
+lifetime = 0.6
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yf5fn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1078630228]
+stream = ExtResource("5_6v2lw")
+max_polyphony = 80
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
