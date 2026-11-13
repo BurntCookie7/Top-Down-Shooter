@@ -10,14 +10,12 @@ extends CharacterBody2D
 
 @export var Stats: PlayerStats
 @export var bullet_scene: PackedScene = null
-@export var grenade_scene: PackedScene = null
 var shake_strength = 0.0
 enum Control_Mode{Mouse_Turn, Key_Turn}
 @export var SPEED = 150.0
-@export var TURN_SPEED = 0.04
+@export var TURN_SPEED = 0.02
 @export var grenade_throw_strength: float = 1000
 @export var pause_menu: Control
-var turn_speed_mult: float = 1.0
 var hit_color: Color = Color(1.0, 0.0, 0.0, 1.0)
 var reserves: int = 0
 var grenades: int = 3
@@ -34,6 +32,7 @@ var aiming: bool = false
 var reload_sound = preload("res://Audio/Reload.mp3")
 var shot_sound = preload("res://Audio/Gunshot.mp3")
 var bullets_shot: int = 1
+var sensitivity: float = Global.turn_sensitivity
 
 func _ready() -> void:
 	Global.player = self
@@ -82,9 +81,10 @@ func bench_left():
 	pass
 
 func _process(delta: float) -> void:
-	pass
+	sensitivity = Global.turn_sensitivity
 
 func _physics_process(delta: float) -> void:
+	print(Global.turn_sensitivity)
 	if control_mode != Control_Mode.get(Global.player_control_mode):
 		control_mode = Control_Mode.get(Global.player_control_mode)
 	if Global.player_health <= 0:
@@ -113,7 +113,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 	if not sitting:
-		rotation += turn_amount * TURN_SPEED * turn_speed_mult
+		rotation += turn_amount * TURN_SPEED * sensitivity
 		turn_amount = 0.0
 		match control_mode:
 			Control_Mode.Mouse_Turn:
@@ -141,7 +141,7 @@ func _physics_process(delta: float) -> void:
 					state = Global.State.STANDING
 					velocity = velocity.move_toward(Vector2.ZERO, SPEED)
 				if turn:
-					global_rotation += turn * TURN_SPEED
+					global_rotation += turn * TURN_SPEED * sensitivity
 
 	state_handler()
 	move_and_slide()
@@ -169,7 +169,7 @@ func spawn_bullet():
 	bullet.global_position = bullet_spawn_position.global_position
 
 func spawn_grenade() -> void:
-	var grenade = grenade_scene.instantiate()
+	var grenade = Global.grenade_scene.instantiate()
 	grenade.global_position = grenade_spawn_position.global_position
 	grenade.rotation = rotation
 	get_tree().root.add_child(grenade)
@@ -184,26 +184,26 @@ func state_handler():
 			else:
 				sprite.play("Standing")
 			SPEED = 150
-			turn_speed_mult = 1.0
+			sensitivity = Global.turn_sensitivity
 		Global.State.WALKING:
 			if aiming:
 				sprite.play("WalkingAiming")
 			else:
 				sprite.play("Walking")
 			SPEED = 150
-			turn_speed_mult = 1.0
+			sensitivity = Global.turn_sensitivity
 		Global.State.RUNNING:
 			if aiming:
 				sprite.play("RunningAiming")
 			else:
 				sprite.play("Running")
 			SPEED = 250
-			turn_speed_mult *= 1.001
+			sensitivity *= 1.001
 		Global.State.SITTING:
 			aiming = false
 			sprite.play("Sitting")
 			SPEED = 0
-			turn_speed_mult = 0.0
+			sensitivity = 0.0
 			velocity = Vector2.ZERO
 
  

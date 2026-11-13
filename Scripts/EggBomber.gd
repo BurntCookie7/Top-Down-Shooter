@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @export var SPEED: float = 100.0
 @export var drops: DropTable
-@export var total_health: int = 100.0
+@export var total_health: int = 150.0
 @onready var sprite: LitAnimatedSprite2D = $Sprite2D
 @export var hit_color: Color = Color(0.0, 0.0, 0.0, 1.0)
 @export var damage: int = 5
@@ -18,6 +18,7 @@ var health_bar_offset: Vector2 = Vector2(13, -20)
 var can_attack = true
 var stretch_tween: Tween
 var babies_thrown: int = 6
+
 func _ready() -> void:
 	collision.disabled = false
 	await get_tree().physics_frame
@@ -68,25 +69,14 @@ func manage_health():
 	if health <= 0:
 		die()
 
-func drop_item(table: Dictionary):
-	var total = 0.0
-	for weight in table.values():
-		total += weight
-	
-	var roll: float = randf() * total
-	
-	for item in table:
-		roll -= table[item]
-		if roll <= 0.0:
-			return item
-	
-	return null
-
-func die():
-	var drop: Node2D = drop_item(drops.table).instantiate()
+func drop_item():
+	var drop: Node2D = drops.pick_item().instantiate()
 	Global.map.add_child(drop)
 	drop.global_position = global_position
 	drop.rotation = randf()
+
+func die():
+	drop_item()
 	Global.enemies_killed += 1
 	queue_free()
 
@@ -100,7 +90,7 @@ func throw_babies():
 		Global.map.add_child(baby_instance)
 		baby_instance.global_position = global_position + dir * 40
 		baby_instance.rotation = angle
-		baby_instance.throw(dir, 300)
+		baby_instance.throw(dir, 300, "Enemy")
 
 func attack():
 	squash_stretch(Vector2(0.3, 0.155), 1.0)

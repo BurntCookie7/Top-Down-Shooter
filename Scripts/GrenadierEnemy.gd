@@ -52,26 +52,16 @@ func update_target():
 func manage_health():
 	health_bar.value = health
 	if health <= 0:
-		var drop = drop_item(drops.table).instantiate()
-		get_tree().root.add_child(drop)
-		drop.global_position = global_position
-		drop.rotation = randf()
+		drop_item()
 		Global.enemies_killed += 1
 		queue_free()
 
-func drop_item(table: Dictionary):
-	var total = 0.0
-	for weight in table.values():
-		total += weight
-	
-	var roll: float = randf() * total
-	
-	for item in table:
-		roll -= table[item]
-		if roll <= 0.0:
-			return item
-	
-	return null
+func drop_item():
+	var drop: Node2D = drops.pick_item().instantiate()
+	Global.map.add_child(drop)
+	drop.global_position = global_position
+	drop.rotation = randf()
+
 
 func spawn_grenade() -> void:
 	var grenade = grenade_scene.instantiate()

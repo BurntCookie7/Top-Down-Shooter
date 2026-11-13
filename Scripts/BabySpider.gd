@@ -8,7 +8,7 @@ extends RigidBody2D
 
 const friction = 0
 var damage: int = 10
-
+var thrower: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,23 +25,28 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	linear_velocity = linear_velocity.move_toward(Vector2.ZERO, friction)
 	#angular_velocity = move_toward(angular_velocity, 0, 1)
 
-func throw(direction: Vector2, speed: float):
+func throw(direction: Vector2, speed: float, thrower: String):
 	linear_velocity = direction.normalized() * speed
 	#angular_velocity = randf()*50
 
 
 func _on_body_entered(body: Node) -> void:
-	if not body.is_in_group("Enemy"):
-		print(body)
-		if "health" in body:
-			body.health -= damage
-		if body.is_in_group("Player"):
-			Global.player_health -= damage
-		else:
-			pass
-		particles.emitting = true
-		collision.disabled = true
-		linear_velocity = Vector2.ZERO
-		sprite.hide()
-		await particles.finished
-		queue_free()
+	match thrower:
+		"Enemy":
+			if not body.is_in_group("Enemy"):
+				if "health" in body:
+					body.health -= damage
+				if body.is_in_group("Player"):
+					Global.player_health -= damage
+				else:
+					pass
+		"Player":
+			if not body.is_in_group("Player"):
+				if "health" in body:
+					body.health -= damage
+	particles.emitting = true
+	collision.disabled = true
+	linear_velocity = Vector2.ZERO
+	sprite.hide()
+	await particles.finished
+	queue_free()

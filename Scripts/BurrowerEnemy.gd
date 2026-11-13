@@ -75,10 +75,7 @@ func squash_stretch(stretch := Vector2(1.4, 0.7), time := 0.25):
 func manage_health():
 	health_bar.value = health
 	if health <= 0:
-		var drop: Node2D = drop_item(drops.table).instantiate()
-		Global.map.add_child(drop)
-		drop.global_position = global_position
-		drop.rotation = randf()
+		drop_item()
 		Global.enemies_killed += 1
 		queue_free()
 
@@ -100,19 +97,12 @@ func unburrow():
 	sprite.show()
 	SPEED = 100
 
-func drop_item(table: Dictionary):
-	var total = 0.0
-	for weight in table.values():
-		total += weight
-	
-	var roll: float = randf() * total
-	
-	for item in table:
-		roll -= table[item]
-		if roll <= 0.0:
-			return item
-	
-	return null
+func drop_item():
+	var drop: Node2D = drops.pick_item().instantiate()
+	Global.map.add_child(drop)
+	drop.global_position = global_position
+	drop.rotation = randf()
+
 
 func attack():
 	squash_stretch(Vector2(0.3, 0.155), 1.0)

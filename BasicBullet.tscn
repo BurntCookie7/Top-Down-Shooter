@@ -30,8 +30,8 @@ shader_parameter/directional_horizontal_scale = 32.0
 diffuse_texture = ExtResource("4_kok35")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
-radius = 2.0
-height = 10.0
+radius = 8.0
+height = 18.0
 
 [sub_resource type="Curve" id="Curve_g4v7s"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.056994796), 0.3415543, 0.0, 0, 0]

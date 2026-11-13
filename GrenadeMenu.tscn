@@ -1,0 +1,209 @@
+[gd_scene format=3 uid="uid://j2sb6jicsqio"]
+
+[ext_resource type="Script" uid="uid://bi1v1nw23sn1v" path="res://Scripts/GrenadeMenu.gd" id="1_2ylw7"]
+[ext_resource type="PackedScene" uid="uid://c3sjveru2gplp" path="res://GrenadeOptionButton.tscn" id="1_ob7ki"]
+[ext_resource type="Texture2D" uid="uid://buqv4gfdts28r" path="res://Images/pixelated-image.png" id="2_uhwd8"]
+[ext_resource type="Script" uid="uid://x33dor4nrau8" path="res://Scripts/GrenadeInspector.gd" id="2_ukqd5"]
+[ext_resource type="PackedScene" uid="uid://0ta2j3xvwvga" path="res://Grenade.tscn" id="3_ofk7x"]
+[ext_resource type="Texture2D" uid="uid://doc15yrfubols" path="res://Images/BabySpider.png" id="4_ey1uo"]
+[ext_resource type="PackedScene" uid="uid://bxhel732gm3fl" path="res://BabySpider.tscn" id="5_kame0"]
+[ext_resource type="FontFile" uid="uid://ye48oxluhm2o" path="res://Fonts/Vipnagorgialla Rg It.otf" id="7_ukqd5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.2653605, 0.26536053, 0.26536041, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.41725737, 0.41725743, 0.41725716, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0.10872076, 0.10872077, 0.10872071, 1)
+border_width_left = 5
+border_color = Color(0.056291647, 0.056291588, 0.056291595, 1)
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_usqqf"]
+bg_color = Color(0, 0, 0, 0.33333334)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.70519364, 0.70519364, 0.7051935, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c18q2"]
+bg_color = Color(0, 0, 0, 0.33333334)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.70519364, 0.70519364, 0.7051935, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vsoaf"]
+bg_color = Color(0.28974146, 0.28974146, 0.28974146, 0.33333334)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.70519364, 0.70519364, 0.7051935, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Control" type="Control" unique_id=1973808610]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2ylw7")
+
+[node name="Panel" type="Panel" parent="." unique_id=1496501546]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.75
+offset_top = -172.5
+offset_right = 330.75
+offset_bottom = 172.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="Inspector" type="Panel" parent="Panel" unique_id=203436379 node_paths=PackedStringArray("options")]
+layout_mode = 0
+offset_left = 450.75
+offset_top = 4.5
+offset_right = 656.75
+offset_bottom = 339.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_yf5fn")
+script = ExtResource("2_ukqd5")
+options = [NodePath("../ScrollContainer/HBoxContainer/BasicGrenade"), NodePath("../ScrollContainer/HBoxContainer/Spider")]
+
+[node name="InspectorTitle" type="Label" parent="Panel/Inspector" unique_id=1252404733]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 8.0
+offset_right = 20.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 20
+text = "Title"
+
+[node name="Panel" type="Panel" parent="Panel/Inspector" unique_id=1866858753]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -102.5
+offset_right = 102.0
+offset_bottom = 127.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Description" type="RichTextLabel" parent="Panel/Inspector/Panel" unique_id=1140236667]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=630327930]
+layout_mode = 0
+offset_left = 39.75
+offset_top = 5.5
+offset_right = 443.75
+offset_bottom = 340.5
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/ScrollContainer" unique_id=280337968]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 143
+
+[node name="Offset" type="Control" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1858717136]
+layout_mode = 2
+
+[node name="BasicGrenade" parent="Panel/ScrollContainer/HBoxContainer" unique_id=499112976 node_paths=PackedStringArray("Inspector") instance=ExtResource("1_ob7ki")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+Name = &"Basic Grenade"
+image = ExtResource("2_uhwd8")
+grenade_scene = ExtResource("3_ofk7x")
+Inspector = NodePath("../../../Inspector")
+Description = "The basic grenade, slows down with friction, and explodes after time has passed."
+
+[node name="Spider" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1173460858 node_paths=PackedStringArray("Inspector") instance=ExtResource("1_ob7ki")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+Name = &"Baby Spider"
+image = ExtResource("4_ey1uo")
+grenade_scene = ExtResource("5_kame0")
+Inspector = NodePath("../../../Inspector")
+Description = "When thrown the baby spider will continue moving in one direction until it hits anything dealing damage only when it hits."
+
+[node name="Offset2" type="Control" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1864011224]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel" unique_id=161378147]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -114.0
+offset_top = 12.5
+offset_right = -39.0
+offset_bottom = 35.5
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("7_ukqd5")
+theme_override_font_sizes/font_size = 29
+text = "Grenades"
+
+[node name="Exit" type="Button" parent="Panel" unique_id=768693777]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -643.75
+offset_top = 17.5
+offset_right = -611.75
+offset_bottom = 51.633335
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_usqqf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c18q2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vsoaf")
+text = "X"
+
+[connection signal="pressed" from="Panel/Exit" to="." method="_on_exit_pressed"]

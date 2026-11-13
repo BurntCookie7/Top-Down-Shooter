@@ -6,15 +6,23 @@ extends Control
 @onready var key_turn_controls: Control = $Panel/VBoxContainer/ControlSettings/KeyTurn
 @onready var general_settings: Control = $Panel/VBoxContainer/GeneralSettings
 @onready var check_box: CheckBox = $Panel/VBoxContainer/GeneralSettings/Arachnophobia/CheckBox
+@onready var h_slider: HSlider = $Panel/VBoxContainer/ControlSettings/Label/HSlider
 
 var controls_to_show = 0
 var current_tab
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	h_slider.value = Global.turn_sensitivity
 	check_box.set_pressed_no_signal(Global.arachnophobia)
 	manage_tabs(0)
-
+	match Global.player.control_mode:
+		Global.player.Control_Mode.Mouse_Turn:
+			controls_to_show = 0
+			control_mode_selection.selected = 0
+		Global.player.Control_Mode.Key_Turn:
+			controls_to_show = 1
+			control_mode_selection.selected = 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -70,3 +78,7 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 	else:
 		Global.arachnophobia = false
 	print(Global.arachnophobia)
+
+
+func _on_h_slider_value_changed(value: float) -> void:
+	Global.turn_sensitivity = value

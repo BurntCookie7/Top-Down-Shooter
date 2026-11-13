@@ -22,8 +22,12 @@ var enemy_damage_mult = 1.0
 var enemy_health_mult = 2.0
 var arachnophobia: bool = false
 var benches: int = 1
-var upgrades: int = 6
+var upgrades: int = 3
 var ammo_per_pickup: int = 5
+var enemies_active: bool
+var grenade_scene: PackedScene = preload("res://Grenade.tscn")
+var canvas_layer = null
+var turn_sensitivity: float = 1.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

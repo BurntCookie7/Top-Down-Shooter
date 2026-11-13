@@ -14,7 +14,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Global.enemies_active:
+		round_counter.show()
+	else:
+		round_counter.hide()
 	
 func _physics_process(delta: float) -> void:
 	ammo.text = "Ammo: " + str(Global.player.ammunition_remaining) + "/" + str(Global.player.max_ammunition)

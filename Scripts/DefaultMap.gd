@@ -7,7 +7,7 @@ extends Node2D
 @export var spawn_points_node: Node
 @export var bench: PackedScene
 @export var bench_location: Node2D
-@export var resources: Array[PackedScene]
+@export var resources: DropTable
 var spawn_points: Array[Node2D]
 var enemies_spawned: int = 0
 @onready var enemies_container = get_parent().enemies_container
@@ -44,11 +44,12 @@ func setup_timers():
 	add_child(resource_timer)
 	
 func spawn_timer_out():
-	if enemies_spawned < enemy_amount:
-		if is_instance_valid(enemies_container):
-			var spawn_point = spawn_points.pick_random()
-			spawn_enemy(spawn_point)
-		
+	if Global.enemies_active:
+		if enemies_spawned < enemy_amount:
+			if is_instance_valid(enemies_container):
+				var spawn_point = spawn_points.pick_random()
+				spawn_enemy(spawn_point)
+			
 func spawn_enemy(point):
 	var enemy: CharacterBody2D = enemies.pick_random().instantiate()
 	enemies_container.add_child(enemy)
@@ -56,7 +57,7 @@ func spawn_enemy(point):
 	enemies_spawned += 1
 
 func spawn_resources():
-	var resource: Node2D = resources.pick_random().instantiate()
+	var resource: Node2D = resources.pick_item().instantiate()
 	resource.global_position = get_random_free_location()
 	resource.rotation = randf()
 	Global.map.add_child(resource)

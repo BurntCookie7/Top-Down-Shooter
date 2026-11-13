@@ -72,5 +72,20 @@ theme_override_fonts/font = ExtResource("4_tu0on")
 theme_override_font_sizes/font_size = 77
 text = "Slow Burn"
 
+[node name="Quit" type="Button" parent="CanvasLayer/Control" unique_id=41712745]
+layout_mode = 0
+offset_left = 931.0
+offset_top = 409.0
+offset_right = 1112.0
+offset_bottom = 469.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
+text = "Quit"
+
 [connection signal="pressed" from="CanvasLayer/Control/Play" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Quit" to="." method="_on_quit_pressed"]
