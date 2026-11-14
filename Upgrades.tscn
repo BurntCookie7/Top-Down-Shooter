@@ -1,6 +1,42 @@
 [gd_scene format=3 uid="uid://d2iwwc5xuen5m"]
 
+[ext_resource type="Texture2D" uid="uid://b8vuy7l8npt6w" path="res://addons/controller_icons/assets/mouse/left.png" id="1_ts0bt"]
+[ext_resource type="Texture2D" uid="uid://cy7e67qj2flir" path="res://addons/controller_icons/assets/mouse/right.png" id="2_y0ry1"]
+
 [node name="Node2D" type="Node2D" unique_id=49926377]
+
+[node name="TrashUpgrade" type="Label" parent="." unique_id=1309135915]
+offset_left = -109.0
+offset_top = -99.0
+offset_right = 5.0
+offset_bottom = -76.0
+text = "Trash Upgrade"
+
+[node name="TextureRect" type="TextureRect" parent="TrashUpgrade" unique_id=1502604745]
+layout_mode = 0
+offset_left = 117.0
+offset_right = 142.0
+offset_bottom = 24.999996
+texture = ExtResource("2_y0ry1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PickUpgrade" type="Label" parent="." unique_id=580240704]
+offset_left = -300.0
+offset_top = -98.552505
+offset_right = -198.0
+offset_bottom = -75.552505
+text = "Pick Upgrade"
+
+[node name="TextureRect" type="TextureRect" parent="PickUpgrade" unique_id=1718037243]
+layout_mode = 0
+offset_left = 112.0
+offset_top = -0.44749832
+offset_right = 137.0
+offset_bottom = 24.552502
+texture = ExtResource("1_ts0bt")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=978102248]
 anchors_preset = 8
@@ -8,15 +44,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -56.5525
-offset_right = 300.0
-offset_bottom = 56.5525
+offset_left = -313.0
+offset_top = -63.0
+offset_right = 313.0
+offset_bottom = 90.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
 
 [node name="Control" type="HBoxContainer" parent="ScrollContainer" unique_id=533195982]
 layout_mode = 2
-offset_transform_enabled = true
-theme_override_constants/separation = 198
+theme_override_constants/separation = 128

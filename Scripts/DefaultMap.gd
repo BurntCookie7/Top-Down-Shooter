@@ -57,10 +57,11 @@ func spawn_enemy(point):
 	enemies_spawned += 1
 
 func spawn_resources():
-	var resource: Node2D = resources.pick_item().instantiate()
-	resource.global_position = get_random_free_location()
-	resource.rotation = randf()
-	Global.map.add_child(resource)
+	if not Global.won_round:
+		var resource: Node2D = resources.pick_item().instantiate()
+		resource.global_position = get_random_free_location()
+		resource.rotation = randf()
+		Global.map.add_child(resource)
 
 func get_random_free_location() -> Vector2:
 	var pos := NavigationServer2D.region_get_random_point(

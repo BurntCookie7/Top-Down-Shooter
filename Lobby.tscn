@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dxvpop1wvfuv2" path="res://Scripts/StartFlag.gd" id="5_wl2pq"]
 [ext_resource type="PackedScene" uid="uid://bh17jrcqf5cpy" path="res://Four Corners.tscn" id="6_urrkl"]
 [ext_resource type="Texture2D" uid="uid://xe4n818le3p8" path="res://addons/controller_icons/assets/key/e.png" id="7_jjvec"]
+[ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="8_w3hcm"]
 [ext_resource type="Script" uid="uid://csplyvpfia5g" path="res://Scripts/GrenadeOpener.gd" id="9_mc3c4"]
 [ext_resource type="Texture2D" uid="uid://buqv4gfdts28r" path="res://Images/pixelated-image.png" id="10_1q3jt"]
 [ext_resource type="PackedScene" uid="uid://j2sb6jicsqio" path="res://GrenadeMenu.tscn" id="10_rvgkb"]
@@ -86,8 +87,52 @@ tile_size = Vector2i(30, 30)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_c56d2")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufkk4"]
+shader = ExtResource("1_6juw2")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6v7yt"]
+diffuse_texture = ExtResource("5_5i7o0")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 41.01564
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sl2bc"]
+shader = ExtResource("1_6juw2")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ouqy5"]
+diffuse_texture = ExtResource("10_1q3jt")
 
 [node name="Node2D2" type="Node2D" unique_id=4829420]
 z_index = -2
@@ -119,7 +164,9 @@ script = ExtResource("5_wl2pq")
 map = ExtResource("6_urrkl")
 
 [node name="Sprite2D" type="Sprite2D" parent="StartFlag" unique_id=782093106]
-texture = ExtResource("5_5i7o0")
+material = SubResource("ShaderMaterial_ufkk4")
+texture = SubResource("CanvasTexture_6v7yt")
+script = ExtResource("8_w3hcm")
 
 [node name="Area2D" type="Area2D" parent="StartFlag" unique_id=1592319412]
 
@@ -139,9 +186,11 @@ script = ExtResource("9_mc3c4")
 Menu_scene = ExtResource("10_rvgkb")
 
 [node name="Sprite2D" type="Sprite2D" parent="GrenadeOpener" unique_id=726709599]
+material = SubResource("ShaderMaterial_sl2bc")
 position = Vector2(0, -3.0517578e-05)
 scale = Vector2(0.109374724, 0.10937473)
-texture = ExtResource("10_1q3jt")
+texture = SubResource("CanvasTexture_ouqy5")
+script = ExtResource("8_w3hcm")
 
 [node name="Area2D" type="Area2D" parent="GrenadeOpener" unique_id=1064806803]
 

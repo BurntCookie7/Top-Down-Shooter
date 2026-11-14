@@ -47,11 +47,11 @@ func _input(event: InputEvent) -> void:
 			if event is InputEventMouseMotion:
 				turn_amount += event.relative.x
 	
-	if event.is_action_pressed("ESC") and not death_screen.visible:
+	if event.is_action_pressed("ESC") and not death_screen.visible and not is_instance_valid(Global.canvas_layer.get_node("GrenadeMenu")):
 		pause_menu.show()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		get_tree().paused = not get_tree().paused
-	
+
 	if event.is_action_pressed("RightClick") and sitting != true:
 		aiming = true
 	if event.is_action_released("RightClick"):
@@ -72,6 +72,7 @@ func _input(event: InputEvent) -> void:
 		if grenades > 0:
 			spawn_grenade()
 			grenades -= 1
+
 func bench_entered(bench, sitting_pos):
 	#print("entered bench")
 	current_bench = bench
@@ -84,7 +85,6 @@ func _process(delta: float) -> void:
 	sensitivity = Global.turn_sensitivity
 
 func _physics_process(delta: float) -> void:
-	print(Global.turn_sensitivity)
 	if control_mode != Control_Mode.get(Global.player_control_mode):
 		control_mode = Control_Mode.get(Global.player_control_mode)
 	if Global.player_health <= 0:
@@ -172,7 +172,7 @@ func spawn_grenade() -> void:
 	var grenade = Global.grenade_scene.instantiate()
 	grenade.global_position = grenade_spawn_position.global_position
 	grenade.rotation = rotation
-	get_tree().root.add_child(grenade)
+	Global.map_container.get_child(0).add_child(grenade)
 	grenade.throw(global_transform.x, grenade_throw_strength, "Player")
 	grenade.linear_velocity += velocity * 0.5
 
@@ -208,7 +208,7 @@ func state_handler():
 
  
 
-func apply_upgrade(upgrade:UpgradeData):
+func apply_upgrade(upgrade:UpgradeData, button):
 	for mod in upgrade.modifiers:
 		var target: Object = null
 		if mod.stat in self:
@@ -219,6 +219,16 @@ func apply_upgrade(upgrade:UpgradeData):
 			push_warning("Upgrade stat not found: " + str(mod.stat))
 			continue
 		target.set(mod.stat, target.get(mod.stat) + mod.amount)
+
+	if current_bench.buttons_remaining() > 1:
+		if randf_range(0.0, 10.0) < Global.upgrade_reroll_chance:
+			if is_instance_valid(button):
+				button.queue_free()
+			return
+	finish_bench()
+
+
+func finish_bench():
 	current_bench.remove_upgrades()
 	state = Global.State.STANDING
 	sitting = false

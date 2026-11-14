@@ -12,6 +12,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("E") and can_start:
 		Global.map_container.load_new_map(map)
+		Global.restart()
 		Global.enemies_active = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

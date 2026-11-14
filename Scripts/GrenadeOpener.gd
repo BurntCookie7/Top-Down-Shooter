@@ -13,6 +13,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("E") and can_open and not Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		var menu = Menu_scene.instantiate()
 		Global.canvas_layer.add_child(menu)
+		menu.name = "GrenadeMenu"
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 

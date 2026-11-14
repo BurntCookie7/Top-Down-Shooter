@@ -28,6 +28,7 @@ var enemies_active: bool
 var grenade_scene: PackedScene = preload("res://Grenade.tscn")
 var canvas_layer = null
 var turn_sensitivity: float = 1.0
+var upgrade_reroll_chance = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -55,9 +56,13 @@ func restart():
 	cycle = 0
 	rounds = 5
 	loops = 1
-	player_max_grenades = 5
-	map_container.load_new_map(map_container.initial_map)
+	player_max_grenades = 3
+	upgrades = 3
+	upgrade_reroll_chance = 0.0
+	player.grenades = player_max_grenades
+	player.ammunition_remaining = player.max_ammunition
+	#map_container.load_new_map(map_container.initial_map)
 	get_tree().paused = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	get_tree().reload_current_scene()
+	#get_tree().reload_current_scene()
 	

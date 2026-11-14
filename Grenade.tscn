@@ -34,11 +34,11 @@ diffuse_texture = ExtResource("2_824rw")
 offsets = PackedFloat32Array(0.969112, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_68v2o"]
 gradient = SubResource("Gradient_87bes")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.6210826, 0.4074074)
+fill_to = Vector2(0.5669516, 0.3931624)
 
 [sub_resource type="Curve" id="Curve_3gngh"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50649345, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.9496403), -4.056919, 0.0, 0, 0]
@@ -103,7 +103,7 @@ one_shot = true
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1924244926]
 emitting = false
 amount = 30
-texture = SubResource("GradientTexture2D_g4v7s")
+texture = SubResource("GradientTexture2D_68v2o")
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0

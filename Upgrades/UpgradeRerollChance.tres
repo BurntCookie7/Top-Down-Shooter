@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://dsdbcphehgbbx"]
+
+[ext_resource type="Script" uid="uid://bd2ql44krcm2" path="res://Resources/StatModifier.gd" id="1_1kmhp"]
+[ext_resource type="Texture2D" uid="uid://xrv28lvm1ix6" path="res://addons/controller_icons/assets/key/r.png" id="1_iqisb"]
+[ext_resource type="Script" uid="uid://c524q2ho8bja3" path="res://Resources/UpgradeData.gd" id="2_iqisb"]
+
+[resource]
+script = ExtResource("2_iqisb")
+id = &"UpgradeRerollChance"
+title = "Lucky Pick"
+description = "+0.1% chance that the player may choose another upgrade at the bench"
+icon = ExtResource("1_iqisb")
+metadata/_custom_type_script = "uid://c524q2ho8bja3"

@@ -7,7 +7,7 @@
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="4_j3yda"]
 [ext_resource type="Texture2D" uid="uid://ckhwqle4a8ipw" path="res://Images/new_gradient_texture_2d.tres" id="4_ns8y8"]
 [ext_resource type="PackedScene" uid="uid://ba4dhkx8s4a5v" path="res://Burrower.tscn" id="4_uba8f"]
-[ext_resource type="PackedScene" uid="uid://bmivrm7wiw7ab" path="res://Upgrades/EggBomber.tscn" id="5_ce0rk"]
+[ext_resource type="PackedScene" uid="uid://bmivrm7wiw7ab" path="res://EggBomber.tscn" id="5_ce0rk"]
 [ext_resource type="Texture2D" uid="uid://duwbmts2hdam" path="res://Images/Tiles.png" id="5_gaj3i"]
 [ext_resource type="Script" uid="uid://cekuun21ika3v" path="res://addons/lit/nodes/lit_tile_map_layer.gd" id="6_5kecc"]
 [ext_resource type="Resource" uid="uid://kfcfur5jhmt8" path="res://Drop Tables/MapResources.tres" id="7_uba8f"]

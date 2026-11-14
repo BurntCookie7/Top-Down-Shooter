@@ -10,7 +10,7 @@ extends StaticBody2D
 var menu_made: bool
 var menu = null
 var player: Node2D = Global.player
-signal upgrade_chosen(upgrade:UpgradeData, player_node:Node2D)
+signal upgrade_chosen(upgrade:UpgradeData, player_node:Node2D, button)
 var upgrade_options: Array[UpgradeData]
 var buffer_node: Control
 var Hbox: Control
@@ -50,7 +50,7 @@ func load_upgrades():
 		#print("menu shown")
 	else:
 		menu = Upgrades_Menu.instantiate()
-		Hbox = menu.get_child(0).get_child(0)
+		Hbox = menu.get_child(-1).get_child(0)
 		menu.name = "UpgradeMenu"
 		add_child(menu)
 		menu.global_rotation = player.camera.global_rotation - deg_to_rad(90)
@@ -81,11 +81,34 @@ func create_button():
 	else:
 		upgrade_choice = option.data
 	option.pressed.connect(func():
+		var button = option
 		upgrade_chosen.emit()
-		player.apply_upgrade(upgrade_choice))
+		player.apply_upgrade(upgrade_choice, button))
+		
 	Hbox.add_child(option)
+	var option_button := option.get_node("Button") as Button
+	option_button.gui_input.connect(func(event: InputEvent):
+		print("[bench] gui_input on button: ", event)
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			option_button.accept_event()
+			trash_upgrade(option))
 	upgrade_options.append(option.data)
 	return
+
+func trash_upgrade(button):
+	if buttons_remaining() <= 1:
+		Global.player.finish_bench()
+		return
+	upgrade_options.erase(button.data)
+	button.queue_free()
+
+func buttons_remaining() -> int:
+	var count = 0
+	for child in Hbox.get_children():
+		if child != buffer_node and not child.is_queued_for_deletion():
+			count += 1
+	return count
+	
 
 func unload_upgrades():
 	menu.hide()

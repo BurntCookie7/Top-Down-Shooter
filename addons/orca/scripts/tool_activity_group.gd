@@ -1,0 +1,256 @@
+@tool
+extends PanelContainer
+
+signal open_requested(filepath: String, line: int, column: int)
+signal help_requested(topic: String)
+
+const ToolActivityCard = preload("res://addons/orca/scripts/tool_activity_card.gd")
+const UiMetrics = preload("res://addons/orca/scripts/ui_metrics.gd")
+const Localization = preload("res://addons/orca/scripts/localization.gd")
+const CardHeader = preload("res://addons/orca/scripts/card_header.gd")
+
+var _header_button: Button
+var _status_label: Label
+var _duration_label: Label
+var _body: VBoxContainer
+var _expanded := false
+var _accepting := true
+var _cards: Dictionary = {}
+var _tool_names: Dictionary = {}
+var _targets: Dictionary = {}
+var _target_captions: Dictionary = {}
+var _outcomes: Dictionary = {}
+var _durations: Dictionary = {}
+
+
+func _enter_tree() -> void:
+	Localization.attach(self)
+
+
+func _ready() -> void:
+	set_meta("orca_tool_group", true)
+	size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var panel_style := StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.075, 0.082, 0.095, 0.92)
+	panel_style.border_color = Color(0.22, 0.25, 0.29, 1)
+	panel_style.set_border_width_all(UiMetrics.scaled_int(1))
+	panel_style.set_corner_radius_all(UiMetrics.scaled_int(7))
+	panel_style.set_content_margin_all(UiMetrics.scaled(6))
+	add_theme_stylebox_override("panel", panel_style)
+
+	var content := VBoxContainer.new()
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", UiMetrics.scaled_int(5))
+	add_child(content)
+	var header := CardHeader.new()
+	header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_theme_constant_override("separation", UiMetrics.scaled_int(6))
+	content.add_child(header)
+
+	var label_font_size := 13
+	var meta_font_size := 11
+	if Engine.is_editor_hint():
+		var editor_theme := EditorInterface.get_editor_theme()
+		label_font_size = maxi(editor_theme.get_font_size("font_size", "Label"), 12)
+		meta_font_size = maxi(label_font_size - 1, 11)
+	_header_button = Button.new()
+	_header_button.flat = true
+	_header_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_header_button.custom_minimum_size.x = 0
+	_header_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_header_button.clip_text = true
+	_header_button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_header_button.add_theme_font_size_override("font_size", label_font_size)
+	_header_button.pressed.connect(_toggle)
+	header.add_child(_header_button)
+	_status_label = header.create_status_badge()
+
+	_body = VBoxContainer.new()
+	_body.set_meta("orca_tool_group_body", true)
+	_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_body.add_theme_constant_override("separation", UiMetrics.scaled_int(5))
+	_body.visible = false
+	content.add_child(_body)
+	_duration_label = Label.new()
+	_duration_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_duration_label.add_theme_font_size_override("font_size", meta_font_size)
+	_duration_label.add_theme_color_override("font_color", Color(0.55, 0.62, 0.68))
+	_body.add_child(_duration_label)
+	_update_header()
+
+
+func add_tool(call_id: String, tool_name: String, arguments: Dictionary):
+	if not _accepting or _cards.has(call_id):
+		return null
+	var card = ToolActivityCard.new()
+	_body.add_child(card)
+	card.configure(tool_name, arguments)
+	card.open_requested.connect(func(path: String, line: int, column: int): open_requested.emit(path, line, column))
+	card.help_requested.connect(func(topic: String): help_requested.emit(topic))
+	_cards[call_id] = card
+	_tool_names[call_id] = tool_name
+	_targets[call_id] = card._target_from_arguments(arguments) if tool_name == "inspect_editor_scene" else _target_from_arguments(arguments)
+	_target_captions[call_id] = card._target_is_caption
+	_outcomes[call_id] = "running"
+	_durations[call_id] = 0
+	_update_header()
+	return card
+
+
+func complete_tool(call_id: String, execution: Dictionary, duration_ms: int) -> void:
+	if not _cards.has(call_id):
+		return
+	var card = _cards[call_id]
+	if is_instance_valid(card):
+		card.complete(execution, duration_ms)
+	_outcomes[call_id] = str(execution.get("outcome", "failed"))
+	_durations[call_id] = maxi(0, duration_ms)
+	_update_header()
+
+
+func close_for_appends() -> void:
+	_accepting = false
+
+
+func can_append() -> bool:
+	return _accepting
+
+
+func call_count() -> int:
+	return _cards.size()
+
+
+func aggregate_outcome() -> String:
+	if _outcomes.values().any(func(outcome): return outcome == "running"):
+		return "running"
+	if _outcomes.values().any(func(outcome): return outcome == "failed"):
+		return "failed"
+	if _outcomes.values().any(func(outcome): return outcome in ["interrupted", "cancelled", "rejected"]):
+		return "interrupted"
+	return "completed"
+
+
+func total_duration_ms() -> int:
+	var total := 0
+	for duration in _durations.values():
+		total += int(duration)
+	return total
+
+
+func get_card(call_id: String):
+	return _cards.get(call_id, null)
+
+
+func set_expanded(expanded: bool) -> void:
+	_expanded = expanded
+	if _body != null:
+		_body.visible = expanded
+	_update_header()
+
+
+func _toggle() -> void:
+	set_expanded(not _expanded)
+
+
+func _update_header() -> void:
+	if _header_button == null:
+		return
+	var count := call_count()
+	var title := _group_title()
+	var parts: Array = [["%s", [Localization.source(title)]]]
+	if count > 0:
+		if count == 1:
+			var first = _targets.keys()[0]
+			var target := str(_targets.get(first, ""))
+			if not target.is_empty():
+				parts.append(["  %s", [Localization.source(target) if _target_captions.get(first, false) else target]])
+		parts.append([" · %d", [count]])
+	CardHeader.set_disclosure(_header_button, _expanded)
+	Localization.bind_parts(_header_button, &"text", parts)
+	var outcome := aggregate_outcome()
+	var duration := total_duration_ms()
+	CardHeader.set_status(_status_label, outcome)
+	var status_parts: Array = _status_label.get_meta(Localization.BINDINGS)[&"tooltip_text"]["parts"].duplicate(true)
+	Localization.bind(_duration_label, &"text", "Total tool time: %s", [_format_duration(duration)])
+	_duration_label.visible = _expanded and outcome != "running"
+	var timing_parts: Array = [["\n", []], ["Total tool time: %s", [_format_duration(duration)]]] if outcome != "running" else []
+	Localization.bind_parts(_header_button, &"tooltip_text", parts + timing_parts)
+	Localization.bind_parts(_status_label, &"tooltip_text", status_parts + timing_parts)
+
+
+func _group_title() -> String:
+	var count := call_count()
+	if count == 0:
+		return "Project activity"
+	var unique_names: Dictionary = {}
+	for tool_name in _tool_names.values():
+		unique_names[str(tool_name)] = true
+	var title := "Project activity"
+	if unique_names.size() == 1:
+		match str(unique_names.keys()[0]):
+			"read_file":
+				title = "Read file" if count == 1 else "Read files"
+			"list_directory":
+				title = "List directory" if count == 1 else "List directories"
+			"search_files":
+				title = "Search project"
+			"inspect_scene":
+				title = "Inspect scene" if count == 1 else "Inspect scenes"
+			"inspect_editor_scene":
+				title = "Inspect live scene"
+			"inspect_project_settings":
+				title = "Inspect project settings"
+			"inspect_animation":
+				title = "Inspect animation"
+			"read_project_skill":
+				title = "Read project skill" if count == 1 else "Read project skills"
+			"inspect_godot_api":
+				title = "Inspect Godot API"
+			"read_gdscript_function":
+				title = "Read GDScript function" if count == 1 else "Read GDScript functions"
+			"discover_dependencies":
+				title = "Discover dependencies"
+			"find_project_symbols":
+				title = "Find project symbols"
+			"find_symbol_references":
+				title = "Find reference candidates"
+			"get_editor_context":
+				title = "Inspect editor context"
+			"get_diagnostics":
+				title = "Read game status and diagnostics"
+			"observe_game_run":
+				title = "Observe game run"
+	return title
+
+
+func _target_from_arguments(arguments: Dictionary) -> String:
+	if arguments.has("symbol"):
+		return str(arguments["symbol"])
+	if arguments.has("class_name"):
+		var api_target := str(arguments["class_name"])
+		var member := str(arguments.get("member_name", ""))
+		return api_target + ("." + member if not member.is_empty() else "")
+	if arguments.has("function_name"):
+		return str(arguments.get("filepath", "")) + " :: " + str(arguments["function_name"])
+	if arguments.has("name"):
+		return str(arguments["name"])
+	if arguments.has("direction") and arguments.has("filepath"):
+		return str(arguments["filepath"]) + " · " + str(arguments["direction"])
+	if arguments.has("scene_path"):
+		var focus := str(arguments.get("animation_name", arguments.get("node_path", "")))
+		return str(arguments["scene_path"]) + (" :: " + focus if not focus.is_empty() else "")
+	if arguments.has("setting_path") and not str(arguments["setting_path"]).is_empty():
+		return str(arguments["setting_path"])
+	if arguments.has("filepath"):
+		return str(arguments["filepath"])
+	if arguments.has("query"):
+		return '"' + str(arguments["query"]) + '"'
+	if arguments.has("path"):
+		return str(arguments["path"])
+	return ""
+
+
+func _format_duration(duration_ms: int) -> String:
+	if duration_ms < 1000:
+		return str(duration_ms) + " ms"
+	return "%.1f s" % (duration_ms / 1000.0)

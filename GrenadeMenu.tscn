@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://doc15yrfubols" path="res://Images/BabySpider.png" id="4_ey1uo"]
 [ext_resource type="PackedScene" uid="uid://bxhel732gm3fl" path="res://BabySpider.tscn" id="5_kame0"]
 [ext_resource type="FontFile" uid="uid://ye48oxluhm2o" path="res://Fonts/Vipnagorgialla Rg It.otf" id="7_ukqd5"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="8_usqqf"]
+[ext_resource type="PackedScene" uid="uid://dtsry53cxmg7e" path="res://AOEGrenade.tscn" id="9_c18q2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 bg_color = Color(0.2653605, 0.26536053, 0.26536041, 1)
@@ -172,6 +174,14 @@ image = ExtResource("4_ey1uo")
 grenade_scene = ExtResource("5_kame0")
 Inspector = NodePath("../../../Inspector")
 Description = "When thrown the baby spider will continue moving in one direction until it hits anything dealing damage only when it hits."
+
+[node name="AOE" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1647213126 node_paths=PackedStringArray("Inspector") instance=ExtResource("1_ob7ki")]
+layout_mode = 2
+Name = &"Area Grenade"
+image = ExtResource("8_usqqf")
+grenade_scene = ExtResource("9_c18q2")
+Inspector = NodePath("../../../Inspector")
+Description = "Rather than dealing all the damage up from this grenade deals 20 damage every 0.5 seconds. It only stops after dealing 100 total damage."
 
 [node name="Offset2" type="Control" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1864011224]
 layout_mode = 2

@@ -26,4 +26,4 @@ func _physics_process(delta: float) -> void:
 	label.text = str(Global.player_health)
 	health_bar.value = Global.player_health
 	round_counter.text = "Round: " + str(Global.wins) + "/5"
-	grenades_label.text = "Grenades: " + str(Global.player.grenades) + "/" + str(Global.player_max_grenades)
+	grenades_label.text = "Grenades: " + str(Global.player.grenades) + "/" + str(int(Global.player_max_grenades))
