@@ -85,15 +85,9 @@ func create_button():
 		upgrade_chosen.emit()
 		player.apply_upgrade(upgrade_choice, button))
 		
+	option.trash.connect(trash_upgrade)
+	
 	Hbox.add_child(option)
-	var option_button := option.get_node("Button") as Button
-	option_button.gui_input.connect(func(event: InputEvent):
-		print("[bench] gui_input on button: ", event)
-		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
-			option_button.accept_event()
-			trash_upgrade(option))
-	upgrade_options.append(option.data)
-	return
 
 func trash_upgrade(button):
 	if buttons_remaining() <= 1:

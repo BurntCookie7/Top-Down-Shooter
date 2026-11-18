@@ -5,15 +5,23 @@ extends Control
 @onready var label: Label = $Panel/Panel/Label
 @onready var equip: Button = $Panel/Equip
 
+@export var identifier: StringName
 @export var Name: StringName
 @export var image: Texture2D
 @export var grenade_scene: PackedScene
 @export var Inspector: Control
 @export_multiline var Description: String
-
+@export var unlocked: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	unlocked = Global.unlocks.get(identifier)
+	if unlocked:
+		equip.disabled = false
+		texture_rect.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	else:
+		equip.disabled = true
+		texture_rect.modulate = Color(0.0, 0.0, 0.0, 1.0)
+		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

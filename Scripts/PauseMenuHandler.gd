@@ -34,3 +34,11 @@ func _on_quit_pressed() -> void:
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://TitleScreen.tscn")
+
+
+func _on_save_pressed() -> void:
+	Global.save_game()
+
+
+func _on_save_2_pressed() -> void:
+	Global.load_game()

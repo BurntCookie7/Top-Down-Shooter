@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://buqv4gfdts28r" path="res://Images/pixelated-image.png" id="10_1q3jt"]
 [ext_resource type="PackedScene" uid="uid://j2sb6jicsqio" path="res://GrenadeMenu.tscn" id="10_rvgkb"]
 [ext_resource type="PackedScene" uid="uid://bhcrv2ag8nwrp" path="res://Dummy.tscn" id="11_1q3jt"]
+[ext_resource type="PackedScene" uid="uid://56kr68xk13v7" path="res://Bench.tscn" id="14_ufkk4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vm4q1"]
 shader = ExtResource("1_6juw2")
@@ -167,6 +168,7 @@ map = ExtResource("6_urrkl")
 material = SubResource("ShaderMaterial_ufkk4")
 texture = SubResource("CanvasTexture_6v7yt")
 script = ExtResource("8_w3hcm")
+lit_version = "1.1.7"
 
 [node name="Area2D" type="Area2D" parent="StartFlag" unique_id=1592319412]
 
@@ -191,6 +193,7 @@ position = Vector2(0, -3.0517578e-05)
 scale = Vector2(0.109374724, 0.10937473)
 texture = SubResource("CanvasTexture_ouqy5")
 script = ExtResource("8_w3hcm")
+lit_version = "1.1.7"
 
 [node name="Area2D" type="Area2D" parent="GrenadeOpener" unique_id=1064806803]
 
@@ -205,6 +208,10 @@ texture = ExtResource("7_jjvec")
 
 [node name="Node2D" parent="." unique_id=763927022 instance=ExtResource("11_1q3jt")]
 position = Vector2(814, 167)
+
+[node name="StaticBody2D" parent="." unique_id=2013195154 instance=ExtResource("14_ufkk4")]
+position = Vector2(811, 12)
+rotation = 3.1415927
 
 [connection signal="body_entered" from="StartFlag/Area2D" to="StartFlag" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="StartFlag/Area2D" to="StartFlag" method="_on_area_2d_body_exited"]

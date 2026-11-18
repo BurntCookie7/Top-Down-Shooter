@@ -29,10 +29,22 @@ var grenade_scene: PackedScene = preload("res://Grenade.tscn")
 var canvas_layer = null
 var turn_sensitivity: float = 1.0
 var upgrade_reroll_chance = 0.0
+#var global_path = ProjectSettings.globalize_path("res://")
+var save_path = "user://SaveData.cfg"
+var unlocks: Dictionary[StringName, bool] = {
+	"BasicGrenade": true,
+	"BabySpider": false,
+	"AreaGrenade": false
+	}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	if FileAccess.file_exists("user://SaveData.cfg"):
+		pass
+	else:
+		var config_file = ConfigFile.new()
+		config_file.save(save_path)
+	load_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -65,4 +77,28 @@ func restart():
 	get_tree().paused = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#get_tree().reload_current_scene()
+	
+func save_game():
+	var save_nodes = get_tree().get_nodes_in_group("Persist")
+	#for node in save_nodes:
+	
+	for key in unlocks:
+			save_value("Unlocks", key, unlocks[key])
+	
+	save_value("Player", "grenade_scene", grenade_scene.resource_path)
+	
+
+func save_value(section, key, variant):
+	var config = ConfigFile.new()
+	config.load(save_path)
+	config.set_value(section, key, variant)
+	config.save(save_path)
+	
+func load_game():
+	var config = ConfigFile.new()
+	if config.load(save_path) != OK:
+		return #no save
+	
+	grenade_scene = load(config.get_value("Player", "grenade_scene"))
+	
 	

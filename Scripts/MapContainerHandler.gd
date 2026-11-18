@@ -22,8 +22,9 @@ func load_new_map(map: PackedScene) -> void:
 		print(prev_map)
 		if is_instance_valid(prev_map):
 			for child in prev_map.get_children():
-				remove_child(child)
-				child.queue_free()
+				if is_instance_valid(child):
+					remove_child(child)
+					child.queue_free()
 			remove_child(prev_map)
 
 	if enemies_container:

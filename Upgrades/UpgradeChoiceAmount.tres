@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://d1yvunobq8ch4"]
 
-[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_gd1pu"]
+[ext_resource type="Texture2D" uid="uid://qt3r7qniltdo" path="res://Images/GreenUpArrow.png" id="1_gd1pu"]
 [ext_resource type="Script" uid="uid://bd2ql44krcm2" path="res://Resources/StatModifier.gd" id="2_yx0c0"]
 [ext_resource type="Script" uid="uid://c524q2ho8bja3" path="res://Resources/UpgradeData.gd" id="3_lmgs7"]
 
@@ -14,7 +14,8 @@ metadata/_custom_type_script = "uid://bd2ql44krcm2"
 script = ExtResource("3_lmgs7")
 id = &"UpgradeChoiceAmount"
 title = "Eeny, meeny, miny, moe"
-description = "+1 Upgrade choice when sitting at the bench"
+description = "+1 Upgrade choice 
+when sitting at the bench"
 icon = ExtResource("1_gd1pu")
 modifiers = Array[ExtResource("2_yx0c0")]([SubResource("Resource_dvmr2")])
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

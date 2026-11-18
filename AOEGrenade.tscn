@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://prjbwek02c7f" path="res://Scripts/AOEGrenade.gd" id="1_axpxk"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="1_uqgbw"]
-[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="3_axpxk"]
+[ext_resource type="Texture2D" uid="uid://d38qm0ispcrvb" path="res://Images/AreaGrenade.png" id="3_axpxk"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="3_ndlpe"]
 [ext_resource type="AudioStream" uid="uid://cuctwm0gvob35" path="res://Audio/Explosion.mp3" id="4_44niq"]
 
@@ -106,8 +106,8 @@ script = ExtResource("1_axpxk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1708255932]
 material = SubResource("ShaderMaterial_yfln0")
-position = Vector2(1.7881393e-07, -2.842171e-14)
-scale = Vector2(0.11282051, 0.11583012)
+position = Vector2(4.7683716e-07, -4.7683716e-07)
+scale = Vector2(0.33766022, 0.34666768)
 texture = ExtResource("3_axpxk")
 script = ExtResource("3_ndlpe")
 lit_version = "1.1.7"

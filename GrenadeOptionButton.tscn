@@ -56,9 +56,11 @@ offset_top = -22.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 10
+disabled = true
 text = "Equip"
 
 [node name="TextureRect" type="TextureRect" parent="Panel" unique_id=971002390]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://doc15yrfubols" path="res://Images/BabySpider.png" id="4_ey1uo"]
 [ext_resource type="PackedScene" uid="uid://bxhel732gm3fl" path="res://BabySpider.tscn" id="5_kame0"]
 [ext_resource type="FontFile" uid="uid://ye48oxluhm2o" path="res://Fonts/Vipnagorgialla Rg It.otf" id="7_ukqd5"]
-[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="8_usqqf"]
+[ext_resource type="Texture2D" uid="uid://d38qm0ispcrvb" path="res://Images/AreaGrenade.png" id="8_c18q2"]
 [ext_resource type="PackedScene" uid="uid://dtsry53cxmg7e" path="res://AOEGrenade.tscn" id="9_c18q2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
@@ -29,6 +29,14 @@ border_width_left = 5
 border_color = Color(0.056291647, 0.056291588, 0.056291595, 1)
 corner_radius_top_right = 35
 corner_radius_bottom_right = 35
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cv2iv"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_usqqf"]
 bg_color = Color(0, 0, 0, 0.33333334)
@@ -69,7 +77,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Control" type="Control" unique_id=1973808610]
+[node name="Control" type="Control" unique_id=1973808610 groups=["Persist"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,12 +146,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Panel" type="Panel" parent="Panel" unique_id=1112245315]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = -70.0
+offset_right = 120.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cv2iv")
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=630327930]
 layout_mode = 0
-offset_left = 39.75
-offset_top = 5.5
-offset_right = 443.75
-offset_bottom = 340.5
+offset_left = 4.75
+offset_top = 98.5
+offset_right = 450.75
+offset_bottom = 248.5
 vertical_scroll_mode = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/ScrollContainer" unique_id=280337968]
@@ -155,30 +178,35 @@ theme_override_constants/separation = 143
 [node name="Offset" type="Control" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1858717136]
 layout_mode = 2
 
-[node name="BasicGrenade" parent="Panel/ScrollContainer/HBoxContainer" unique_id=499112976 node_paths=PackedStringArray("Inspector") instance=ExtResource("1_ob7ki")]
+[node name="BasicGrenade" parent="Panel/ScrollContainer/HBoxContainer" unique_id=499112976 node_paths=PackedStringArray("Inspector") groups=["Persist"] instance=ExtResource("1_ob7ki")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+identifier = &"BasicGrenade"
 Name = &"Basic Grenade"
 image = ExtResource("2_uhwd8")
 grenade_scene = ExtResource("3_ofk7x")
 Inspector = NodePath("../../../Inspector")
 Description = "The basic grenade, slows down with friction, and explodes after time has passed."
+unlocked = true
 
-[node name="Spider" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1173460858 node_paths=PackedStringArray("Inspector") instance=ExtResource("1_ob7ki")]
+[node name="Spider" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1173460858 node_paths=PackedStringArray("Inspector") groups=["Persist"] instance=ExtResource("1_ob7ki")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+identifier = &"BabySpider"
 Name = &"Baby Spider"
 image = ExtResource("4_ey1uo")
 grenade_scene = ExtResource("5_kame0")
 Inspector = NodePath("../../../Inspector")
 Description = "When thrown the baby spider will continue moving in one direction until it hits anything dealing damage only when it hits."
+unlocked = true
 
-[node name="AOE" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1647213126 node_paths=PackedStringArray("Inspector") instance=ExtResource("1_ob7ki")]
+[node name="AOE" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1647213126 node_paths=PackedStringArray("Inspector") groups=["Persist"] instance=ExtResource("1_ob7ki")]
 layout_mode = 2
+identifier = &"AreaGrenade"
 Name = &"Area Grenade"
-image = ExtResource("8_usqqf")
+image = ExtResource("8_c18q2")
 grenade_scene = ExtResource("9_c18q2")
 Inspector = NodePath("../../../Inspector")
 Description = "Rather than dealing all the damage up from this grenade deals 20 damage every 0.5 seconds. It only stops after dealing 100 total damage."

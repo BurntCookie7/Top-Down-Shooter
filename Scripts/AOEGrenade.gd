@@ -43,10 +43,17 @@ func damage():
 							target.hit()
 						target.health -= damage_per_hit
 						total_damage_delt += damage_per_hit
+		"Enemy":
+			if Global.player in targets:
+				if is_instance_valid(Global.player):
+					Global.player_health -= damage_per_hit
+					total_damage_delt += damage_per_hit
 
 func _on_timer_timeout() -> void:
 	damage()
 
+func explode():
+	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	targets.append(body)

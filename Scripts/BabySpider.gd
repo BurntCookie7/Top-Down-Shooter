@@ -48,5 +48,6 @@ func _on_body_entered(body: Node) -> void:
 	collision.disabled = true
 	linear_velocity = Vector2.ZERO
 	sprite.hide()
+	collision.disabled = true
 	await particles.finished
 	queue_free()

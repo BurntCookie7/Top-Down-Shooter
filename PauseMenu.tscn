@@ -26,6 +26,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_q775a")
 
+[node name="Save" type="Button" parent="Panel" unique_id=804567285]
+layout_mode = 1
+offset_right = 124.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 30
+text = "Save"
+
+[node name="Save2" type="Button" parent="Panel" unique_id=1324988599]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 1.0
+offset_right = 262.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 30
+text = "Load
+"
+
 [node name="Paused" type="Label" parent="." unique_id=1747564875]
 layout_mode = 1
 anchors_preset = 5
@@ -106,6 +123,8 @@ theme_override_font_sizes/font_size = 30
 text = "Resume
 "
 
+[connection signal="pressed" from="Panel/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Panel/Save2" to="." method="_on_save_2_pressed"]
 [connection signal="pressed" from="Paused/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="Paused/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Paused/Quit" to="." method="_on_quit_pressed"]

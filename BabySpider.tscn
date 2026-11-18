@@ -4,7 +4,6 @@
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="2_03bou"]
 [ext_resource type="Texture2D" uid="uid://doc15yrfubols" path="res://Images/BabySpider.png" id="3_82htw"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="4_t5j5n"]
-[ext_resource type="AudioStream" uid="uid://cuctwm0gvob35" path="res://Audio/Explosion.mp3" id="5_6v2lw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yfln0"]
 shader = ExtResource("2_03bou")
@@ -97,7 +96,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_yf5fn")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1078630228]
-stream = ExtResource("5_6v2lw")
+volume_db = -20.0
 max_polyphony = 80
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
