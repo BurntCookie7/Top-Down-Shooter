@@ -41,3 +41,4 @@ func _on_button_pressed() -> void:
 	Global.grenade_scene = grenade_scene
 	Inspector.inspector_title.text = Name
 	Inspector.description.text = Description
+	Global.save_game()

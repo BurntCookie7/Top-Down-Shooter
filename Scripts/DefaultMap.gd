@@ -3,7 +3,6 @@ extends Node2D
 @export var enemy_amount: int
 @export var nav_region: NavigationRegion2D
 @export var enemy_spawn_interval: float
-@export var enemies: Array[PackedScene]
 @export var spawn_points_node: Node
 @export var bench: PackedScene
 @export var bench_location: Node2D
@@ -11,6 +10,7 @@ extends Node2D
 var spawn_points: Array[Node2D]
 var enemies_spawned: int = 0
 @onready var enemies_container = get_parent().enemies_container
+@onready var enemies: DropTable = Global.map_container.enemy_selection
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	enemies_spawned = 0
@@ -51,7 +51,7 @@ func spawn_timer_out():
 				spawn_enemy(spawn_point)
 			
 func spawn_enemy(point):
-	var enemy: CharacterBody2D = enemies.pick_random().instantiate()
+	var enemy: CharacterBody2D = enemies.pick_item().instantiate()
 	enemies_container.add_child(enemy)
 	enemy.global_position = point.global_position
 	enemies_spawned += 1

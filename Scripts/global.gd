@@ -31,11 +31,15 @@ var turn_sensitivity: float = 1.0
 var upgrade_reroll_chance = 0.0
 #var global_path = ProjectSettings.globalize_path("res://")
 var save_path = "user://SaveData.cfg"
+var egg_bombers_killed: int = 0
+var area_bombers_killed: int = 0
+var grenade_radius: int = 0
 var unlocks: Dictionary[StringName, bool] = {
 	"BasicGrenade": true,
 	"BabySpider": false,
 	"AreaGrenade": false
 	}
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -86,6 +90,8 @@ func save_game():
 			save_value("Unlocks", key, unlocks[key])
 	
 	save_value("Player", "grenade_scene", grenade_scene.resource_path)
+	save_value("Player", "EggBombersKilled", egg_bombers_killed)
+	save_value("Player", "AreaBombersKilled", area_bombers_killed)
 	
 
 func save_value(section, key, variant):
@@ -100,5 +106,10 @@ func load_game():
 		return #no save
 	
 	grenade_scene = load(config.get_value("Player", "grenade_scene"))
+	egg_bombers_killed = config.get_value("Player", "EggBombersKilled", egg_bombers_killed)
+	area_bombers_killed = config.get_value("Player", "AreaBombersKilled", area_bombers_killed)
+	
+	for unlock in unlocks:
+		unlocks[unlock] = config.get_value("Unlocks", unlock, unlocks[unlock])
 	
 	

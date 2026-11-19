@@ -40,13 +40,11 @@ func _on_body_entered(body: Node2D) -> void:
 		body.light.energy = 0
 		body.light_out = true
 	if "health" in body:
-		if body.is_in_group("Player"):
-			Global.player_health -= damage
-		else:
-			body.health -= damage
+		body.health -= damage
 	if body.has_method("hit"):
 		body.hit()
-	
+	if body.is_in_group("Player"):
+		Global.player_health -= damage
 	if body.is_in_group("Grenade"):
 		body.explode()
 	

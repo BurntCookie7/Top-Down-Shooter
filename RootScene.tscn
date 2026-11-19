@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://157tr5a4d3ir" path="res://Images/Maze.tscn" id="10_w6mlc"]
 [ext_resource type="PackedScene" uid="uid://cm23c0yrj6ic8" path="res://Lobby.tscn" id="11_eqcq4"]
 [ext_resource type="PackedScene" uid="uid://bugn4m7r3qjnw" path="res://Hammer.tscn" id="12_dlv3y"]
+[ext_resource type="Resource" uid="uid://emvnht0bly2q" path="res://Drop Tables/MapEnemySelection.tres" id="16_y6m3s"]
 
 [node name="Node2D" type="Node2D" unique_id=792516362]
 
@@ -72,3 +73,4 @@ script = ExtResource("9_w6mlc")
 initial_map = ExtResource("11_eqcq4")
 enemies_container = NodePath("../Enemies")
 map_cycle = Array[PackedScene]([ExtResource("9_644yn"), ExtResource("10_w6mlc"), ExtResource("12_dlv3y")])
+enemy_selection = ExtResource("16_y6m3s")

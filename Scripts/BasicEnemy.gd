@@ -13,8 +13,19 @@ extends CharacterBody2D
 @onready var health_bar: ProgressBar = $Node2D/ProgressBar
 var health: int
 var health_bar_offset: Vector2 = Vector2(13, -20)
+var upgraded_material = preload("res://Shaders/Armored.tres")
 
 func _ready() -> void:
+	if Global.loops >= 2:
+		var upgraded = bool(randi_range(0, 1))
+		if upgraded:
+			var sprite_material = sprite.material as ShaderMaterial
+			sprite_material.shader = upgraded_material
+			health_bar.max_value *= 1.5
+			health_bar.max_value = round(health_bar.max_value)
+			health = health_bar.max_value
+			SPEED -= 10
+	
 	await get_tree().physics_frame
 	update_target()
 	health = total_health

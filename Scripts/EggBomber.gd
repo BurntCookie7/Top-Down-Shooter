@@ -18,8 +18,19 @@ var health_bar_offset: Vector2 = Vector2(13, -20)
 var can_attack = true
 var stretch_tween: Tween
 var babies_thrown: int = 6
+var upgraded_material = preload("res://Shaders/Armored.tres")
 
 func _ready() -> void:
+	if Global.loops >= 2:
+		var upgraded = bool(randi_range(0, 1))
+		if upgraded:
+			var sprite_material = sprite.material as ShaderMaterial
+			sprite_material.shader = upgraded_material
+			health_bar.max_value *= 1.5
+			health_bar.max_value = round(health_bar.max_value)
+			total_health = health_bar.max_value
+			SPEED -= 10
+		
 	collision.disabled = false
 	await get_tree().physics_frame
 	update_target()
@@ -77,6 +88,7 @@ func drop_item():
 
 func die():
 	drop_item()
+	Global.egg_bombers_killed += 1
 	Global.enemies_killed += 1
 	queue_free()
 

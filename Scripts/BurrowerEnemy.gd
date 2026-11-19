@@ -19,8 +19,19 @@ enum State{BURROWED, UNBURROWED, THREAT, ATTACK}
 var state = State.UNBURROWED
 var can_attack = false
 var stretch_tween: Tween
+var upgraded_material = preload("res://Shaders/Armored.tres")
 
 func _ready() -> void:
+	if Global.loops >= 2:
+		var upgraded = bool(randi_range(0, 1))
+		if upgraded:
+			var sprite_material = sprite.material as ShaderMaterial
+			sprite_material.shader = upgraded_material
+			health_bar.max_value *= 1.5
+			health_bar.max_value = round(health_bar.max_value)
+			total_health = health_bar.max_value
+			SPEED -= 10
+	
 	collision.disabled = false
 	burrow_particles.emitting = false
 	await get_tree().physics_frame

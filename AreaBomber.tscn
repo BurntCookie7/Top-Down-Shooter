@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://1lkifvut5hey"]
+
+[ext_resource type="Script" uid="uid://bwdswuhjav7ua" path="res://AreaBomber.gd" id="1_xlvva"]
+[ext_resource type="Resource" uid="uid://chpybbgau80h0" path="res://Drop Tables/GrenadierDrops.tres" id="2_2ht76"]
+[ext_resource type="PackedScene" uid="uid://dtsry53cxmg7e" path="res://AOEGrenade.tscn" id="3_vc6lf"]
+[ext_resource type="Texture2D" uid="uid://c4x1hl5intlgn" path="res://Images/AreaBomberSprites.png" id="4_nqjt6"]
+[ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="4_vc6lf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ht76"]
+atlas = ExtResource("4_nqjt6")
+region = Rect2(192, 0, 64, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc6lf"]
+atlas = ExtResource("4_nqjt6")
+region = Rect2(0, 0, 64, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpr6d"]
+atlas = ExtResource("4_nqjt6")
+region = Rect2(64, 0, 64, 110)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gcdux"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ht76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc6lf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpr6d")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
+radius = 11.0
+height = 54.0
+
+[sub_resource type="Theme" id="Theme_g4v7s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0u6y"]
+bg_color = Color(0, 0, 0, 0.19607843)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(2.6471912e-06, 0.7278638, 0.08175551, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1850996865]
+script = ExtResource("1_xlvva")
+SPEED = 80.0
+drops = ExtResource("2_2ht76")
+total_health = 200
+hit_color = Color(0.30980393, 0, 0.8117647, 1)
+grenade_scene = ExtResource("3_vc6lf")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
+rotation = -1.5707964
+sprite_frames = SubResource("SpriteFrames_gcdux")
+frame_progress = 0.49914673
+offset = Vector2(0, 8.495)
+script = ExtResource("4_vc6lf")
+lit_version = "1.1.7"
+
+[node name="GrenadeSpawnPosition" type="Node2D" parent="Sprite2D" unique_id=1444088525]
+position = Vector2(-4.808253e-07, 11)
+
+[node name="RayCast2D" type="RayCast2D" parent="Sprite2D" unique_id=2002126239]
+position = Vector2(-4.808253e-07, 11)
+scale = Vector2(3.85, 1)
+target_position = Vector2(0, 200)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1596461876]
+avoidance_enabled = true
+radius = 30.0
+
+[node name="NavigationTimer" type="Timer" parent="." unique_id=710775026]
+wait_time = 0.5
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418133407]
+shape = SubResource("CapsuleShape2D_yf5fn")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=31531383]
+
+[node name="ProgressBar" type="ProgressBar" parent="Node2D" unique_id=1631956121]
+offset_left = 13.5
+offset_top = -24.0
+offset_right = 17.499996
+offset_bottom = 3.0
+rotation = 1.5707964
+theme = SubResource("Theme_g4v7s")
+theme_override_styles/background = SubResource("StyleBoxFlat_d0u6y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yf5fn")
+max_value = 200.0
+value = 200.0
+rounded = true
+fill_mode = 3
+show_percentage = false
+
+[node name="ThrowTimer" type="Timer" parent="." unique_id=266761494]
+autostart = true
+
+[connection signal="timeout" from="NavigationTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ThrowTimer" to="." method="_on_throw_timer_timeout"]

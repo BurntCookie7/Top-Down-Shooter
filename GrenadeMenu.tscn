@@ -200,7 +200,6 @@ image = ExtResource("4_ey1uo")
 grenade_scene = ExtResource("5_kame0")
 Inspector = NodePath("../../../Inspector")
 Description = "When thrown the baby spider will continue moving in one direction until it hits anything dealing damage only when it hits."
-unlocked = true
 
 [node name="AOE" parent="Panel/ScrollContainer/HBoxContainer" unique_id=1647213126 node_paths=PackedStringArray("Inspector") groups=["Persist"] instance=ExtResource("1_ob7ki")]
 layout_mode = 2

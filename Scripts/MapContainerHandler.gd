@@ -3,6 +3,7 @@ extends Node
 @export var initial_map: PackedScene
 @export var enemies_container: Node
 @export var map_cycle: Array[PackedScene]
+@export var enemy_selection: DropTable
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.map_container = self
@@ -19,7 +20,6 @@ func load_new_map(map: PackedScene) -> void:
 	Global.won_round = false
 	if is_instance_valid(Global.map):
 		var prev_map = Global.map
-		print(prev_map)
 		if is_instance_valid(prev_map):
 			for child in prev_map.get_children():
 				if is_instance_valid(child):

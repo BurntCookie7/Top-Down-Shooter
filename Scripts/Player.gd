@@ -89,6 +89,7 @@ func _physics_process(delta: float) -> void:
 		control_mode = Control_Mode.get(Global.player_control_mode)
 	if Global.player_health <= 0:
 		death_screen.show()
+		Global.save_game()
 		get_tree().paused = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	shake_strength = move_toward(shake_strength, 0.0, 40.0 * delta)

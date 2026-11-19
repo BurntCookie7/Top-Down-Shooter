@@ -2,10 +2,11 @@ extends Control
 @onready var title: Label = $Button/Label
 @onready var description: RichTextLabel = $Button/RichTextLabel
 @onready var texture: TextureRect = $Button/Label/TextureRect
-@onready var button: Button = $Button/Button
+@onready var button: Button = $Button
+@onready var trash: Button = $Button/Button
 
 signal pressed
-signal trash
+signal trashed(button)
 
 var data: UpgradeData
 
@@ -17,8 +18,5 @@ func _ready() -> void:
 	description.text = data.description
 	texture.texture = data.icon
 	button.pressed.connect(func(): pressed.emit())
+	trash.pressed.connect(func(): trashed.emit(self))
 	return
-
-
-func _on_button_pressed() -> void:
-	trash.emit()

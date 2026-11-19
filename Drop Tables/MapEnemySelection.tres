@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="DropTable" format=3 uid="uid://emvnht0bly2q"]
+
+[ext_resource type="Script" uid="uid://i4o22xyau85o" path="res://Resources/DropTable.gd" id="1_hj8xq"]
+[ext_resource type="PackedScene" uid="uid://1lkifvut5hey" path="res://AreaBomber.tscn" id="2_mpuk4"]
+[ext_resource type="PackedScene" uid="uid://bmivrm7wiw7ab" path="res://EggBomber.tscn" id="3_uv7qe"]
+[ext_resource type="PackedScene" uid="uid://ba4dhkx8s4a5v" path="res://Burrower.tscn" id="4_qwx4b"]
+[ext_resource type="PackedScene" uid="uid://tamrqnlbh8x7" path="res://BasicEnemy.tscn" id="5_q8ue5"]
+[ext_resource type="PackedScene" uid="uid://csd7jorx3ewke" path="res://Grenadier.tscn" id="6_q2hb6"]
+
+[resource]
+script = ExtResource("1_hj8xq")
+table = Dictionary[PackedScene, float]({
+ExtResource("2_mpuk4"): 1.0,
+ExtResource("3_uv7qe"): 1.0,
+ExtResource("4_qwx4b"): 1.0,
+ExtResource("5_q8ue5"): 2.0,
+ExtResource("6_q2hb6"): 1.5
+})
+metadata/_custom_type_script = "uid://i4o22xyau85o"

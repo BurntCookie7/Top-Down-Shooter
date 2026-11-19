@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 
 #===Play Button===#
 func _on_button_pressed() -> void:
+	Global.load_game()
 	Global.map = preload("res://Lobby.tscn").instantiate()
 	get_tree().change_scene_to_file("res://RootScene.tscn")
 #===End===#

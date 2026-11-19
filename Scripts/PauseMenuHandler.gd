@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 
 func _on_resume_pressed() -> void:
 	hide()
+	Global.save_game()
 	if Global.player.state == Global.State.SITTING:
 		pass
 	else:
@@ -28,6 +29,7 @@ func _on_settings_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
+	Global.save_game()
 	get_tree().quit()
 
 

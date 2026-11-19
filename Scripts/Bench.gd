@@ -82,10 +82,9 @@ func create_button():
 		upgrade_choice = option.data
 	option.pressed.connect(func():
 		var button = option
-		upgrade_chosen.emit()
 		player.apply_upgrade(upgrade_choice, button))
 		
-	option.trash.connect(trash_upgrade)
+	option.trashed.connect(trash_upgrade)
 	
 	Hbox.add_child(option)
 
@@ -95,12 +94,14 @@ func trash_upgrade(button):
 		return
 	upgrade_options.erase(button.data)
 	button.queue_free()
+	print(buttons_remaining())
 
 func buttons_remaining() -> int:
 	var count = 0
 	for child in Hbox.get_children():
 		if child != buffer_node and not child.is_queued_for_deletion():
 			count += 1
+	count -= 1
 	return count
 	
 

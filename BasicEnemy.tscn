@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dhg5gt5uqjnt7" path="res://BasicBullet.tscn" id="3_6fv04"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="3_yhmlg"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="5_6fv04"]
+[ext_resource type="PackedScene" uid="uid://csd7jorx3ewke" path="res://Grenadier.tscn" id="7_1cnvr"]
+[ext_resource type="Script" uid="uid://46chadwwxnhg" path="res://Scripts/GrenadierEnemy.gd" id="8_8kjeb"]
+[ext_resource type="Resource" uid="uid://chpybbgau80h0" path="res://Drop Tables/GrenadierDrops.tres" id="9_epbun"]
+[ext_resource type="PackedScene" uid="uid://0ta2j3xvwvga" path="res://Grenade.tscn" id="10_jyrmu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s3sw0"]
 shader = ExtResource("3_yhmlg")
@@ -127,6 +131,14 @@ show_percentage = false
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=266761494]
 autostart = true
+
+[node name="CharacterBody2D" parent="." unique_id=1022936355 instance=ExtResource("7_1cnvr")]
+script = ExtResource("8_8kjeb")
+SPEED = 80.0
+drops = ExtResource("9_epbun")
+total_health = 200
+hit_color = Color(1, 0, 0, 1)
+grenade_scene = ExtResource("10_jyrmu")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

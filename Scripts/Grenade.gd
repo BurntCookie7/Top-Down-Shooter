@@ -3,7 +3,7 @@ extends RigidBody2D
 @onready var timer: Timer = $Timer
 @onready var sprite: LitSprite2D = $Sprite2D
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
-@onready var range: Sprite2D = $Area2D/Sprite2D2
+@onready var range: Area2D = $Area2D
 
 const friction = 45
 var exploded = false
@@ -19,6 +19,8 @@ func _ready() -> void:
 	flash_tween = create_tween().set_loops()
 	flash_tween.tween_property(sprite, "modulate", Color.RED, 0.15)
 	flash_tween.tween_property(sprite, "modulate", Color.WHITE, 0.15)
+	range.transform.x += Vector2(Global.grenade_radius, 0)
+	range.transform.y += Vector2(0, Global.grenade_radius)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

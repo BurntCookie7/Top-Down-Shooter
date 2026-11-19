@@ -9,13 +9,23 @@ extends CharacterBody2D
 @onready var sprite: LitAnimatedSprite2D = $Sprite2D
 @export var hit_color: Color = Color()
 @export var grenade_scene: PackedScene
-@export var damage: int = 5
 @onready var health_bar: ProgressBar = $Node2D/ProgressBar
 var health: int
 var health_bar_offset: Vector2 = Vector2(13, -20)
 var throw_strength = 1000
+var upgraded_material = preload("res://Shaders/Armored.tres")
 
 func _ready() -> void:
+	if Global.loops >= 2:
+		var upgraded = bool(randi_range(0, 1))
+		if upgraded:
+			var sprite_material = sprite.material as ShaderMaterial
+			sprite_material.shader = upgraded_material
+			health_bar.max_value *= 1.5
+			health_bar.max_value = round(health_bar.max_value)
+			total_health = health_bar.max_value
+			SPEED -= 10
+
 	await get_tree().physics_frame
 	update_target()
 	health = total_health
@@ -66,7 +76,7 @@ func drop_item():
 func spawn_grenade() -> void:
 	var grenade = grenade_scene.instantiate()
 	grenade.global_position = grenade_spawn_position.global_position
-	get_tree().root.add_child(grenade)
+	Global.map.add_child(grenade)
 	grenade.throw(global_transform.x, throw_strength, "Enemy")
 	grenade.linear_velocity += velocity * 0.5
 
