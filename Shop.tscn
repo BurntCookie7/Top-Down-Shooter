@@ -1,0 +1,278 @@
+[gd_scene format=3 uid="uid://byvvcom0q8nuh"]
+
+[ext_resource type="Script" uid="uid://bde4hme8ea4j3" path="res://ShopHandler.gd" id="1_c0ofq"]
+[ext_resource type="PackedScene" uid="uid://scykvv4jf3p2" path="res://UpgradeButton.tscn" id="2_odqjv"]
+[ext_resource type="FontFile" uid="uid://ye48oxluhm2o" path="res://Fonts/Vipnagorgialla Rg It.otf" id="3_odqjv"]
+[ext_resource type="Resource" uid="uid://2bb1q2y68s16" path="res://Drop Tables/BenchUpgradeChoices.tres" id="3_vdbi3"]
+[ext_resource type="Script" uid="uid://oel6ehxa0hi0" path="res://UpgradeInspector.gd" id="4_odqjv"]
+[ext_resource type="FontFile" uid="uid://dq3hwlqrhhpdd" path="res://Fonts/Vipnagorgialla Bd It.otf" id="4_vdbi3"]
+[ext_resource type="Texture2D" uid="uid://bq5t8q0gxm0c" path="res://Images/Crystals.png" id="7_vdbi3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.2653605, 0.26536053, 0.26536041, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.41725737, 0.41725743, 0.41725716, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0.10872076, 0.10872077, 0.10872071, 1)
+border_width_left = 5
+border_color = Color(0.056291647, 0.056291588, 0.056291595, 1)
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x7t7"]
+bg_color = Color(0, 0.52156866, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.27912152, 0, 1)
+corner_radius_bottom_right = 34
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_odqjv"]
+bg_color = Color(0, 0.2848733, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.119799875, 0, 1)
+corner_radius_bottom_right = 34
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vdbi3"]
+bg_color = Color(0.43198213, 0.18524197, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.22911623, 0.00043943376, 0.5869244, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_db8k6"]
+bg_color = Color(0.2316013, 0.00044867487, 0.5925392, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.12113506, 0.000135464, 0.3460566, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cv2iv"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_detail = 5
+
+[node name="Control" type="Control" unique_id=1973808610 groups=["Persist"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c0ofq")
+upgrade_button = ExtResource("2_odqjv")
+upgrade_table = ExtResource("3_vdbi3")
+
+[node name="Panel" type="Panel" parent="." unique_id=1496501546]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.75
+offset_top = -172.5
+offset_right = 330.75
+offset_bottom = 172.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="Inspector" type="Panel" parent="Panel" unique_id=203436379]
+layout_mode = 0
+offset_left = 450.75
+offset_top = 4.5
+offset_right = 656.75
+offset_bottom = 339.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_yf5fn")
+script = ExtResource("4_odqjv")
+
+[node name="InspectorTitle" type="Label" parent="Panel/Inspector" unique_id=1252404733]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 8.0
+offset_right = 20.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_odqjv")
+theme_override_font_sizes/font_size = 20
+text = "Title"
+
+[node name="Panel" type="Panel" parent="Panel/Inspector" unique_id=1866858753]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -122.5
+offset_right = 102.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Description" type="RichTextLabel" parent="Panel/Inspector/Panel" unique_id=1140236667]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Continue" type="Button" parent="Panel/Inspector" unique_id=320570912]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 99.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_vdbi3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2x7t7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2x7t7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_odqjv")
+text = "Continue"
+
+[node name="Purchase" type="Button" parent="Panel/Inspector" unique_id=510447507]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -40.0
+offset_right = -107.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_vdbi3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vdbi3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vdbi3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_db8k6")
+text = "Buy
+"
+
+[node name="Panel" type="Panel" parent="Panel" unique_id=1112245315]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = -123.0
+offset_right = 120.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cv2iv")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Panel" unique_id=1081413195]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.0
+offset_top = -65.5
+offset_right = 223.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="Control" type="HBoxContainer" parent="Panel/Panel/ScrollContainer" unique_id=519183119]
+layout_mode = 2
+theme_override_constants/separation = 152
+
+[node name="Buffer" type="Control" parent="Panel/Panel/ScrollContainer/Control" unique_id=242523689]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel" unique_id=161378147]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -309.0
+offset_top = 12.5
+offset_right = -212.0
+offset_bottom = 48.5
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_odqjv")
+theme_override_font_sizes/font_size = 29
+text = "Shop"
+
+[node name="Gems" type="Control" parent="Panel" unique_id=2052032350]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="Clip" type="Control" parent="Panel/Gems" unique_id=58138030]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -42.5
+offset_right = 65.0
+offset_bottom = 22.5
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Gems/Clip" unique_id=908718674]
+clip_contents = true
+layout_mode = 1
+offset_right = 204.0
+offset_bottom = 64.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-126.57, 0)
+texture = ExtResource("7_vdbi3")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Panel/Gems" unique_id=193112343]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 13.75
+offset_top = -19.5
+offset_right = 53.75
+offset_bottom = 3.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+
+[connection signal="pressed" from="Panel/Inspector/Purchase" to="Panel/Inspector" method="_on_buy_pressed"]

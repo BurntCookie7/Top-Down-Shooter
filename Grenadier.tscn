@@ -1,7 +1,27 @@
-[gd_scene format=3 uid="uid://csd7jorx3ewke"]
+[gd_scene format=4 uid="uid://csd7jorx3ewke"]
 
 [ext_resource type="Texture2D" uid="uid://dgm1c4xv7aip7" path="res://Images/GrenadierSprites.png" id="5_yssgn"]
+[ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="6_ybxan"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="8_eyhfq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adtk6"]
+shader = ExtResource("6_ybxan")
+shader_parameter/emissive_strength = 0.0
+shader_parameter/receiver_mask = 1
+shader_parameter/receiver_z = 0
+shader_parameter/receiver_layer = 0
+shader_parameter/self_shadow = false
+shader_parameter/self_rect_count = 0
+shader_parameter/self_rects = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/specular_strength = 0.5
+shader_parameter/specular_k = 32.0
+shader_parameter/has_specular_map = false
+shader_parameter/metallic_value = 0.0
+shader_parameter/roughness_value = 1.0
+shader_parameter/shadow_steps = 64
+shader_parameter/shadow_min_step = 0.2
+shader_parameter/shadow_ramp = 0.0
+shader_parameter/directional_horizontal_scale = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tcew6"]
 atlas = ExtResource("5_yssgn")
@@ -55,6 +75,7 @@ corner_radius_bottom_left = 1
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1850996865]
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
+material = SubResource("ShaderMaterial_adtk6")
 rotation = -1.5707964
 sprite_frames = SubResource("SpriteFrames_paaqd")
 frame_progress = 0.3787723

@@ -13,9 +13,9 @@ metadata/_custom_type_script = "uid://bd2ql44krcm2"
 [resource]
 script = ExtResource("3_lmgs7")
 id = &"UpgradeChoiceAmount"
-title = "Eeny, meeny, miny, moe"
+title = "Choices"
 description = "+1 Upgrade choice 
-when sitting at the bench"
+at the shop"
 icon = ExtResource("1_gd1pu")
 modifiers = Array[ExtResource("2_yx0c0")]([SubResource("Resource_dvmr2")])
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

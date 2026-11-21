@@ -33,6 +33,7 @@ var reload_sound = preload("res://Audio/Reload.mp3")
 var shot_sound = preload("res://Audio/Gunshot.mp3")
 var bullets_shot: int = 1
 var sensitivity: float = Global.turn_sensitivity
+var gems_pulling: Array[Area2D]
 
 func _ready() -> void:
 	Global.player = self
@@ -85,6 +86,7 @@ func _process(delta: float) -> void:
 	sensitivity = Global.turn_sensitivity
 
 func _physics_process(delta: float) -> void:
+	pull_gems(delta)
 	if control_mode != Control_Mode.get(Global.player_control_mode):
 		control_mode = Control_Mode.get(Global.player_control_mode)
 	if Global.player_health <= 0:
@@ -220,14 +222,9 @@ func apply_upgrade(upgrade:UpgradeData, button):
 			push_warning("Upgrade stat not found: " + str(mod.stat))
 			continue
 		target.set(mod.stat, target.get(mod.stat) + mod.amount)
-
-	if current_bench.buttons_remaining() > 1:
-		if randf_range(0.0, 10.0) < Global.upgrade_reroll_chance:
-			if is_instance_valid(button):
-				button.queue_free()
-			return
-	finish_bench()
-
+		
+		button.queue_free()
+		
 
 func finish_bench():
 	current_bench.remove_upgrades()
@@ -249,3 +246,15 @@ func finish_bench():
 	else:
 		Global.map_container.load_new_map(Global.map_container.map_cycle[Global.cycle])
 		Global.wins += 1
+
+func pull_gems(delta):
+	for gem in gems_pulling:
+		if is_instance_valid(gem):
+			gem.look_at(global_position)
+			gem.global_position = gem.global_position.move_toward(global_position, (gem.speed * delta) * (Global.pickup_speed * delta))
+			gem.speed += 5
+
+func _on_pickup_range_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Gem"):
+		if area.can_pickup:
+			gems_pulling.append(area)

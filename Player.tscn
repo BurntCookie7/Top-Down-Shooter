@@ -165,6 +165,9 @@ animations = [{
 "speed": 3.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 88.051125
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=93508001 groups=["Persist", "Player"]]
 collision_layer = 3
 collision_mask = 3
@@ -217,3 +220,10 @@ scale = Vector2(1, -1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1456915445]
 zoom = Vector2(1.2, 1.2)
+
+[node name="PickupRange" type="Area2D" parent="." unique_id=321268079]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange" unique_id=1835855841]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]

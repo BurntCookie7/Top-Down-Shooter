@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 	if navigation.is_navigation_finished():
 		velocity = Vector2.ZERO
 		move_and_slide()
-		return
+		
 	health_bar.global_position = global_position + health_bar_offset
 	var next_position := navigation.get_next_path_position()
 	var direction := global_position.direction_to(next_position)
@@ -64,6 +64,7 @@ func manage_health():
 	if health <= 0:
 		drop_item()
 		Global.enemies_killed += 1
+		drops.drop_gems(global_position)
 		queue_free()
 
 func drop_item():

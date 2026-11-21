@@ -90,6 +90,7 @@ func die():
 	drop_item()
 	Global.egg_bombers_killed += 1
 	Global.enemies_killed += 1
+	drops.drop_gems(global_position)
 	queue_free()
 
 func throw_babies():

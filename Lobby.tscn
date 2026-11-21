@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://j2sb6jicsqio" path="res://GrenadeMenu.tscn" id="10_rvgkb"]
 [ext_resource type="PackedScene" uid="uid://bhcrv2ag8nwrp" path="res://Dummy.tscn" id="11_1q3jt"]
 [ext_resource type="PackedScene" uid="uid://56kr68xk13v7" path="res://Bench.tscn" id="14_ufkk4"]
+[ext_resource type="PackedScene" uid="uid://cygois887lu1i" path="res://Gem.tscn" id="15_6v7yt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vm4q1"]
 shader = ExtResource("1_6juw2")
@@ -212,6 +213,15 @@ position = Vector2(814, 167)
 [node name="StaticBody2D" parent="." unique_id=2013195154 instance=ExtResource("14_ufkk4")]
 position = Vector2(811, 12)
 rotation = 3.1415927
+
+[node name="Area2D" parent="." unique_id=984506439 instance=ExtResource("15_6v7yt")]
+position = Vector2(790, 294)
+
+[node name="Area2D2" parent="." unique_id=1360358462 instance=ExtResource("15_6v7yt")]
+position = Vector2(730, 353)
+
+[node name="Area2D3" parent="." unique_id=84432260 instance=ExtResource("15_6v7yt")]
+position = Vector2(818, 374)
 
 [connection signal="body_entered" from="StartFlag/Area2D" to="StartFlag" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="StartFlag/Area2D" to="StartFlag" method="_on_area_2d_body_exited"]

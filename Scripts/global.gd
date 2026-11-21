@@ -22,7 +22,7 @@ var enemy_damage_mult = 1.0
 var enemy_health_mult = 2.0
 var arachnophobia: bool = false
 var benches: int = 1
-var upgrades: int = 3
+var upgrades: int = 6
 var ammo_per_pickup: int = 5
 var enemies_active: bool
 var grenade_scene: PackedScene = preload("res://Grenade.tscn")
@@ -34,12 +34,16 @@ var save_path = "user://SaveData.cfg"
 var egg_bombers_killed: int = 0
 var area_bombers_killed: int = 0
 var grenade_radius: int = 0
+var gem = preload("res://Gem.tscn")
+var pickup_rad_mult = 0
+var pickup_speed: float = 50.0
+var pickup_amount: int = 1
+var gem_balance: int = 0
 var unlocks: Dictionary[StringName, bool] = {
 	"BasicGrenade": true,
 	"BabySpider": false,
 	"AreaGrenade": false
 	}
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -72,8 +76,13 @@ func restart():
 	cycle = 0
 	rounds = 5
 	loops = 1
+	grenade_radius = 0
 	player_max_grenades = 3
 	upgrades = 3
+	pickup_rad_mult = 0
+	pickup_speed = 50.0
+	pickup_amount = 1
+	gem_balance = 0
 	upgrade_reroll_chance = 0.0
 	player.grenades = player_max_grenades
 	player.ammunition_remaining = player.max_ammunition

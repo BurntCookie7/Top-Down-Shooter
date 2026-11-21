@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cygois887lu1i"]
+
+[ext_resource type="Script" uid="uid://m25dm47lh4c1" path="res://Scripts/Gem.gd" id="1_3niwm"]
+[ext_resource type="Texture2D" uid="uid://bq5t8q0gxm0c" path="res://Images/Crystals.png" id="1_nlnni"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3niwm"]
+atlas = ExtResource("1_nlnni")
+region = Rect2(68, 0, 68, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2jd7"]
+atlas = ExtResource("1_nlnni")
+region = Rect2(136, 0, 68, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry2kc"]
+atlas = ExtResource("1_nlnni")
+region = Rect2(0, 0, 68, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3niwm")
+}],
+"loop": 1,
+"name": &"crystal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2jd7")
+}],
+"loop": 1,
+"name": &"rombus",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ry2kc")
+}],
+"loop": 1,
+"name": &"wing",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 18.0
+
+[node name="Area2D" type="Area2D" unique_id=984506439 groups=["Gem"]]
+script = ExtResource("1_3niwm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=963325065]
+position = Vector2(0.78125095, 0.4999991)
+scale = Vector2(0.390625, 0.390625)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"wing"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=172083314]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="PickupTimer" type="Timer" parent="." unique_id=264028387]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="PickupTimer" to="." method="_on_pickup_timer_timeout"]

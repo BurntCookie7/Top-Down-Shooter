@@ -88,6 +88,7 @@ func manage_health():
 	if health <= 0:
 		drop_item()
 		Global.enemies_killed += 1
+		drops.drop_gems(global_position)
 		queue_free()
 
 func burrow():

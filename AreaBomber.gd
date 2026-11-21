@@ -65,6 +65,7 @@ func manage_health():
 		drop_item()
 		Global.enemies_killed += 1
 		Global.area_bombers_killed += 1
+		drops.drop_gems(global_position)
 		queue_free()
 
 func drop_item():

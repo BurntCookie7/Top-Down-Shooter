@@ -9,14 +9,14 @@
 [ext_resource type="Texture2D" uid="uid://dim5mk7g4q043" path="res://addons/controller_icons/assets/key/q.png" id="7_lnr38"]
 [ext_resource type="Texture2D" uid="uid://b8vuy7l8npt6w" path="res://addons/controller_icons/assets/mouse/left.png" id="8_di4v8"]
 [ext_resource type="Texture2D" uid="uid://cy7e67qj2flir" path="res://addons/controller_icons/assets/mouse/right.png" id="9_3o7xj"]
+[ext_resource type="Texture2D" uid="uid://broeuieppu0ni" path="res://addons/controller_icons/assets/key/f.png" id="10_252gt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 border_width_left = 8
-border_width_top = 4
+border_width_top = 8
 border_width_right = 8
-border_width_bottom = 4
+border_width_bottom = 8
 border_color = Color(0.32172796, 0.321728, 0.32172775, 1)
-border_blend = true
 corner_radius_top_left = 60
 corner_radius_top_right = 60
 corner_radius_bottom_right = 60
@@ -283,6 +283,18 @@ position = Vector2(47, 14.000001)
 scale = Vector2(0.37, 0.34)
 texture = ExtResource("9_3o7xj")
 
+[node name="Label9" type="Label" parent="Panel/VBoxContainer/ControlSettings/MouseTurn" unique_id=1528424705]
+layout_mode = 0
+offset_left = 420.0
+offset_right = 485.0
+offset_bottom = 23.0
+text = "Ability"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/MouseTurn/Label9" unique_id=1881363724]
+position = Vector2(68, 13.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("10_252gt")
+
 [node name="KeyTurn" type="Control" parent="Panel/VBoxContainer/ControlSettings" unique_id=1149906172]
 visible = false
 anchors_preset = 0
@@ -392,6 +404,18 @@ position = Vector2(47, 14.000001)
 scale = Vector2(0.37, 0.34)
 texture = ExtResource("9_3o7xj")
 
+[node name="Label9" type="Label" parent="Panel/VBoxContainer/ControlSettings/KeyTurn" unique_id=1908789698]
+layout_mode = 0
+offset_left = 420.0
+offset_right = 485.0
+offset_bottom = 23.0
+text = "Ability"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/ControlSettings/KeyTurn/Label9" unique_id=792081333]
+position = Vector2(68, 13.000001)
+scale = Vector2(0.37, 0.34)
+texture = ExtResource("10_252gt")
+
 [node name="Label" type="Label" parent="Panel/VBoxContainer/ControlSettings" unique_id=2101897087]
 layout_mode = 0
 offset_top = 41.0
@@ -438,9 +462,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -125.0
-offset_top = 11.0
+offset_top = 23.0
 offset_right = 123.0
-offset_bottom = 42.0
+offset_bottom = 54.0
 grow_horizontal = 2
 theme_override_constants/outline_size = 6
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_5s0fj")
