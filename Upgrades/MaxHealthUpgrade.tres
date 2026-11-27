@@ -17,4 +17,5 @@ title = "Max Health"
 description = "+10 max health"
 icon = ExtResource("1_b23ms")
 modifiers = Array[ExtResource("1_2bwfe")]([SubResource("Resource_wi0c6")])
+price = 7
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

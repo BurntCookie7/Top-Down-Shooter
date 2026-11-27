@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bh17jrcqf5cpy" path="res://Four Corners.tscn" id="9_644yn"]
 [ext_resource type="PackedScene" uid="uid://c6jorfd1twiwh" path="res://PauseMenu.tscn" id="9_bn020"]
 [ext_resource type="Script" uid="uid://cn7y8200jbqns" path="res://Scripts/MapContainerHandler.gd" id="9_w6mlc"]
-[ext_resource type="PackedScene" uid="uid://157tr5a4d3ir" path="res://Images/Maze.tscn" id="10_w6mlc"]
+[ext_resource type="PackedScene" uid="uid://157tr5a4d3ir" path="res://Maze.tscn" id="10_w6mlc"]
 [ext_resource type="PackedScene" uid="uid://cm23c0yrj6ic8" path="res://Lobby.tscn" id="11_eqcq4"]
 [ext_resource type="PackedScene" uid="uid://bugn4m7r3qjnw" path="res://Hammer.tscn" id="12_dlv3y"]
 [ext_resource type="Resource" uid="uid://emvnht0bly2q" path="res://Drop Tables/MapEnemySelection.tres" id="16_y6m3s"]

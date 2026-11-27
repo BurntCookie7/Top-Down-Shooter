@@ -35,15 +35,23 @@ var egg_bombers_killed: int = 0
 var area_bombers_killed: int = 0
 var grenade_radius: int = 0
 var gem = preload("res://Gem.tscn")
+var enemy_drop_mult: int = 1
+var gem_drop_mult: int = 1
 var pickup_rad_mult = 0
 var pickup_speed: float = 50.0
 var pickup_amount: int = 1
-var gem_balance: int = 0
+var gem_balance: int = 999
+var price_increase_interval: int = 5
+var player_ui = null
+var camera_mode: String = "Locked"
 var unlocks: Dictionary[StringName, bool] = {
 	"BasicGrenade": true,
 	"BabySpider": false,
 	"AreaGrenade": false
 	}
+var upgrade_prices: Dictionary[StringName, int] = {
+	
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -82,13 +90,16 @@ func restart():
 	pickup_rad_mult = 0
 	pickup_speed = 50.0
 	pickup_amount = 1
+	gem_drop_mult = 1
+	enemy_drop_mult = 1
+	upgrade_prices.clear()
 	gem_balance = 0
 	upgrade_reroll_chance = 0.0
 	player.grenades = player_max_grenades
 	player.ammunition_remaining = player.max_ammunition
 	#map_container.load_new_map(map_container.initial_map)
 	get_tree().paused = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#get_tree().reload_current_scene()
 	
 func save_game():
@@ -101,6 +112,8 @@ func save_game():
 	save_value("Player", "grenade_scene", grenade_scene.resource_path)
 	save_value("Player", "EggBombersKilled", egg_bombers_killed)
 	save_value("Player", "AreaBombersKilled", area_bombers_killed)
+	save_value("Player", "ControlMode", player_control_mode)
+	save_value("Player", "CameraMode", camera_mode)
 	
 
 func save_value(section, key, variant):
@@ -117,6 +130,8 @@ func load_game():
 	grenade_scene = load(config.get_value("Player", "grenade_scene"))
 	egg_bombers_killed = config.get_value("Player", "EggBombersKilled", egg_bombers_killed)
 	area_bombers_killed = config.get_value("Player", "AreaBombersKilled", area_bombers_killed)
+	player_control_mode = config.get_value("Player", "ControlMode", player_control_mode)
+	camera_mode = config.get_value("Player", "CameraMode", camera_mode)
 	
 	for unlock in unlocks:
 		unlocks[unlock] = config.get_value("Unlocks", unlock, unlocks[unlock])

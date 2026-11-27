@@ -17,4 +17,5 @@ title = "Max Ammo"
 description = "+5 max ammo"
 icon = ExtResource("1_5b4vm")
 modifiers = Array[ExtResource("2_77jo8")]([SubResource("Resource_5b4vm")])
+price = 5
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

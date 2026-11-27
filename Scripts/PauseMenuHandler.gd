@@ -35,6 +35,7 @@ func _on_quit_pressed() -> void:
 
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = false
+	Global.restart()
 	get_tree().change_scene_to_file("res://TitleScreen.tscn")
 
 

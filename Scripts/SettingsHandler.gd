@@ -7,6 +7,7 @@ extends Control
 @onready var general_settings: Control = $Panel/VBoxContainer/GeneralSettings
 @onready var check_box: CheckBox = $Panel/VBoxContainer/GeneralSettings/Arachnophobia/CheckBox
 @onready var h_slider: HSlider = $Panel/VBoxContainer/ControlSettings/Label/HSlider
+@onready var camera_mode_selection: OptionButton = $Panel/VBoxContainer/ControlSettings/CameraMode/CameraMode
 
 var controls_to_show = 0
 var current_tab
@@ -23,6 +24,11 @@ func _ready() -> void:
 		Global.player.Control_Mode.Key_Turn:
 			controls_to_show = 1
 			control_mode_selection.selected = 1
+	match Global.camera_mode:
+		"Locked":
+			camera_mode_selection.selected = 0
+		"Turning":
+			camera_mode_selection.selected = 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -82,3 +88,11 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 
 func _on_h_slider_value_changed(value: float) -> void:
 	Global.turn_sensitivity = value
+
+
+func _on_camera_mode_item_selected(index: int) -> void:
+	var option: String = camera_mode_selection.get_item_text(index)
+	option = option.replace(" Camera", "")
+	print(option)
+	Global.camera_mode = str(option)
+	manage_tabs(current_tab)

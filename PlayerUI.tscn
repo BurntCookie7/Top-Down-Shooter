@@ -1,10 +1,20 @@
 [gd_scene format=3 uid="uid://e3g5wyogiycf"]
 
 [ext_resource type="Script" uid="uid://dixnowfv8yu0t" path="res://Scripts/PlayerUI.gd" id="1_qwd5t"]
+[ext_resource type="PackedScene" uid="uid://ds1bavd5npr27" path="res://ConsumableIcon.tscn" id="2_b1whj"]
+[ext_resource type="Resource" uid="uid://dwfk4l8i61e07" path="res://Consumables/SpeedUp.tres" id="3_3tn7b"]
+[ext_resource type="Resource" uid="uid://buret0yledklh" path="res://Consumables/InstantKill.tres" id="4_3tn7b"]
+[ext_resource type="Script" uid="uid://q56e3kvm665x" path="res://BenchPointer.gd" id="5_5mut0"]
+[ext_resource type="Texture2D" uid="uid://qt3r7qniltdo" path="res://Images/GreenUpArrow.png" id="5_50c3i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwd5t"]
 bg_color = Color(0, 0, 0, 0.49803922)
 skew = Vector2(0.5, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.8352941)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -13,6 +23,11 @@ corner_radius_bottom_left = 5
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pf331"]
 bg_color = Color(0, 0.7176471, 0, 1)
 skew = Vector2(0.5, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1.2453831e-06, 0.32229185, 0.0068484284, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -88,4 +103,41 @@ offset_left = 6.0
 offset_top = 555.0
 offset_right = 114.0
 offset_bottom = 578.0
-text = "Granades: 5/5"
+text = "Grenades: 5/5"
+
+[node name="ConsumablesContainer" type="HBoxContainer" parent="." unique_id=1557654659]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 962.0
+offset_top = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 48
+
+[node name="Control" parent="ConsumablesContainer" unique_id=1528186817 instance=ExtResource("2_b1whj")]
+layout_mode = 2
+data = ExtResource("3_3tn7b")
+
+[node name="Control2" parent="ConsumablesContainer" unique_id=468243927 instance=ExtResource("2_b1whj")]
+layout_mode = 2
+data = ExtResource("4_3tn7b")
+
+[node name="Control3" parent="ConsumablesContainer" unique_id=624260382 instance=ExtResource("2_b1whj")]
+layout_mode = 2
+data = ExtResource("4_3tn7b")
+
+[node name="Control4" parent="ConsumablesContainer" unique_id=999913940 instance=ExtResource("2_b1whj")]
+layout_mode = 2
+data = ExtResource("3_3tn7b")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=841320276]
+position = Vector2(575, 59)
+script = ExtResource("5_5mut0")
+
+[node name="TextureRect" type="Sprite2D" parent="Node2D" unique_id=131981253]
+position = Vector2(0, 4.55)
+rotation = 1.5707964
+texture = ExtResource("5_50c3i")

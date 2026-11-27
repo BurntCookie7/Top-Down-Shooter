@@ -17,4 +17,5 @@ title = "Grenade Radius"
 description = "Higher hit radius on grenades thrown by the player"
 icon = ExtResource("1_spwk3")
 modifiers = Array[ExtResource("1_ehu4n")]([SubResource("Resource_nglh4")])
+price = 6
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

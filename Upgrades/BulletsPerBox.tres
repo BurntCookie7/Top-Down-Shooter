@@ -18,4 +18,5 @@ description = "+2 bullets per
 ammo crate"
 icon = ExtResource("1_cxhoi")
 modifiers = Array[ExtResource("1_37o2y")]([SubResource("Resource_37o2y")])
+price = 5
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

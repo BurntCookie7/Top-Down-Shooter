@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://csplyvpfia5g" path="res://Scripts/GrenadeOpener.gd" id="9_mc3c4"]
 [ext_resource type="Texture2D" uid="uid://buqv4gfdts28r" path="res://Images/pixelated-image.png" id="10_1q3jt"]
 [ext_resource type="PackedScene" uid="uid://j2sb6jicsqio" path="res://GrenadeMenu.tscn" id="10_rvgkb"]
+[ext_resource type="Script" uid="uid://cbqxf76s2766y" path="res://Scripts/FloatingUI.gd" id="10_sl2bc"]
 [ext_resource type="PackedScene" uid="uid://bhcrv2ag8nwrp" path="res://Dummy.tscn" id="11_1q3jt"]
 [ext_resource type="PackedScene" uid="uid://56kr68xk13v7" path="res://Bench.tscn" id="14_ufkk4"]
 [ext_resource type="PackedScene" uid="uid://cygois887lu1i" path="res://Gem.tscn" id="15_6v7yt"]
@@ -181,6 +182,7 @@ visible = false
 position = Vector2(18.445, -3.685)
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("7_jjvec")
+script = ExtResource("10_sl2bc")
 
 [node name="GrenadeOpener" type="StaticBody2D" parent="." unique_id=377077615]
 position = Vector2(328.00003, 150.00002)
@@ -206,6 +208,7 @@ visible = false
 position = Vector2(18.445, -3.685)
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("7_jjvec")
+script = ExtResource("10_sl2bc")
 
 [node name="Node2D" parent="." unique_id=763927022 instance=ExtResource("11_1q3jt")]
 position = Vector2(814, 167)

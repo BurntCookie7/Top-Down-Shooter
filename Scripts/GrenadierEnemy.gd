@@ -1,6 +1,5 @@
 extends CharacterBody2D
 @onready var navigation: NavigationAgent2D = $NavigationAgent2D
-@onready var player = get_tree().get_first_node_in_group("Player")
 @onready var raycast: RayCast2D = $Sprite2D/RayCast2D
 @onready var grenade_spawn_position: Node2D = $Sprite2D/GrenadeSpawnPosition
 @export var SPEED: float = 100.0
@@ -10,7 +9,7 @@ extends CharacterBody2D
 @export var hit_color: Color = Color()
 @export var grenade_scene: PackedScene
 @onready var health_bar: ProgressBar = $Node2D/ProgressBar
-var health: int
+var health: int = total_health
 var health_bar_offset: Vector2 = Vector2(13, -20)
 var throw_strength = 1000
 var upgraded_material = preload("res://Shaders/Armored.tres")
@@ -37,6 +36,7 @@ func _physics_process(delta: float) -> void:
 	if navigation.is_navigation_finished():
 		velocity = Vector2.ZERO
 		move_and_slide()
+		return
 		
 	health_bar.global_position = global_position + health_bar_offset
 	var next_position := navigation.get_next_path_position()
@@ -56,8 +56,8 @@ func hit():
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 func update_target():
-	if is_instance_valid(player):
-		navigation.target_position = player.global_position
+	if is_instance_valid(Global.player):
+		navigation.target_position = Global.player.global_position
 		
 func manage_health():
 	health_bar.value = health

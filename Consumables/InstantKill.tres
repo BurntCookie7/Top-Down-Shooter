@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ConsumableData" format=3 uid="uid://buret0yledklh"]
+
+[ext_resource type="Texture2D" uid="uid://b74wqnk6d7t8b" path="res://Images/HourGlass.png" id="1_710rt"]
+[ext_resource type="Script" uid="uid://bd2ql44krcm2" path="res://Resources/StatModifier.gd" id="1_sokfq"]
+[ext_resource type="Script" uid="uid://co7orclhtquai" path="res://Resources/ConsumableData.gd" id="2_710rt"]
+
+[sub_resource type="Resource" id="Resource_sokfq"]
+script = ExtResource("1_sokfq")
+stat = &"damage_mult"
+amount = 1000.0
+metadata/_custom_type_script = "uid://bd2ql44krcm2"
+
+[resource]
+script = ExtResource("2_710rt")
+id = &"InstantKill"
+title = &"Instant Kill"
+description = "Istant kill enemies for a short time"
+icon = ExtResource("1_710rt")
+modifiers = Array[ExtResource("1_sokfq")]([SubResource("Resource_sokfq")])
+price = 50
+duration = 5.0
+metadata/_custom_type_script = "uid://co7orclhtquai"

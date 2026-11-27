@@ -1,5 +1,8 @@
 [gd_scene format=4 uid="uid://csd7jorx3ewke"]
 
+[ext_resource type="Script" uid="uid://46chadwwxnhg" path="res://Scripts/GrenadierEnemy.gd" id="1_yssgn"]
+[ext_resource type="Resource" uid="uid://chpybbgau80h0" path="res://Drop Tables/GrenadierDrops.tres" id="2_yssgn"]
+[ext_resource type="PackedScene" uid="uid://0ta2j3xvwvga" path="res://Grenade.tscn" id="4_tcew6"]
 [ext_resource type="Texture2D" uid="uid://dgm1c4xv7aip7" path="res://Images/GrenadierSprites.png" id="5_yssgn"]
 [ext_resource type="Shader" uid="uid://cadnte8s5ipk7" path="res://addons/lit/shaders/receiver/lit_receiver_fast.gdshader" id="6_ybxan"]
 [ext_resource type="Script" uid="uid://ccbrgq2jxmujk" path="res://addons/lit/nodes/lit_animated_sprite_2d.gd" id="8_eyhfq"]
@@ -73,6 +76,10 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1850996865]
+script = ExtResource("1_yssgn")
+drops = ExtResource("2_yssgn")
+hit_color = Color(1, 0, 0, 1)
+grenade_scene = ExtResource("4_tcew6")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=163597588]
 material = SubResource("ShaderMaterial_adtk6")

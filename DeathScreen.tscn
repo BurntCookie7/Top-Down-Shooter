@@ -2,6 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://ye48oxluhm2o" path="res://Fonts/Vipnagorgialla Rg It.otf" id="1_58ct5"]
 [ext_resource type="Script" uid="uid://ckkijfx6ecqxf" path="res://Scripts/DeathScreenHandler.gd" id="1_80igo"]
+[ext_resource type="PackedScene" uid="uid://bh17jrcqf5cpy" path="res://Four Corners.tscn" id="2_gircr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 bg_color = Color(0, 0, 0, 0.33333334)
@@ -14,6 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_80igo")
+retry_map = ExtResource("2_gircr")
 
 [node name="Panel" type="Panel" parent="." unique_id=617559641]
 layout_mode = 1

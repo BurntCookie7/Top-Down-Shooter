@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ConsumableData" format=3 uid="uid://dwfk4l8i61e07"]
+
+[ext_resource type="Script" uid="uid://bd2ql44krcm2" path="res://Resources/StatModifier.gd" id="1_sp6m5"]
+[ext_resource type="Texture2D" uid="uid://c3obwiodlgntg" path="res://Images/SpeedUp.png" id="1_yttmm"]
+[ext_resource type="Script" uid="uid://co7orclhtquai" path="res://Resources/ConsumableData.gd" id="2_yttmm"]
+
+[sub_resource type="Resource" id="Resource_38ghs"]
+script = ExtResource("1_sp6m5")
+stat = &"speed_mult"
+amount = 2.0
+metadata/_custom_type_script = "uid://bd2ql44krcm2"
+
+[resource]
+script = ExtResource("2_yttmm")
+id = &"SpeedUp"
+title = &"Speed Up"
+description = "More speed for a short time"
+icon = ExtResource("1_yttmm")
+modifiers = Array[ExtResource("1_sp6m5")]([SubResource("Resource_38ghs")])
+price = 20
+duration = 8.0
+metadata/_custom_type_script = "uid://co7orclhtquai"

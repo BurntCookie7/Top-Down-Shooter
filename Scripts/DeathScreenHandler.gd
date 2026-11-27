@@ -1,5 +1,6 @@
 extends Control
 
+@export var retry_map: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,6 +14,9 @@ func _process(delta: float) -> void:
 
 func _on_retry_pressed() -> void:
 	Global.restart()
+	Global.map_container.load_new_map(retry_map)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	hide()
 
 
 func _on_quit_pressed() -> void:

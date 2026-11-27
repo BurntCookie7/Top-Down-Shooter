@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://1lkifvut5hey"]
 
-[ext_resource type="Script" uid="uid://bwdswuhjav7ua" path="res://AreaBomber.gd" id="1_xlvva"]
+[ext_resource type="Script" uid="uid://bwdswuhjav7ua" path="res://Scripts/AreaBomber.gd" id="1_xlvva"]
 [ext_resource type="Resource" uid="uid://chpybbgau80h0" path="res://Drop Tables/GrenadierDrops.tres" id="2_2ht76"]
 [ext_resource type="PackedScene" uid="uid://dtsry53cxmg7e" path="res://AOEGrenade.tscn" id="3_vc6lf"]
 [ext_resource type="Texture2D" uid="uid://c4x1hl5intlgn" path="res://Images/AreaBomberSprites.png" id="4_nqjt6"]

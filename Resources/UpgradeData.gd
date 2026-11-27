@@ -6,3 +6,4 @@ class_name UpgradeData extends Resource
 @export_multiline var description: String
 @export var icon: Texture2D
 @export var modifiers: Array[StatModifier]
+@export var price: int

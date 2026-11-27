@@ -5,7 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://byvvcom0q8nuh" path="res://Shop.tscn" id="2_81ih3"]
 [ext_resource type="Texture2D" uid="uid://cyxmmqtihy4a5" path="res://Images/Bench.png" id="2_upi1e"]
 [ext_resource type="Script" uid="uid://drrhypxeb6nsg" path="res://addons/lit/nodes/lit_sprite_2d.gd" id="3_74lck"]
-[ext_resource type="Resource" uid="uid://2bb1q2y68s16" path="res://Drop Tables/BenchUpgradeChoices.tres" id="4_81ih3"]
+[ext_resource type="Texture2D" uid="uid://xe4n818le3p8" path="res://addons/controller_icons/assets/key/e.png" id="6_81ih3"]
+[ext_resource type="Script" uid="uid://cbqxf76s2766y" path="res://Scripts/FloatingUI.gd" id="7_25bsb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u82ir"]
 shader = ExtResource("1_qifmt")
@@ -35,11 +36,10 @@ size = Vector2(126, 39.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
 size = Vector2(126, 13)
 
-[node name="StaticBody2D" type="StaticBody2D" unique_id=2013195154]
+[node name="StaticBody2D" type="StaticBody2D" unique_id=2013195154 groups=["Bench"]]
 script = ExtResource("1_upi1e")
 Upgrades_Menu = ExtResource("2_81ih3")
 hit_color = Color(0.2774405, 0.21356648, 0.1444242, 1)
-upgrade_table = ExtResource("4_81ih3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1430604863]
 material = SubResource("ShaderMaterial_u82ir")
@@ -61,6 +61,12 @@ shape = SubResource("RectangleShape2D_yf5fn")
 
 [node name="SittingPos" type="Node2D" parent="." unique_id=1484309249]
 position = Vector2(0, -16)
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1263542566]
+position = Vector2(0, -9)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_81ih3")
+script = ExtResource("7_25bsb")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://ds1bavd5npr27"]
+
+[ext_resource type="Script" uid="uid://dnm5ytxlrau0p" path="res://Scripts/ConsumableIcon.gd" id="1_pga8n"]
+[ext_resource type="StyleBox" uid="uid://cwb0w64tp1jmu" path="res://Styles/ConsumablePanel.tres" id="2_qf633"]
+[ext_resource type="Texture2D" uid="uid://c3obwiodlgntg" path="res://Images/SpeedUp.png" id="3_7qvug"]
+[ext_resource type="FontFile" uid="uid://ye48oxluhm2o" path="res://Fonts/Vipnagorgialla Rg It.otf" id="4_qfk7t"]
+
+[node name="Control" type="Control" unique_id=1528186817]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pga8n")
+
+[node name="Background" type="Panel" parent="." unique_id=1083315780]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = ExtResource("2_qf633")
+
+[node name="Icon" type="TextureRect" parent="Background" unique_id=967624922]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_7qvug")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Background" unique_id=561960143]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 2.0
+offset_bottom = 3.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_qfk7t")
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1

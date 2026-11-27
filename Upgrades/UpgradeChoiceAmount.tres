@@ -18,4 +18,5 @@ description = "+1 Upgrade choice
 at the shop"
 icon = ExtResource("1_gd1pu")
 modifiers = Array[ExtResource("2_yx0c0")]([SubResource("Resource_dvmr2")])
+price = 10
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

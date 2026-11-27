@@ -39,8 +39,8 @@ func _on_body_entered(body: Node2D) -> void:
 		body.audio.play()
 		body.light.energy = 0
 		body.light_out = true
-	if "health" in body:
-		body.health -= damage
+	if "health" in body and not body.is_in_group("Player"):
+		body.health -= damage * Global.player.damage_mult
 	if body.has_method("hit"):
 		body.hit()
 	if body.is_in_group("Player"):

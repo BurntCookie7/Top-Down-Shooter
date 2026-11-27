@@ -4,9 +4,12 @@ extends Control
 @onready var inspector: Panel = $Panel/Inspector
 @onready var continue_button: Button = $Panel/Inspector/Continue
 @onready var gems_balance: Label = $Panel/Gems/Label
+@onready var ConsumableHbox: HBoxContainer = $Panel/Consumables/ScrollContainer/Control
 
 @export var upgrade_button: PackedScene
 @export var upgrade_table: BenchTable
+@export var consumable_button: PackedScene
+@export var consumable_options: Array[ConsumableData]
 
 var upgrade_options: Array[UpgradeData]
 var option = null
@@ -17,13 +20,16 @@ func _ready() -> void:
 	upgrade_options.clear()
 	for i in range(Global.upgrades):
 		create_button()
+	create_consumable_buttons()
 	Hbox.add_child(Control.new())
-	gems_balance.text = str(Global.gem_balance)
+	Global.player.in_menu = true
+	Global.player.state = Global.State.SITTING
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	gems_balance.text = str(Global.gem_balance)
 
 func create_button():
 	var data: UpgradeData = upgrade_table.pick_random()
@@ -39,3 +45,10 @@ func create_button():
 	option.setup(data)
 	option.selected.connect(inspector.button_selected)
 	Hbox.add_child(option)
+	
+func create_consumable_buttons():
+	for i in consumable_options.size():
+		var button_instance = consumable_button.instantiate()
+		button_instance.setup(consumable_options[i])
+		ConsumableHbox.add_child(button_instance)
+		button_instance.selected.connect(inspector.button_selected)

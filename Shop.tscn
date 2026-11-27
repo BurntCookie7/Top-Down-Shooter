@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://byvvcom0q8nuh"]
 
-[ext_resource type="Script" uid="uid://bde4hme8ea4j3" path="res://ShopHandler.gd" id="1_c0ofq"]
+[ext_resource type="Script" uid="uid://bde4hme8ea4j3" path="res://Scripts/ShopHandler.gd" id="1_c0ofq"]
 [ext_resource type="PackedScene" uid="uid://scykvv4jf3p2" path="res://UpgradeButton.tscn" id="2_odqjv"]
 [ext_resource type="FontFile" uid="uid://ye48oxluhm2o" path="res://Fonts/Vipnagorgialla Rg It.otf" id="3_odqjv"]
 [ext_resource type="Resource" uid="uid://2bb1q2y68s16" path="res://Drop Tables/BenchUpgradeChoices.tres" id="3_vdbi3"]
-[ext_resource type="Script" uid="uid://oel6ehxa0hi0" path="res://UpgradeInspector.gd" id="4_odqjv"]
+[ext_resource type="PackedScene" uid="uid://iwii6gw1vfc" path="res://ConsumablePurchaseButton.tscn" id="4_cl6py"]
+[ext_resource type="Script" uid="uid://oel6ehxa0hi0" path="res://Scripts/UpgradeInspector.gd" id="4_odqjv"]
 [ext_resource type="FontFile" uid="uid://dq3hwlqrhhpdd" path="res://Fonts/Vipnagorgialla Bd It.otf" id="4_vdbi3"]
+[ext_resource type="Script" uid="uid://co7orclhtquai" path="res://Resources/ConsumableData.gd" id="5_wr8g1"]
+[ext_resource type="Resource" uid="uid://dwfk4l8i61e07" path="res://Consumables/SpeedUp.tres" id="6_bmy5l"]
+[ext_resource type="Resource" uid="uid://buret0yledklh" path="res://Consumables/InstantKill.tres" id="7_u5mf3"]
 [ext_resource type="Texture2D" uid="uid://bq5t8q0gxm0c" path="res://Images/Crystals.png" id="7_vdbi3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
@@ -81,6 +85,8 @@ grow_vertical = 2
 script = ExtResource("1_c0ofq")
 upgrade_button = ExtResource("2_odqjv")
 upgrade_table = ExtResource("3_vdbi3")
+consumable_button = ExtResource("4_cl6py")
+consumable_options = Array[ExtResource("5_wr8g1")]([ExtResource("6_bmy5l"), ExtResource("7_u5mf3"), ExtResource("6_bmy5l"), ExtResource("7_u5mf3")])
 
 [node name="Panel" type="Panel" parent="." unique_id=1496501546]
 layout_mode = 1
@@ -216,6 +222,37 @@ theme_override_constants/separation = 152
 visible = false
 layout_mode = 2
 
+[node name="Consumables" type="Panel" parent="Panel" unique_id=1710201755]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = 15.0
+offset_right = 120.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cv2iv")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Consumables" unique_id=692141265]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="Control" type="HBoxContainer" parent="Panel/Consumables/ScrollContainer" unique_id=508337852]
+layout_mode = 2
+theme_override_constants/separation = 34
+
+[node name="Buffer" type="Control" parent="Panel/Consumables/ScrollContainer/Control" unique_id=1955283493]
+layout_mode = 2
+
 [node name="Label" type="Label" parent="Panel" unique_id=161378147]
 layout_mode = 1
 anchors_preset = 5
@@ -275,4 +312,5 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "0"
 
+[connection signal="pressed" from="Panel/Inspector/Continue" to="Panel/Inspector" method="_on_continue_pressed"]
 [connection signal="pressed" from="Panel/Inspector/Purchase" to="Panel/Inspector" method="_on_buy_pressed"]

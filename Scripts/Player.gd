@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var gun_sounds: AudioStreamPlayer = $AnimatedSprite2D/GunSounds
 @onready var grenade_spawn_position: Node2D = $AnimatedSprite2D/GrenadeSpawnPosition
 @onready var death_screen: Control = $"../CanvasLayer/DeathScreen"
+@onready var consumable_duration: Timer = $ConsumableDuration
 
 @export var Stats: PlayerStats
 @export var bullet_scene: PackedScene = null
@@ -21,6 +22,7 @@ var reserves: int = 0
 var grenades: int = 3
 var max_ammunition: int = 15
 var ammunition_remaining: int = 15
+var speed_mult: float = 1
 const JUMP_VELOCITY = -400.0
 var turn_amount = 0.0
 var state := Global.State.STANDING
@@ -34,6 +36,10 @@ var shot_sound = preload("res://Audio/Gunshot.mp3")
 var bullets_shot: int = 1
 var sensitivity: float = Global.turn_sensitivity
 var gems_pulling: Array[Area2D]
+var in_menu: bool = false
+var selection_index: int = 0
+var active_consumable: ConsumableData = null
+var damage_mult: float = 1
 
 func _ready() -> void:
 	Global.player = self
@@ -49,9 +55,10 @@ func _input(event: InputEvent) -> void:
 				turn_amount += event.relative.x
 	
 	if event.is_action_pressed("ESC") and not death_screen.visible and not is_instance_valid(Global.canvas_layer.get_node("GrenadeMenu")):
-		pause_menu.show()
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		get_tree().paused = not get_tree().paused
+		if not in_menu:
+			pause_menu.show()
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_tree().paused = not get_tree().paused
 
 	if event.is_action_pressed("RightClick") and sitting != true:
 		aiming = true
@@ -73,6 +80,13 @@ func _input(event: InputEvent) -> void:
 		if grenades > 0:
 			spawn_grenade()
 			grenades -= 1
+	if event is InputEventMouseButton and event.pressed:
+		if not in_menu:
+			match event.button_index:
+				MOUSE_BUTTON_WHEEL_UP:
+					selection_index = wrapi(selection_index + 1, 0, 4)
+				MOUSE_BUTTON_WHEEL_DOWN:
+					selection_index = wrapi(selection_index - 1, 0, 4)
 
 func bench_entered(bench, sitting_pos):
 	#print("entered bench")
@@ -87,16 +101,19 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	pull_gems(delta)
+	handle_camera_mode()
 	if control_mode != Control_Mode.get(Global.player_control_mode):
 		control_mode = Control_Mode.get(Global.player_control_mode)
 	if Global.player_health <= 0:
+		Global.player_ui.manual_update()
 		death_screen.show()
+		remove_active_consumable()
 		Global.save_game()
 		get_tree().paused = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	shake_strength = move_toward(shake_strength, 0.0, 40.0 * delta)
 	camera.offset = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * shake_strength
-	if Input.is_action_just_pressed("E") and is_instance_valid(current_bench):
+	if Input.is_action_just_pressed("E") and is_instance_valid(current_bench) and Global.can_sit:
 		match sitting:
 			true:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -129,7 +146,7 @@ func _physics_process(delta: float) -> void:
 					velocity = input_direction.rotated(rotation) * SPEED
 				else:
 					state = Global.State.STANDING
-					velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+					velocity = velocity.move_toward(Vector2.ZERO, SPEED/5)
 			Control_Mode.Key_Turn:
 				var turn := Input.get_axis("Left", "Right")
 				var forward := Input.get_axis("Down", "Up")
@@ -142,7 +159,7 @@ func _physics_process(delta: float) -> void:
 					velocity = transform.x * forward * SPEED
 				else:
 					state = Global.State.STANDING
-					velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+					velocity = velocity.move_toward(Vector2.ZERO, SPEED/5)
 				if turn:
 					global_rotation += turn * TURN_SPEED * sensitivity
 
@@ -179,6 +196,13 @@ func spawn_grenade() -> void:
 	grenade.throw(global_transform.x, grenade_throw_strength, "Player")
 	grenade.linear_velocity += velocity * 0.5
 
+func handle_camera_mode():
+	match Global.camera_mode:
+		"Locked":
+			camera.ignore_rotation = true
+		"Turning":
+			camera.ignore_rotation = false
+
 func state_handler():
 	match state:
 		Global.State.STANDING:
@@ -186,21 +210,21 @@ func state_handler():
 				sprite.play("StandingAiming")
 			else:
 				sprite.play("Standing")
-			SPEED = 150
+			SPEED = 150 * speed_mult
 			sensitivity = Global.turn_sensitivity
 		Global.State.WALKING:
 			if aiming:
 				sprite.play("WalkingAiming")
 			else:
 				sprite.play("Walking")
-			SPEED = 150
+			SPEED = 150 * speed_mult
 			sensitivity = Global.turn_sensitivity
 		Global.State.RUNNING:
 			if aiming:
 				sprite.play("RunningAiming")
 			else:
 				sprite.play("Running")
-			SPEED = 250
+			SPEED = 250 * speed_mult
 			sensitivity *= 1.001
 		Global.State.SITTING:
 			aiming = false
@@ -222,9 +246,39 @@ func apply_upgrade(upgrade:UpgradeData, button):
 			push_warning("Upgrade stat not found: " + str(mod.stat))
 			continue
 		target.set(mod.stat, target.get(mod.stat) + mod.amount)
-		
 		button.queue_free()
+
+func apply_consumable(consumable:ConsumableData):
+	if active_consumable == null:
+		active_consumable = consumable
+		for mod in consumable.modifiers:
+			var target: Object = null
+			if mod.stat in self:
+				target = self
+			elif mod.stat in Global:
+				target = Global
+			else:
+				push_warning("Upgrade stat not found: " + str(mod.stat))
+				continue
+			target.set(mod.stat, target.get(mod.stat) + mod.amount)
+		consumable_duration.start(consumable.duration)
 		
+	
+
+func remove_active_consumable():
+	if active_consumable != null:
+		for mod in active_consumable.modifiers:
+			var target: Object = null
+			if mod.stat in self:
+				target = self
+			elif mod.stat in Global:
+				target = Global
+			else:
+				push_warning("Upgrade stat not found: " + str(mod.stat))
+				continue
+			target.set(mod.stat, target.get(mod.stat) - mod.amount)
+		active_consumable = null
+			
 
 func finish_bench():
 	current_bench.remove_upgrades()
@@ -233,6 +287,7 @@ func finish_bench():
 	collision.set_deferred("disabled", false)
 	Global.can_sit = false
 	current_bench.queue_free()
+	in_menu = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Global.enemies_killed = 0
 	if Global.wins >= Global.rounds:
@@ -258,3 +313,7 @@ func _on_pickup_range_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Gem"):
 		if area.can_pickup:
 			gems_pulling.append(area)
+
+
+func _on_consumable_duration_timeout() -> void:
+	remove_active_consumable()

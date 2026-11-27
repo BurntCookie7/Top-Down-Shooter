@@ -8,17 +8,17 @@
 [ext_resource type="Resource" uid="uid://dc8e3op16hnga" path="res://Upgrades/BulletsPerBox.tres" id="6_cp6el"]
 [ext_resource type="Resource" uid="uid://d1glnbl88ajcy" path="res://Upgrades/GrenadeCapacityUpgrade.tres" id="8_3oc2u"]
 [ext_resource type="Resource" uid="uid://d1yvunobq8ch4" path="res://Upgrades/UpgradeChoiceAmount.tres" id="8_fsc0j"]
-[ext_resource type="Resource" uid="uid://dsdbcphehgbbx" path="res://Upgrades/UpgradeRerollChance.tres" id="9_45rhh"]
+[ext_resource type="Resource" uid="uid://c46qfyq6cstbh" path="res://Upgrades/GemDropMult.tres" id="9_fsc0j"]
 
 [resource]
 script = ExtResource("1_am5jm")
 table = Dictionary[ExtResource("2_vsu6e"), float]({
 ExtResource("3_j2slk"): 2.0,
 ExtResource("4_cp6el"): 2.0,
-ExtResource("5_2s6l3"): 0.5,
+ExtResource("5_2s6l3"): 0.25,
 ExtResource("6_cp6el"): 1.0,
 ExtResource("8_3oc2u"): 0.5,
 ExtResource("8_fsc0j"): 0.1,
-ExtResource("9_45rhh"): 0.1
+ExtResource("9_fsc0j"): 1.5
 })
 metadata/_custom_type_script = "uid://ycumbst7jav1"

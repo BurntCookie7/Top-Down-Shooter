@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://iwii6gw1vfc"]
+
+[ext_resource type="Script" uid="uid://fanlwbvopygk" path="res://ConsumablePurchaseButton.gd" id="1_d5lyl"]
+[ext_resource type="Texture2D" uid="uid://xmk0ltaasp7q" path="res://Images/AmmoBox.png" id="2_qr3yu"]
+[ext_resource type="Texture2D" uid="uid://bq5t8q0gxm0c" path="res://Images/Crystals.png" id="3_ub262"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkamj"]
+bg_color = Color(0.17880967, 0.17880964, 0.17880964, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0885599, 0.08855995, 0.088559814, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vefb"]
+bg_color = Color(0.12591085, 0.12591085, 0.12591082, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.029506553, 0.029506562, 0.029506536, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Container" type="Control" unique_id=897205047]
+custom_minimum_size = Vector2(69.735, 72.66)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 94.47157
+offset_bottom = 83.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 17)
+script = ExtResource("1_d5lyl")
+
+[node name="Button" type="Button" parent="." unique_id=297707364]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fkamj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fkamj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6vefb")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Label" type="Label" parent="Button" unique_id=970855755]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.252033
+offset_top = 2.0
+offset_right = 41.747967
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 12
+text = "Placeholder"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Button/Label" unique_id=470848084]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.578949
+offset_right = 23.473686
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_qr3yu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Button" unique_id=1169177202]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -11.5
+offset_right = 64.0
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+horizontal_alignment = 1
+
+[node name="Gems" type="Control" parent="Button" unique_id=965292437]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -22.0
+offset_right = 29.000004
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+mouse_filter = 2
+
+[node name="Clip" type="Control" parent="Button/Gems" unique_id=1230594081]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.5
+offset_top = -39.5
+offset_right = 17.5
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="Button/Gems/Clip" unique_id=1870505556]
+clip_contents = true
+layout_mode = 1
+offset_right = 204.0
+offset_bottom = 64.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(-127.8, 0)
+texture = ExtResource("3_ub262")
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Button/Gems" unique_id=1223179879]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -11.25
+offset_top = -19.5
+offset_right = 28.75
+offset_bottom = 3.5
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+text = "0"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -4,6 +4,7 @@ extends StaticBody2D
 
 @export var Upgrades_Menu: PackedScene
 @export var hit_color: Color
+@onready var input_display: Sprite2D = $Sprite2D2
 
 
 var menu_made: bool
@@ -24,17 +25,20 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		Global.can_sit = true
 		SignalBus.player_entered_bench.emit(self, sitting_pos.global_position)
+		input_display.show()
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		Global.can_sit = false
+		input_display.hide()
+		
 
 func load_upgrades():
 	if menu_made:
 		menu.show()
-		menu.global_rotation = Global.playe.camera.global_rotation - deg_to_rad(90)
-		menu.global_position = Global.playe.global_position
+		menu.global_rotation = Global.player.camera.global_rotation - deg_to_rad(90)
+		menu.global_position = Global.player.global_position
 		menu.global_position.y -= 100
 		#print("menu shown")
 	else:

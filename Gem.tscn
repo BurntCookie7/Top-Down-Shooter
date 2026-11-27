@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://m25dm47lh4c1" path="res://Scripts/Gem.gd" id="1_3niwm"]
 [ext_resource type="Texture2D" uid="uid://bq5t8q0gxm0c" path="res://Images/Crystals.png" id="1_nlnni"]
+[ext_resource type="Script" uid="uid://cpa2qb3trjq4k" path="res://addons/lit/nodes/lit_point_light_2d.gd" id="3_a2jd7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3niwm"]
 atlas = ExtResource("1_nlnni")
@@ -58,8 +59,17 @@ animation = &"wing"
 shape = SubResource("CircleShape2D_g4v7s")
 
 [node name="PickupTimer" type="Timer" parent="." unique_id=264028387]
+wait_time = 0.5
 one_shot = true
 autostart = true
+
+[node name="LitPointLight2D" type="Node2D" parent="." unique_id=667056772]
+script = ExtResource("3_a2jd7")
+lit_version = "1.1.7"
+color = Color(0.74441004, 0.00042509078, 0.7444049, 1)
+range = 100.0
+falloff = 4.0
+metadata/_custom_type_script = "uid://cpa2qb3trjq4k"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="PickupTimer" to="." method="_on_pickup_timer_timeout"]

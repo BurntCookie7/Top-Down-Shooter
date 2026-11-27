@@ -17,4 +17,5 @@ title = "Grenades"
 description = "+1 grenade capacity"
 icon = ExtResource("1_3khp0")
 modifiers = Array[ExtResource("1_tb2qm")]([SubResource("Resource_4bwdg")])
+price = 5
 metadata/_custom_type_script = "uid://c524q2ho8bja3"

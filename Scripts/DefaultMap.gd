@@ -48,12 +48,12 @@ func spawn_timer_out():
 		if enemies_spawned < enemy_amount:
 			if is_instance_valid(enemies_container):
 				var spawn_point = spawn_points.pick_random()
-				spawn_enemy(spawn_point)
+				spawn_enemy()
 			
-func spawn_enemy(point):
+func spawn_enemy():
 	var enemy: CharacterBody2D = enemies.pick_item().instantiate()
 	enemies_container.add_child(enemy)
-	enemy.global_position = point.global_position
+	enemy.global_position = get_random_free_location()
 	enemies_spawned += 1
 
 func spawn_resources():
